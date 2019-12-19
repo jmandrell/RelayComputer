@@ -155,7 +155,8 @@ MuxTest.o: /usr/include/endian.h /usr/include/sched.h /usr/include/time.h
 MuxTest.o: Mux.h Relay.h
 Or8.o: Or8.h OrGate.h Relay.h Io.h Updatable.h /usr/include/pthread.h
 Or8.o: /usr/include/features.h /usr/include/stdc-predef.h
-Or8.o: /usr/include/endian.h /usr/include/sched.h /usr/include/time.h
+Or8.o: /usr/include/endian.h /usr/include/sched.h /usr/include/time.h Bus8.h
+Or8.o: Display8Bit.h
 Or8Test.o: /usr/include/unistd.h /usr/include/features.h
 Or8Test.o: /usr/include/stdc-predef.h TestHarness.h /usr/include/ncurses.h
 Or8Test.o: /usr/include/ncurses_dll.h /usr/include/stdint.h
@@ -209,7 +210,8 @@ Updatable.o: /usr/include/stdc-predef.h Updatable.h /usr/include/pthread.h
 Updatable.o: /usr/include/endian.h /usr/include/sched.h /usr/include/time.h
 Xor8.o: Xor8.h XorGate.h Relay.h Io.h Updatable.h /usr/include/pthread.h
 Xor8.o: /usr/include/features.h /usr/include/stdc-predef.h
-Xor8.o: /usr/include/endian.h /usr/include/sched.h /usr/include/time.h
+Xor8.o: /usr/include/endian.h /usr/include/sched.h /usr/include/time.h Bus8.h
+Xor8.o: Display8Bit.h
 Xor8Test.o: /usr/include/unistd.h /usr/include/features.h
 Xor8Test.o: /usr/include/stdc-predef.h TestHarness.h /usr/include/ncurses.h
 Xor8Test.o: /usr/include/ncurses_dll.h /usr/include/stdint.h
