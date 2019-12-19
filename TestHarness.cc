@@ -1,6 +1,7 @@
 #include <stdlib.h>
 #include <string.h>
 #include <unistd.h>
+#include <sstream>
 
 #include "TestHarness.h"
 #include "Relay.h"
@@ -43,30 +44,48 @@ void TestHarness::exitFunc() {
 }
 
 
-void TestHarness::AddInput(const std::string label, Io* fan) {
-	const unsigned int col = inputCount / 26;
-	const unsigned int row = inputCount % 26 + 1;
-	char letter = "aA"[col] + row - 1;
-	std::string label1 = label + " [" + letter + "]";
-	mvaddstr(row, (col + 1) * 25 - label1.size(), label1.c_str());
-	refresh();
-	inputs[inputCount++] = fan;
+void TestHarness::AddInputBus8(const std::string& label, Bus8* bus) {
+	for (int i = 0; i < 8; ++i) {
+		std::ostringstream newLabel;
+		newLabel << label << " " << i;
+		AddInput(newLabel.str(), bus->bits + i);
+	}
 }
 
 
-void TestHarness::AddOutput(const std::string label, Io* fan) {
-	mvaddstr(outputCount + 1, 75 - label.size(), label.c_str());
-	outputs[outputCount++] = fan;
+void TestHarness::AddInput(const std::string& label, Io* io) {
+	const unsigned int col = inputCount / 26;
+	const unsigned int row = inputCount % 26;
+	char letter = "aA"[col] + row;
+	std::string label1 = label + " [" + letter + "]";
+	mvaddstr(row + 5, (col + 1) * 25 - label1.size(), label1.c_str());
+	refresh();
+	inputs[inputCount++] = io;
+}
+
+
+void TestHarness::AddOutputBus8(const std::string& label, Bus8* bus) {
+	for (int i = 0; i < 8; ++i) {
+		std::ostringstream newLabel;
+		newLabel << label << " " << i;
+		AddOutput(newLabel.str(), bus->bits + i);
+	}
+}
+
+
+void TestHarness::AddOutput(const std::string& label, Io* io) {
+	mvaddstr(outputCount + 5, 75 - label.size(), label.c_str());
+	outputs[outputCount++] = io;
 }
 
 
 void TestHarness::UpdateInputs() {
 	for (unsigned int i = 0; i < 52; ++i) {
-		const int row = i % 26 + 1;
+		const int row = i % 26;
 		const int col = i / 26;
 		if (inputs[i]) {
 			bool value = inputs[i]->GetOutput();
-			mvaddstr(row, (col + 1) * 25 + 5, value ? "*" : "O");
+			mvaddstr(row + 5, (col + 1) * 25 + 5, value ? "*" : "O");
 		}
 	}
 }
@@ -76,7 +95,7 @@ void TestHarness::UpdateOutputs() {
 	for (unsigned int i = 0; i < 26; ++i) {
 		if (outputs[i]) {
 			bool value = outputs[i]->GetOutput();
-			mvaddstr(i + 1, 77, value ? "*" : "O");
+			mvaddstr(i + 5, 77, value ? "*" : "O");
 		}
 	}
 }

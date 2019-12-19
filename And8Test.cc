@@ -3,59 +3,41 @@
 
 #include "TestHarness.h"
 #include "And8.h"
+#include "Bus8.h"
 
 
 int main() {
 	TestHarness harness;
 	And8 and8("and8");
 	Io enable;
-	Io inputA[8];
-	Io inputB[8];
+	Bus8 inputA("Input A");
+	Bus8 inputB("Input B");
+	Bus8 output("Output");
 	
 	and8.AttachEnable(&enable);
 	harness.AddInput("Enable", &enable);
-	and8.AttachInputA0(inputA+0);
-	and8.AttachInputA1(inputA+1);
-	and8.AttachInputA2(inputA+2);
-	and8.AttachInputA3(inputA+3);
-	and8.AttachInputA4(inputA+4);
-	and8.AttachInputA5(inputA+5);
-	and8.AttachInputA6(inputA+6);
-	and8.AttachInputA7(inputA+7);
-	harness.AddInput("Input A 0", inputA + 0);
-	harness.AddInput("Input A 1", inputA + 1);
-	harness.AddInput("Input A 2", inputA + 2);
-	harness.AddInput("Input A 3", inputA + 3);
-	harness.AddInput("Input A 4", inputA + 4);
-	harness.AddInput("Input A 5", inputA + 5);
-	harness.AddInput("Input A 6", inputA + 6);
-	harness.AddInput("Input A 7", inputA + 7);
+	and8.AttachInputBusA(&inputA);
+	harness.AddInput("Input A 0", inputA.bits + 0);
+	harness.AddInput("Input A 1", inputA.bits + 1);
+	harness.AddInput("Input A 2", inputA.bits + 2);
+	harness.AddInput("Input A 3", inputA.bits + 3);
+	harness.AddInput("Input A 4", inputA.bits + 4);
+	harness.AddInput("Input A 5", inputA.bits + 5);
+	harness.AddInput("Input A 6", inputA.bits + 6);
+	harness.AddInput("Input A 7", inputA.bits + 7);
 
-	and8.AttachInputB0(inputB+0);
-	and8.AttachInputB1(inputB+1);
-	and8.AttachInputB2(inputB+2);
-	and8.AttachInputB3(inputB+3);
-	and8.AttachInputB4(inputB+4);
-	and8.AttachInputB5(inputB+5);
-	and8.AttachInputB6(inputB+6);
-	and8.AttachInputB7(inputB+7);
-	harness.AddInput("Input B 0", inputB + 0);
-	harness.AddInput("Input B 1", inputB + 1);
-	harness.AddInput("Input B 2", inputB + 2);
-	harness.AddInput("Input B 3", inputB + 3);
-	harness.AddInput("Input B 4", inputB + 4);
-	harness.AddInput("Input B 5", inputB + 5);
-	harness.AddInput("Input B 6", inputB + 6);
-	harness.AddInput("Input B 7", inputB + 7);
+	and8.AttachInputBusB(&inputB);
+	harness.AddInput("Input B 0", inputB.bits + 0);
+	harness.AddInput("Input B 1", inputB.bits + 1);
+	harness.AddInput("Input B 2", inputB.bits + 2);
+	harness.AddInput("Input B 3", inputB.bits + 3);
+	harness.AddInput("Input B 4", inputB.bits + 4);
+	harness.AddInput("Input B 5", inputB.bits + 5);
+	harness.AddInput("Input B 6", inputB.bits + 6);
+	harness.AddInput("Input B 7", inputB.bits + 7);
 	
-	harness.AddOutput("Output 0", and8.GetOutput0());
-	harness.AddOutput("Output 1", and8.GetOutput1());
-	harness.AddOutput("Output 2", and8.GetOutput2());
-	harness.AddOutput("Output 3", and8.GetOutput3());
-	harness.AddOutput("Output 4", and8.GetOutput4());
-	harness.AddOutput("Output 5", and8.GetOutput5());
-	harness.AddOutput("Output 6", and8.GetOutput6());
-	harness.AddOutput("Output 7", and8.GetOutput7());
+	and8.AttachOutputBus(&output);
+	harness.AddOutputBus8("Output", &output);
 	
 	harness.Run();
 	return 0;
