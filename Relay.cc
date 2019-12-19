@@ -1,35 +1,9 @@
-#include <unistd.h>
 #include <iostream>
 #include "Relay.h"
 
-unsigned int Relay::relayCount = 0;
-Relay* Relay::relays[1000];
-pthread_t Relay::thread;
-pthread_mutex_t Relay::mutex;
-
-static bool started = false;
 
 Relay::Relay(const std::string& initName) : name(initName) {
-	relays[relayCount++] = this;
-	if (!started) {
-		pthread_mutex_init(&mutex, 0);
-		pthread_create(&thread, 0, Relay::UpdateAll, 0);
-		started = true;
-	}
 }
-
-void* Relay::UpdateAll(void*) {
-	for (;;) {
-		usleep(10000);
-		pthread_mutex_lock(&mutex);
-		for (unsigned int i = 0; i < relayCount; ++i) {
-			relays[i]->Update();
-		}
-		pthread_mutex_unlock(&mutex);
-	}
-	return 0;
-}
-
 
 void Relay::Update() {
 	if (activate.GetOutput()) {

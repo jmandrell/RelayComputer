@@ -1,13 +1,17 @@
 #ifndef RELAY_H
 #define RELAY_H
 
-#include <pthread.h>
 #include <string>
 #include "Io.h"
+#include "Updatable.h"
 
 //#define DEBUG
 
-class Relay {
+/// This class implements a simulation of a SPDT relay.
+/// You can directly attach to the Activate line to switch the
+/// relay, but the other lines need to be fetched and dealt with
+/// directly as they can either be inputs or outputs.
+class Relay : public Updatable {
 public:
 	Relay(const std::string& initName);
 	void Update();
@@ -23,21 +27,8 @@ public:
 	Io* GetNc() {
 		return &nc;
 	}
-	static void Lock() {
-		pthread_mutex_lock(&mutex);
-	}
-	static void Unlock() {
-		pthread_mutex_unlock(&mutex);
-	}
 	
-private:
-	static void* UpdateAll(void*);
-
-	static Relay* relays[1000];
-	static unsigned int relayCount;
-	static pthread_t thread;
-	static pthread_mutex_t mutex;
-	
+private:	
 	const std::string name;
 	Io activate;
 	Io armature;
