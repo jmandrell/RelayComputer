@@ -4,6 +4,7 @@ GATELIB_SRCS = \
 	Display8Bit.cc \
 	Relay.cc \
 	Inverter.cc \
+	Not8.cc \
 	AndGate.cc \
 	And8.cc \
 	OrGate.cc \
@@ -20,6 +21,7 @@ GATELIB_SRCS = \
 TEST_SRCS = \
 	RelayTest.cc \
 	InverterTest.cc \
+	Not8Test.cc \
 	AndGateTest.cc \
 	And8Test.cc \
 	OrGateTest.cc \
@@ -153,6 +155,17 @@ MuxTest.o: /usr/include/stdio.h /usr/include/unctrl.h /usr/include/curses.h
 MuxTest.o: Io.h Bus8.h Display8Bit.h Updatable.h /usr/include/pthread.h
 MuxTest.o: /usr/include/endian.h /usr/include/sched.h /usr/include/time.h
 MuxTest.o: Mux.h Relay.h
+Not8.o: Not8.h Inverter.h Relay.h Io.h Updatable.h /usr/include/pthread.h
+Not8.o: /usr/include/features.h /usr/include/stdc-predef.h
+Not8.o: /usr/include/endian.h /usr/include/sched.h /usr/include/time.h Bus8.h
+Not8.o: Display8Bit.h
+Not8Test.o: /usr/include/unistd.h /usr/include/features.h
+Not8Test.o: /usr/include/stdc-predef.h TestHarness.h /usr/include/ncurses.h
+Not8Test.o: /usr/include/ncurses_dll.h /usr/include/stdint.h
+Not8Test.o: /usr/include/stdio.h /usr/include/unctrl.h /usr/include/curses.h
+Not8Test.o: Io.h Bus8.h Display8Bit.h Updatable.h /usr/include/pthread.h
+Not8Test.o: /usr/include/endian.h /usr/include/sched.h /usr/include/time.h
+Not8Test.o: Not8.h Inverter.h Relay.h
 Or8.o: Or8.h OrGate.h Relay.h Io.h Updatable.h /usr/include/pthread.h
 Or8.o: /usr/include/features.h /usr/include/stdc-predef.h
 Or8.o: /usr/include/endian.h /usr/include/sched.h /usr/include/time.h Bus8.h
