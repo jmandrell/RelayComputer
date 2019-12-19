@@ -4,6 +4,7 @@ GATELIB_SRCS = \
 	Relay.cc \
 	Inverter.cc \
 	AndGate.cc \
+	And8.cc \
 	OrGate.cc \
 	XorGate.cc \
 	Latch.cc \
@@ -14,6 +15,7 @@ TEST_SRCS = \
 	RelayTest.cc \
 	InverterTest.cc \
 	AndGateTest.cc \
+	And8Test.cc \
 	OrGateTest.cc \
 	XorGateTest.cc \
 	LatchTest.cc \
@@ -45,20 +47,15 @@ depend:
 
 # DO NOT DELETE
 
-Adder8.o: Adder8.h FullAdder.h XorGate.h Relay.h /usr/include/pthread.h
-Adder8.o: /usr/include/features.h /usr/include/stdc-predef.h
-Adder8.o: /usr/include/endian.h /usr/include/sched.h /usr/include/time.h Io.h
-Adder8.o: OrGate.h AndGate.h
-Adder8Test.o: /usr/include/unistd.h /usr/include/features.h
-Adder8Test.o: /usr/include/stdc-predef.h TestHarness.h /usr/include/ncurses.h
-Adder8Test.o: /usr/include/ncurses_dll.h /usr/include/stdint.h
-Adder8Test.o: /usr/include/stdio.h /usr/include/unctrl.h
-Adder8Test.o: /usr/include/curses.h Io.h Adder8.h FullAdder.h XorGate.h
-Adder8Test.o: Relay.h /usr/include/pthread.h /usr/include/endian.h
-Adder8Test.o: /usr/include/sched.h /usr/include/time.h OrGate.h AndGate.h
 And8.o: And8.h AndGate.h Relay.h /usr/include/pthread.h
 And8.o: /usr/include/features.h /usr/include/stdc-predef.h
 And8.o: /usr/include/endian.h /usr/include/sched.h /usr/include/time.h Io.h
+And8Test.o: /usr/include/unistd.h /usr/include/features.h
+And8Test.o: /usr/include/stdc-predef.h TestHarness.h /usr/include/ncurses.h
+And8Test.o: /usr/include/ncurses_dll.h /usr/include/stdint.h
+And8Test.o: /usr/include/stdio.h /usr/include/unctrl.h /usr/include/curses.h
+And8Test.o: Io.h And8.h AndGate.h Relay.h /usr/include/pthread.h
+And8Test.o: /usr/include/endian.h /usr/include/sched.h /usr/include/time.h
 AndGate.o: AndGate.h Relay.h /usr/include/pthread.h /usr/include/features.h
 AndGate.o: /usr/include/stdc-predef.h /usr/include/endian.h
 AndGate.o: /usr/include/sched.h /usr/include/time.h Io.h
@@ -69,18 +66,6 @@ AndGateTest.o: /usr/include/stdint.h /usr/include/stdio.h
 AndGateTest.o: /usr/include/unctrl.h /usr/include/curses.h Io.h AndGate.h
 AndGateTest.o: Relay.h /usr/include/pthread.h /usr/include/endian.h
 AndGateTest.o: /usr/include/sched.h /usr/include/time.h
-FullAdder.o: FullAdder.h XorGate.h Relay.h /usr/include/pthread.h
-FullAdder.o: /usr/include/features.h /usr/include/stdc-predef.h
-FullAdder.o: /usr/include/endian.h /usr/include/sched.h /usr/include/time.h
-FullAdder.o: Io.h OrGate.h AndGate.h
-FullAdderTest.o: /usr/include/unistd.h /usr/include/features.h
-FullAdderTest.o: /usr/include/stdc-predef.h TestHarness.h
-FullAdderTest.o: /usr/include/ncurses.h /usr/include/ncurses_dll.h
-FullAdderTest.o: /usr/include/stdint.h /usr/include/stdio.h
-FullAdderTest.o: /usr/include/unctrl.h /usr/include/curses.h Io.h FullAdder.h
-FullAdderTest.o: XorGate.h Relay.h /usr/include/pthread.h
-FullAdderTest.o: /usr/include/endian.h /usr/include/sched.h
-FullAdderTest.o: /usr/include/time.h OrGate.h AndGate.h
 Inverter.o: Inverter.h Relay.h /usr/include/pthread.h /usr/include/features.h
 Inverter.o: /usr/include/stdc-predef.h /usr/include/endian.h
 Inverter.o: /usr/include/sched.h /usr/include/time.h Io.h
