@@ -9,11 +9,14 @@ int main() {
 	TestHarness harness;
 	Latch latch("latch");
 	Io enable;
+	Io capture;
 	Io data;
 	
 	latch.AttachEnable(&enable);
-	latch.AttachData(&data);
 	harness.AddInput("Enable", &enable);
+	latch.AttachCapture(&capture);
+	harness.AddInput("Capture", &capture);
+	latch.AttachData(&data);
 	harness.AddInput("Data", &data);
 	
 	harness.AddOutput("output", latch.GetOutput());
