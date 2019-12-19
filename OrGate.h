@@ -14,10 +14,10 @@ public:
 		relay2.GetArmature()->AttachInput(io);
 	}
 	void AttachInput1(Io* io) {
-		relay1.GetActivate()->AttachInput(io);
+		relay1.AttachActivate(io);
 	}
 	void AttachInput2(Io* io) {
-		relay2.GetActivate()->AttachInput(io);
+		relay2.AttachActivate(io);
 	}
 	Io* GetOutput() {
 		return &output;

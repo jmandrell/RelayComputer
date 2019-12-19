@@ -11,7 +11,8 @@ GATELIB_SRCS = \
 	Latch.cc \
 	Register8.cc \
 	FullAdder.cc \
-	Adder8.cc
+	Adder8.cc \
+	Mux.cc
 
 TEST_SRCS = \
 	RelayTest.cc \
@@ -25,7 +26,8 @@ TEST_SRCS = \
 	LatchTest.cc \
 	Register8Test.cc \
 	FullAdderTest.cc \
-	Adder8Test.cc
+	Adder8Test.cc \
+	MuxTest.cc
 
 GATELIB = gatelib.a
 
@@ -115,6 +117,15 @@ LatchTest.o: /usr/include/ncurses_dll.h /usr/include/stdint.h
 LatchTest.o: /usr/include/stdio.h /usr/include/unctrl.h /usr/include/curses.h
 LatchTest.o: Io.h Latch.h Relay.h /usr/include/pthread.h
 LatchTest.o: /usr/include/endian.h /usr/include/sched.h /usr/include/time.h
+Mux.o: Mux.h Relay.h /usr/include/pthread.h /usr/include/features.h
+Mux.o: /usr/include/stdc-predef.h /usr/include/endian.h /usr/include/sched.h
+Mux.o: /usr/include/time.h Io.h
+MuxTest.o: /usr/include/unistd.h /usr/include/features.h
+MuxTest.o: /usr/include/stdc-predef.h TestHarness.h /usr/include/ncurses.h
+MuxTest.o: /usr/include/ncurses_dll.h /usr/include/stdint.h
+MuxTest.o: /usr/include/stdio.h /usr/include/unctrl.h /usr/include/curses.h
+MuxTest.o: Io.h Mux.h Relay.h /usr/include/pthread.h /usr/include/endian.h
+MuxTest.o: /usr/include/sched.h /usr/include/time.h
 Or8.o: Or8.h OrGate.h Relay.h /usr/include/pthread.h /usr/include/features.h
 Or8.o: /usr/include/stdc-predef.h /usr/include/endian.h /usr/include/sched.h
 Or8.o: /usr/include/time.h Io.h

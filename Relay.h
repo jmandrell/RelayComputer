@@ -11,8 +11,8 @@ class Relay {
 public:
 	Relay(const std::string& initName);
 	void Update();
-	Io* GetActivate() {
-		return &activate;
+	void AttachActivate(Io* io) {
+		activate.AttachInput(io);
 	}
 	Io* GetArmature() {
 		return &armature;

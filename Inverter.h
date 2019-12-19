@@ -12,7 +12,7 @@ public:
 		relay.GetArmature()->AttachInput(io);
 	}
 	void AttachInput(Io* io) {
-		relay.GetActivate()->AttachInput(io);
+		relay.AttachActivate(io);
 	}	
 	Io* GetOutput() {
 		return relay.GetNc();

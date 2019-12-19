@@ -8,10 +8,10 @@ Latch::Latch(const std::string& initName) :
 	relay4(name + " relay4") {
 	power.Force(true);
 	relay2.GetArmature()->AttachInput(&power);
-	relay2.GetActivate()->AttachInput(relay1.GetNo());
+	relay2.AttachActivate(relay1.GetNo());
 	relay3.GetArmature()->AttachInput(relay2.GetNo());
-	relay3.GetActivate()->AttachInput(relay1.GetNc());
-	relay2.GetActivate()->AttachInput(relay3.GetNc());
+	relay3.AttachActivate(relay1.GetNc());
+	relay2.AttachActivate(relay3.GetNc());
 	relay4.GetArmature()->AttachInput(relay3.GetNc());
 }
 
