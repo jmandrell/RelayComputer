@@ -1,8 +1,13 @@
 #GATELIB_SRCS = Io.cc Relay.cc Inverter.cc AndGate.cc OrGate.cc XorGate.cc FullAdder.cc Adder8.cc Latch.cc Register8.cc And8.cc
-GATELIB_SRCS = Io.cc Relay.cc
+GATELIB_SRCS = \
+	Io.cc \
+	Relay.cc \
+	Inverter.cc
 GATELIB = gatelib.a
 #TEST_SRCS = RelayTest.cc InverterTest.cc AndGateTest.cc OrGateTest.cc XorGateTest.cc FullAdderTest.cc Adder8Test.cc LatchTest.cc Register8Test.cc And8Test.cc
-TEST_SRCS = RelayTest.cc
+TEST_SRCS = \
+	RelayTest.cc \
+	InverterTest.cc
 
 CC=g++
 LDLIBS=-lncurses -lpthread
