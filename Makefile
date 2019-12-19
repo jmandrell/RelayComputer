@@ -8,6 +8,7 @@ GATELIB_SRCS = \
 	OrGate.cc \
 	Or8.cc \
 	XorGate.cc \
+	Xor8.cc \
 	Latch.cc \
 	Register8.cc
 
@@ -20,6 +21,7 @@ TEST_SRCS = \
 	OrGateTest.cc \
 	Or8Test.cc \
 	XorGateTest.cc \
+	Xor8Test.cc \
 	LatchTest.cc \
 	Register8Test.cc
 
@@ -135,6 +137,15 @@ TestHarness.o: /usr/include/stdint.h /usr/include/stdio.h
 TestHarness.o: /usr/include/unctrl.h /usr/include/curses.h Io.h Relay.h
 TestHarness.o: /usr/include/pthread.h /usr/include/endian.h
 TestHarness.o: /usr/include/sched.h /usr/include/time.h
+Xor8.o: Xor8.h XorGate.h Relay.h /usr/include/pthread.h
+Xor8.o: /usr/include/features.h /usr/include/stdc-predef.h
+Xor8.o: /usr/include/endian.h /usr/include/sched.h /usr/include/time.h Io.h
+Xor8Test.o: /usr/include/unistd.h /usr/include/features.h
+Xor8Test.o: /usr/include/stdc-predef.h TestHarness.h /usr/include/ncurses.h
+Xor8Test.o: /usr/include/ncurses_dll.h /usr/include/stdint.h
+Xor8Test.o: /usr/include/stdio.h /usr/include/unctrl.h /usr/include/curses.h
+Xor8Test.o: Io.h Xor8.h XorGate.h Relay.h /usr/include/pthread.h
+Xor8Test.o: /usr/include/endian.h /usr/include/sched.h /usr/include/time.h
 XorGate.o: XorGate.h Relay.h /usr/include/pthread.h /usr/include/features.h
 XorGate.o: /usr/include/stdc-predef.h /usr/include/endian.h
 XorGate.o: /usr/include/sched.h /usr/include/time.h Io.h
