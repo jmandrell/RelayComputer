@@ -191,7 +191,7 @@ OrGateTest.o: /usr/include/sched.h /usr/include/time.h OrGate.h Relay.h
 Register8.o: Register8.h Latch.h Relay.h Io.h Updatable.h
 Register8.o: /usr/include/pthread.h /usr/include/features.h
 Register8.o: /usr/include/stdc-predef.h /usr/include/endian.h
-Register8.o: /usr/include/sched.h /usr/include/time.h
+Register8.o: /usr/include/sched.h /usr/include/time.h Bus8.h Display8Bit.h
 Register8Test.o: /usr/include/unistd.h /usr/include/features.h
 Register8Test.o: /usr/include/stdc-predef.h TestHarness.h
 Register8Test.o: /usr/include/ncurses.h /usr/include/ncurses_dll.h

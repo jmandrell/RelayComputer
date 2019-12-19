@@ -35,3 +35,27 @@ void Register8::AttachCapture(Io* io) {
 	latch6.AttachCapture(io);
 	latch7.AttachCapture(io);
 }
+
+
+void Register8::AttachInputBus(Bus8* bus) {
+	latch0.AttachData(&bus->bits[0]);
+	latch1.AttachData(&bus->bits[1]);
+	latch2.AttachData(&bus->bits[2]);
+	latch3.AttachData(&bus->bits[3]);
+	latch4.AttachData(&bus->bits[4]);
+	latch5.AttachData(&bus->bits[5]);
+	latch6.AttachData(&bus->bits[6]);
+	latch7.AttachData(&bus->bits[7]);
+}
+
+
+void Register8::AttachOutputBus(Bus8* bus) {
+	bus->bits[0].AttachInput(latch0.GetOutput());
+	bus->bits[1].AttachInput(latch1.GetOutput());
+	bus->bits[2].AttachInput(latch2.GetOutput());
+	bus->bits[3].AttachInput(latch3.GetOutput());
+	bus->bits[4].AttachInput(latch4.GetOutput());
+	bus->bits[5].AttachInput(latch5.GetOutput());
+	bus->bits[6].AttachInput(latch6.GetOutput());
+	bus->bits[7].AttachInput(latch7.GetOutput());
+}
