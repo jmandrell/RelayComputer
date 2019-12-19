@@ -25,3 +25,40 @@ void Adder8::AttachEnable(Io* io) {
 	faddr6.AttachEnable(io);
 	faddr7.AttachEnable(io);
 }
+
+
+void Adder8::AttachInputBusA(Bus8* bus) {
+	faddr0.AttachInput1(&bus->bits[0]);
+	faddr1.AttachInput1(&bus->bits[1]);
+	faddr2.AttachInput1(&bus->bits[2]);
+	faddr3.AttachInput1(&bus->bits[3]);
+	faddr4.AttachInput1(&bus->bits[4]);
+	faddr5.AttachInput1(&bus->bits[5]);
+	faddr6.AttachInput1(&bus->bits[6]);
+	faddr7.AttachInput1(&bus->bits[7]);
+}
+
+
+void Adder8::AttachInputBusB(Bus8* bus) {
+	faddr0.AttachInput2(&bus->bits[0]);
+	faddr1.AttachInput2(&bus->bits[1]);
+	faddr2.AttachInput2(&bus->bits[2]);
+	faddr3.AttachInput2(&bus->bits[3]);
+	faddr4.AttachInput2(&bus->bits[4]);
+	faddr5.AttachInput2(&bus->bits[5]);
+	faddr6.AttachInput2(&bus->bits[6]);
+	faddr7.AttachInput2(&bus->bits[7]);
+}
+
+
+void Adder8::AttachOutputBus(Bus8* bus) {
+	bus->bits[0].AttachInput(faddr0.GetSum());
+	bus->bits[1].AttachInput(faddr1.GetSum());
+	bus->bits[2].AttachInput(faddr2.GetSum());
+	bus->bits[3].AttachInput(faddr3.GetSum());
+	bus->bits[4].AttachInput(faddr4.GetSum());
+	bus->bits[5].AttachInput(faddr5.GetSum());
+	bus->bits[6].AttachInput(faddr6.GetSum());
+	bus->bits[7].AttachInput(faddr7.GetSum());
+}
+

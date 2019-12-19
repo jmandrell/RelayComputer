@@ -64,7 +64,8 @@ depend:
 Adder8.o: Adder8.h FullAdder.h XorGate.h Relay.h Io.h Updatable.h
 Adder8.o: /usr/include/pthread.h /usr/include/features.h
 Adder8.o: /usr/include/stdc-predef.h /usr/include/endian.h
-Adder8.o: /usr/include/sched.h /usr/include/time.h OrGate.h AndGate.h
+Adder8.o: /usr/include/sched.h /usr/include/time.h OrGate.h AndGate.h Bus8.h
+Adder8.o: Display8Bit.h
 Adder8Test.o: /usr/include/unistd.h /usr/include/features.h
 Adder8Test.o: /usr/include/stdc-predef.h TestHarness.h /usr/include/ncurses.h
 Adder8Test.o: /usr/include/ncurses_dll.h /usr/include/stdint.h
