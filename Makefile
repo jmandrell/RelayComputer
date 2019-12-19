@@ -1,4 +1,3 @@
-#GATELIB_SRCS = FullAdder.cc Adder8.cc
 GATELIB_SRCS = \
 	Io.cc \
 	Relay.cc \
@@ -11,9 +10,9 @@ GATELIB_SRCS = \
 	Xor8.cc \
 	Latch.cc \
 	Register8.cc \
-	FullAdder.cc
+	FullAdder.cc \
+	Adder8.cc
 
-#TEST_SRCS = FullAdderTest.cc Adder8Test.cc
 TEST_SRCS = \
 	RelayTest.cc \
 	InverterTest.cc \
@@ -25,7 +24,8 @@ TEST_SRCS = \
 	Xor8Test.cc \
 	LatchTest.cc \
 	Register8Test.cc \
-	FullAdderTest.cc
+	FullAdderTest.cc \
+	Adder8Test.cc
 
 GATELIB = gatelib.a
 
@@ -53,6 +53,17 @@ depend:
 
 # DO NOT DELETE
 
+Adder8.o: Adder8.h FullAdder.h XorGate.h Relay.h /usr/include/pthread.h
+Adder8.o: /usr/include/features.h /usr/include/stdc-predef.h
+Adder8.o: /usr/include/endian.h /usr/include/sched.h /usr/include/time.h Io.h
+Adder8.o: OrGate.h AndGate.h
+Adder8Test.o: /usr/include/unistd.h /usr/include/features.h
+Adder8Test.o: /usr/include/stdc-predef.h TestHarness.h /usr/include/ncurses.h
+Adder8Test.o: /usr/include/ncurses_dll.h /usr/include/stdint.h
+Adder8Test.o: /usr/include/stdio.h /usr/include/unctrl.h
+Adder8Test.o: /usr/include/curses.h Io.h Adder8.h FullAdder.h XorGate.h
+Adder8Test.o: Relay.h /usr/include/pthread.h /usr/include/endian.h
+Adder8Test.o: /usr/include/sched.h /usr/include/time.h OrGate.h AndGate.h
 And8.o: And8.h AndGate.h Relay.h /usr/include/pthread.h
 And8.o: /usr/include/features.h /usr/include/stdc-predef.h
 And8.o: /usr/include/endian.h /usr/include/sched.h /usr/include/time.h Io.h
