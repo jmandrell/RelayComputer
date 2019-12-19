@@ -23,3 +23,40 @@ void Or8::AttachEnable(Io* io) {
 	gate6.AttachEnable(io);
 	gate7.AttachEnable(io);
 }
+
+
+void Or8::AttachInputBusA(Bus8* bus) {
+	gate0.AttachInput1(&bus->bits[0]);
+	gate1.AttachInput1(&bus->bits[1]);
+	gate2.AttachInput1(&bus->bits[2]);
+	gate3.AttachInput1(&bus->bits[3]);
+	gate4.AttachInput1(&bus->bits[4]);
+	gate5.AttachInput1(&bus->bits[5]);
+	gate6.AttachInput1(&bus->bits[6]);
+	gate7.AttachInput1(&bus->bits[7]);
+}
+
+
+void Or8::AttachInputBusB(Bus8* bus) {
+	gate0.AttachInput2(&bus->bits[0]);
+	gate1.AttachInput2(&bus->bits[1]);
+	gate2.AttachInput2(&bus->bits[2]);
+	gate3.AttachInput2(&bus->bits[3]);
+	gate4.AttachInput2(&bus->bits[4]);
+	gate5.AttachInput2(&bus->bits[5]);
+	gate6.AttachInput2(&bus->bits[6]);
+	gate7.AttachInput2(&bus->bits[7]);
+}
+
+
+void Or8::AttachOutputBus(Bus8* bus) {
+	bus->bits[0].AttachInput(gate0.GetOutput());
+	bus->bits[1].AttachInput(gate1.GetOutput());
+	bus->bits[2].AttachInput(gate2.GetOutput());
+	bus->bits[3].AttachInput(gate3.GetOutput());
+	bus->bits[4].AttachInput(gate4.GetOutput());
+	bus->bits[5].AttachInput(gate5.GetOutput());
+	bus->bits[6].AttachInput(gate6.GetOutput());
+	bus->bits[7].AttachInput(gate7.GetOutput());
+}
+
