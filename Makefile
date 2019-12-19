@@ -4,14 +4,16 @@ GATELIB_SRCS = \
 	Relay.cc \
 	Inverter.cc \
 	AndGate.cc \
-	OrGate.cc
+	OrGate.cc \
+	XorGate.cc
 
 #TEST_SRCS = RelayTest.cc InverterTest.cc AndGateTest.cc OrGateTest.cc XorGateTest.cc FullAdderTest.cc Adder8Test.cc LatchTest.cc Register8Test.cc And8Test.cc
 TEST_SRCS = \
 	RelayTest.cc \
 	InverterTest.cc \
 	AndGateTest.cc \
-	OrGateTest.cc
+	OrGateTest.cc \
+	XorGateTest.cc
 
 GATELIB = gatelib.a
 
