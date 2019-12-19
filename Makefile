@@ -6,6 +6,7 @@ GATELIB_SRCS = \
 	AndGate.cc \
 	And8.cc \
 	OrGate.cc \
+	Or8.cc \
 	XorGate.cc \
 	Latch.cc \
 	Register8.cc
@@ -17,6 +18,7 @@ TEST_SRCS = \
 	AndGateTest.cc \
 	And8Test.cc \
 	OrGateTest.cc \
+	Or8Test.cc \
 	XorGateTest.cc \
 	LatchTest.cc \
 	Register8Test.cc
@@ -86,6 +88,15 @@ LatchTest.o: /usr/include/ncurses_dll.h /usr/include/stdint.h
 LatchTest.o: /usr/include/stdio.h /usr/include/unctrl.h /usr/include/curses.h
 LatchTest.o: Io.h Latch.h Relay.h /usr/include/pthread.h
 LatchTest.o: /usr/include/endian.h /usr/include/sched.h /usr/include/time.h
+Or8.o: Or8.h OrGate.h Relay.h /usr/include/pthread.h /usr/include/features.h
+Or8.o: /usr/include/stdc-predef.h /usr/include/endian.h /usr/include/sched.h
+Or8.o: /usr/include/time.h Io.h
+Or8Test.o: /usr/include/unistd.h /usr/include/features.h
+Or8Test.o: /usr/include/stdc-predef.h TestHarness.h /usr/include/ncurses.h
+Or8Test.o: /usr/include/ncurses_dll.h /usr/include/stdint.h
+Or8Test.o: /usr/include/stdio.h /usr/include/unctrl.h /usr/include/curses.h
+Or8Test.o: Io.h Or8.h OrGate.h Relay.h /usr/include/pthread.h
+Or8Test.o: /usr/include/endian.h /usr/include/sched.h /usr/include/time.h
 OrGate.o: OrGate.h Relay.h /usr/include/pthread.h /usr/include/features.h
 OrGate.o: /usr/include/stdc-predef.h /usr/include/endian.h
 OrGate.o: /usr/include/sched.h /usr/include/time.h Io.h
