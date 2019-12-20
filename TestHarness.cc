@@ -13,11 +13,6 @@ unsigned int TestHarness::outputCount;
 Io* TestHarness::inputs[52];
 Io* TestHarness::outputs[26];
 
-static void exitFunc() {
-	TestHarness::exitFunc();
-}
-
-
 TestHarness::TestHarness() {
 	inputCount = 0;
 	for (unsigned int i = 0; i < 52; ++i) {
@@ -53,6 +48,15 @@ void TestHarness::AddInputBus8(const std::string& label, Bus8* bus) {
 }
 
 
+void TestHarness::AddInputBus16(const std::string& label, Bus16* bus) {
+	for (int i = 0; i < 16; ++i) {
+		std::ostringstream newLabel;
+		newLabel << label << " " << i;
+		AddInput(newLabel.str(), bus->bits + i);
+	}
+}
+
+
 void TestHarness::AddInput(const std::string& label, Io* io) {
 	const unsigned int col = inputCount / 26;
 	const unsigned int row = inputCount % 26;
@@ -66,6 +70,15 @@ void TestHarness::AddInput(const std::string& label, Io* io) {
 
 void TestHarness::AddOutputBus8(const std::string& label, Bus8* bus) {
 	for (int i = 0; i < 8; ++i) {
+		std::ostringstream newLabel;
+		newLabel << label << " " << i;
+		AddOutput(newLabel.str(), bus->bits + i);
+	}
+}
+
+
+void TestHarness::AddOutputBus16(const std::string& label, Bus16* bus) {
+	for (int i = 0; i < 16; ++i) {
 		std::ostringstream newLabel;
 		newLabel << label << " " << i;
 		AddOutput(newLabel.str(), bus->bits + i);

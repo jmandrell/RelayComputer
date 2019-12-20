@@ -20,7 +20,7 @@ public:
 		relay1.AttachActivate(io);
 	}
 	Io* GetOutput() {
-		relay4.GetNo();
+		return relay4.GetNo();
 	}
 	
 private:

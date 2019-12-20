@@ -2,6 +2,7 @@
 #include <ncurses.h>
 #include "Io.h"
 #include "Bus8.h"
+#include "Bus16.h"
 
 class TestHarness {
 public:
@@ -9,8 +10,10 @@ public:
 	static void exitFunc();
 	static void AddInput(const std::string& label, Io* io);
 	static void AddInputBus8(const std::string& label, Bus8* bus);
+	static void AddInputBus16(const std::string& label, Bus16* bus);
 	static void AddOutput(const std::string& label, Io* io);
 	static void AddOutputBus8(const std::string& label, Bus8* bus);
+	static void AddOutputBus16(const std::string& label, Bus16* bus);
 	static void Run();
 	
 private:
