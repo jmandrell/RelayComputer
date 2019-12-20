@@ -14,6 +14,7 @@ GATELIB_SRCS = \
 	Xor8.cc \
 	Latch.cc \
 	Register8.cc \
+	Register16.cc \
 	FullAdder.cc \
 	Adder8.cc \
 	Mux.cc \
@@ -33,6 +34,7 @@ TEST_SRCS = \
 	Xor8Test.cc \
 	LatchTest.cc \
 	Register8Test.cc \
+	Register16Test.cc \
 	FullAdderTest.cc \
 	Adder8Test.cc \
 	MuxTest.cc \
@@ -225,6 +227,20 @@ OrGateTest.o: /usr/include/curses.h Io.h Bus8.h Display8Bit.h Updatable.h
 OrGateTest.o: /usr/include/pthread.h /usr/include/endian.h
 OrGateTest.o: /usr/include/sched.h /usr/include/time.h Bus16.h Display16Bit.h
 OrGateTest.o: OrGate.h Relay.h
+Register16.o: Register16.h Latch.h Relay.h Io.h Updatable.h
+Register16.o: /usr/include/pthread.h /usr/include/features.h
+Register16.o: /usr/include/stdc-predef.h /usr/include/endian.h
+Register16.o: /usr/include/sched.h /usr/include/time.h Bus16.h Display16Bit.h
+Register16.o: Display8Bit.h
+Register16Test.o: /usr/include/unistd.h /usr/include/features.h
+Register16Test.o: /usr/include/stdc-predef.h TestHarness.h
+Register16Test.o: /usr/include/ncurses.h /usr/include/ncurses_dll.h
+Register16Test.o: /usr/include/stdint.h /usr/include/stdio.h
+Register16Test.o: /usr/include/unctrl.h /usr/include/curses.h Io.h Bus8.h
+Register16Test.o: Display8Bit.h Updatable.h /usr/include/pthread.h
+Register16Test.o: /usr/include/endian.h /usr/include/sched.h
+Register16Test.o: /usr/include/time.h Bus16.h Display16Bit.h Register16.h
+Register16Test.o: Latch.h Relay.h
 Register8.o: Register8.h Latch.h Relay.h Io.h Updatable.h
 Register8.o: /usr/include/pthread.h /usr/include/features.h
 Register8.o: /usr/include/stdc-predef.h /usr/include/endian.h
