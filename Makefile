@@ -17,6 +17,7 @@ GATELIB_SRCS = \
 	Register16.cc \
 	FullAdder.cc \
 	Adder8.cc \
+	Increment8.cc \
 	Adder16.cc \
 	Mux.cc \
 	Bus8.cc \
@@ -38,6 +39,7 @@ TEST_SRCS = \
 	Register16Test.cc \
 	FullAdderTest.cc \
 	Adder8Test.cc \
+	Increment8Test.cc \
 	Adder16Test.cc \
 	MuxTest.cc \
 	Bus8Test.cc \
@@ -178,6 +180,20 @@ FullAdderTest.o: Display8Bit.h Updatable.h /usr/include/pthread.h
 FullAdderTest.o: /usr/include/endian.h /usr/include/sched.h
 FullAdderTest.o: /usr/include/time.h Bus16.h Display16Bit.h FullAdder.h
 FullAdderTest.o: XorGate.h Relay.h OrGate.h AndGate.h
+Increment8.o: Increment8.h FullAdder.h XorGate.h Relay.h Io.h Updatable.h
+Increment8.o: /usr/include/pthread.h /usr/include/features.h
+Increment8.o: /usr/include/stdc-predef.h /usr/include/endian.h
+Increment8.o: /usr/include/sched.h /usr/include/time.h OrGate.h AndGate.h
+Increment8.o: Bus8.h Display8Bit.h
+Increment8Test.o: /usr/include/unistd.h /usr/include/features.h
+Increment8Test.o: /usr/include/stdc-predef.h TestHarness.h
+Increment8Test.o: /usr/include/ncurses.h /usr/include/ncurses_dll.h
+Increment8Test.o: /usr/include/stdint.h /usr/include/stdio.h
+Increment8Test.o: /usr/include/unctrl.h /usr/include/curses.h Io.h Bus8.h
+Increment8Test.o: Display8Bit.h Updatable.h /usr/include/pthread.h
+Increment8Test.o: /usr/include/endian.h /usr/include/sched.h
+Increment8Test.o: /usr/include/time.h Bus16.h Display16Bit.h Increment8.h
+Increment8Test.o: FullAdder.h XorGate.h Relay.h OrGate.h AndGate.h
 Inverter.o: Inverter.h Relay.h Io.h Updatable.h /usr/include/pthread.h
 Inverter.o: /usr/include/features.h /usr/include/stdc-predef.h
 Inverter.o: /usr/include/endian.h /usr/include/sched.h /usr/include/time.h
