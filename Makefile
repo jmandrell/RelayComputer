@@ -17,6 +17,7 @@ GATELIB_SRCS = \
 	Register16.cc \
 	FullAdder.cc \
 	Adder8.cc \
+	Adder16.cc \
 	Mux.cc \
 	Bus8.cc \
 	Bus16.cc \
@@ -37,6 +38,7 @@ TEST_SRCS = \
 	Register16Test.cc \
 	FullAdderTest.cc \
 	Adder8Test.cc \
+	Adder16Test.cc \
 	MuxTest.cc \
 	Bus8Test.cc \
 	Bus16Test.cc \
@@ -81,6 +83,20 @@ ALUTest.o: /usr/include/stdc-predef.h /usr/include/endian.h
 ALUTest.o: /usr/include/sched.h /usr/include/time.h Bus16.h Display16Bit.h
 ALUTest.o: ALU.h And8.h AndGate.h Relay.h Or8.h OrGate.h Not8.h Inverter.h
 ALUTest.o: Xor8.h XorGate.h Adder8.h FullAdder.h Mux.h
+Adder16.o: Adder16.h FullAdder.h XorGate.h Relay.h Io.h Updatable.h
+Adder16.o: /usr/include/pthread.h /usr/include/features.h
+Adder16.o: /usr/include/stdc-predef.h /usr/include/endian.h
+Adder16.o: /usr/include/sched.h /usr/include/time.h OrGate.h AndGate.h
+Adder16.o: Bus16.h Display16Bit.h Display8Bit.h
+Adder16Test.o: /usr/include/unistd.h /usr/include/features.h
+Adder16Test.o: /usr/include/stdc-predef.h TestHarness.h
+Adder16Test.o: /usr/include/ncurses.h /usr/include/ncurses_dll.h
+Adder16Test.o: /usr/include/stdint.h /usr/include/stdio.h
+Adder16Test.o: /usr/include/unctrl.h /usr/include/curses.h Io.h Bus8.h
+Adder16Test.o: Display8Bit.h Updatable.h /usr/include/pthread.h
+Adder16Test.o: /usr/include/endian.h /usr/include/sched.h /usr/include/time.h
+Adder16Test.o: Bus16.h Display16Bit.h Adder16.h FullAdder.h XorGate.h Relay.h
+Adder16Test.o: OrGate.h AndGate.h
 Adder8.o: Adder8.h FullAdder.h XorGate.h Relay.h Io.h Updatable.h
 Adder8.o: /usr/include/pthread.h /usr/include/features.h
 Adder8.o: /usr/include/stdc-predef.h /usr/include/endian.h

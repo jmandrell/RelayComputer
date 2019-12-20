@@ -139,7 +139,7 @@ void TestHarness::Run() {
 					}
 				}
 			} else if ((ch >= 'A') && (ch <= 'Z')) {
-				unsigned int item = ch - 'a' + 26;
+				unsigned int item = ch - 'A' + 26;
 				if (inputs[item]) {
 					if (inputs[item]->GetOutput()) {
 						inputs[item]->Force(false);
