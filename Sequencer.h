@@ -14,37 +14,62 @@ public:
 		clear.AttachInput(io);
 	}
 	Io* Get0() {
-		return mux.GetRightSignal0();
+		return mux1.GetRightSignal0();
 	}
 	Io* Get1() {
-		return mux.GetRightSignal1();
+		return mux1.GetRightSignal1();
 	}
 	Io* Get2() {
-		return mux.GetRightSignal2();
+		return mux1.GetRightSignal2();
 	}
 	Io* Get3() {
-		return mux.GetRightSignal3();
+		return mux1.GetRightSignal3();
 	}
 	Io* Get4() {
-		return mux.GetRightSignal4();
+		return mux1.GetRightSignal4();
 	}
 	Io* Get5() {
-		return mux.GetRightSignal5();
+		return mux1.GetRightSignal5();
 	}
 	Io* Get6() {
-		return mux.GetRightSignal6();
+		return mux1.GetRightSignal6();
 	}
 	Io* Get7() {
-		return mux.GetRightSignal7();
+		return mux1.GetRightSignal7();
+	}
+	Io* Get8() {
+		return mux2.GetRightSignal0();
+	}
+	Io* Get9() {
+		return mux2.GetRightSignal1();
+	}
+	Io* Get10() {
+		return mux2.GetRightSignal2();
+	}
+	Io* Get11() {
+		return mux2.GetRightSignal3();
+	}
+	Io* Get12() {
+		return mux2.GetRightSignal4();
+	}
+	Io* Get13() {
+		return mux2.GetRightSignal5();
+	}
+	Io* Get14() {
+		return mux2.GetRightSignal6();
+	}
+	Io* Get15() {
+		return mux2.GetRightSignal7();
 	}
 
 private:
 	void Tick();
-	void Tock();
 	
 	const std::string name;
-	Mux mux;
-	Io power;
+	Mux mux1;
+	Mux mux2;
+	Io mux1Enable;
+	Io mux2Enable;
 	Io clear;
 	Io channel0;
 	Io channel1;

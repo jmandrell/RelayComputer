@@ -7,7 +7,6 @@ class Clock {
 public:
 	Clock();
 	virtual void Tick() = 0;
-	virtual void Tock() = 0;
 	
 private:
 	static void* ClockThread(void*);

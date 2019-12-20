@@ -16,17 +16,10 @@ Clock::Clock() {
 }
 
 void* Clock::ClockThread(void*) {
-	bool tick = false;
 	for (;;) {
 		usleep(1000000);
 		for (unsigned int i = 0; i < clockCount; ++i) {
-			if (tick) {
-				clocks[i]->Tock();
-				tick = false;
-			} else {
-				clocks[i]->Tick();
-				tick = true;
-			}
+			clocks[i]->Tick();
 		}
 	}
 }
