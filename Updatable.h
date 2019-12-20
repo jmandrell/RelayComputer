@@ -18,10 +18,11 @@ public:
 	virtual void Update() = 0;
 	
 private:
+	static const unsigned int MAX_UPDATABLES = 1000;
 	static void* UpdateAll(void*);
 
 	static bool delay;
-	static Updatable* updatables[1000];
+	static Updatable* updatables[MAX_UPDATABLES];
 	static unsigned int count;
 	static pthread_t thread;
 	static pthread_mutex_t mutex;
