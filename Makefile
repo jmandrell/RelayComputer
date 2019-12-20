@@ -204,7 +204,7 @@ Increment16Test.o: /usr/include/stdint.h /usr/include/stdio.h
 Increment16Test.o: /usr/include/unctrl.h /usr/include/curses.h Io.h Bus8.h
 Increment16Test.o: Display8Bit.h Updatable.h /usr/include/pthread.h
 Increment16Test.o: /usr/include/endian.h /usr/include/sched.h
-Increment16Test.o: /usr/include/time.h Bus16.h Display16Bit.h Increment8.h
+Increment16Test.o: /usr/include/time.h Bus16.h Display16Bit.h Increment16.h
 Increment16Test.o: FullAdder.h XorGate.h Relay.h OrGate.h AndGate.h
 Increment8.o: Increment8.h FullAdder.h XorGate.h Relay.h Io.h Updatable.h
 Increment8.o: /usr/include/pthread.h /usr/include/features.h
@@ -296,13 +296,14 @@ OrGateTest.o: /usr/include/curses.h Io.h Bus8.h Display8Bit.h Updatable.h
 OrGateTest.o: /usr/include/pthread.h /usr/include/endian.h
 OrGateTest.o: /usr/include/sched.h /usr/include/time.h Bus16.h Display16Bit.h
 OrGateTest.o: OrGate.h Relay.h
-Processor.o: Processor.h Sequencer.h Clock.h /usr/include/pthread.h
-Processor.o: /usr/include/features.h /usr/include/stdc-predef.h
-Processor.o: /usr/include/endian.h /usr/include/sched.h /usr/include/time.h
-Processor.o: Mux.h Relay.h Io.h Updatable.h ALU.h Bus8.h Display8Bit.h And8.h
-Processor.o: AndGate.h Or8.h OrGate.h Not8.h Inverter.h Xor8.h XorGate.h
-Processor.o: Adder8.h FullAdder.h Increment8.h Register16.h Latch.h Bus16.h
-Processor.o: Display16Bit.h
+Processor.o: /usr/include/unistd.h /usr/include/features.h
+Processor.o: /usr/include/stdc-predef.h Processor.h Sequencer.h Clock.h
+Processor.o: /usr/include/pthread.h /usr/include/endian.h
+Processor.o: /usr/include/sched.h /usr/include/time.h Mux.h Relay.h Io.h
+Processor.o: Updatable.h ALU.h Bus8.h Display8Bit.h And8.h AndGate.h Or8.h
+Processor.o: OrGate.h Not8.h Inverter.h Xor8.h XorGate.h Adder8.h FullAdder.h
+Processor.o: Increment8.h Register16.h Latch.h Bus16.h Display16Bit.h
+Processor.o: Memory.h Register8.h
 ProcessorTest.o: Processor.h Sequencer.h Clock.h /usr/include/pthread.h
 ProcessorTest.o: /usr/include/features.h /usr/include/stdc-predef.h
 ProcessorTest.o: /usr/include/endian.h /usr/include/sched.h
@@ -310,7 +311,7 @@ ProcessorTest.o: /usr/include/time.h Mux.h Relay.h Io.h Updatable.h ALU.h
 ProcessorTest.o: Bus8.h Display8Bit.h And8.h AndGate.h Or8.h OrGate.h Not8.h
 ProcessorTest.o: Inverter.h Xor8.h XorGate.h Adder8.h FullAdder.h
 ProcessorTest.o: Increment8.h Register16.h Latch.h Bus16.h Display16Bit.h
-ProcessorTest.o: TestHarness.h /usr/include/ncurses.h
+ProcessorTest.o: Memory.h Register8.h TestHarness.h /usr/include/ncurses.h
 ProcessorTest.o: /usr/include/ncurses_dll.h /usr/include/stdint.h
 ProcessorTest.o: /usr/include/stdio.h /usr/include/unctrl.h
 ProcessorTest.o: /usr/include/curses.h
@@ -374,8 +375,9 @@ TestHarness.o: Display8Bit.h Updatable.h /usr/include/pthread.h
 TestHarness.o: /usr/include/endian.h /usr/include/sched.h /usr/include/time.h
 TestHarness.o: Bus16.h Display16Bit.h Relay.h
 Updatable.o: /usr/include/unistd.h /usr/include/features.h
-Updatable.o: /usr/include/stdc-predef.h Updatable.h /usr/include/pthread.h
-Updatable.o: /usr/include/endian.h /usr/include/sched.h /usr/include/time.h
+Updatable.o: /usr/include/stdc-predef.h /usr/include/stdlib.h Updatable.h
+Updatable.o: /usr/include/pthread.h /usr/include/endian.h
+Updatable.o: /usr/include/sched.h /usr/include/time.h
 Xor8.o: Xor8.h XorGate.h Relay.h Io.h Updatable.h /usr/include/pthread.h
 Xor8.o: /usr/include/features.h /usr/include/stdc-predef.h
 Xor8.o: /usr/include/endian.h /usr/include/sched.h /usr/include/time.h Bus8.h
