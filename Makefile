@@ -303,7 +303,7 @@ Processor.o: /usr/include/sched.h /usr/include/time.h Mux.h Relay.h Io.h
 Processor.o: Updatable.h ALU.h Bus8.h Display8Bit.h And8.h AndGate.h Or8.h
 Processor.o: OrGate.h Not8.h Inverter.h Xor8.h XorGate.h Adder8.h FullAdder.h
 Processor.o: Increment8.h Register16.h Latch.h Bus16.h Display16Bit.h
-Processor.o: Memory.h Register8.h
+Processor.o: Memory.h Register8.h Increment16.h
 ProcessorTest.o: Processor.h Sequencer.h Clock.h /usr/include/pthread.h
 ProcessorTest.o: /usr/include/features.h /usr/include/stdc-predef.h
 ProcessorTest.o: /usr/include/endian.h /usr/include/sched.h
@@ -311,10 +311,10 @@ ProcessorTest.o: /usr/include/time.h Mux.h Relay.h Io.h Updatable.h ALU.h
 ProcessorTest.o: Bus8.h Display8Bit.h And8.h AndGate.h Or8.h OrGate.h Not8.h
 ProcessorTest.o: Inverter.h Xor8.h XorGate.h Adder8.h FullAdder.h
 ProcessorTest.o: Increment8.h Register16.h Latch.h Bus16.h Display16Bit.h
-ProcessorTest.o: Memory.h Register8.h TestHarness.h /usr/include/ncurses.h
-ProcessorTest.o: /usr/include/ncurses_dll.h /usr/include/stdint.h
-ProcessorTest.o: /usr/include/stdio.h /usr/include/unctrl.h
-ProcessorTest.o: /usr/include/curses.h
+ProcessorTest.o: Memory.h Register8.h Increment16.h TestHarness.h
+ProcessorTest.o: /usr/include/ncurses.h /usr/include/ncurses_dll.h
+ProcessorTest.o: /usr/include/stdint.h /usr/include/stdio.h
+ProcessorTest.o: /usr/include/unctrl.h /usr/include/curses.h
 Register16.o: Register16.h Latch.h Relay.h Io.h Updatable.h
 Register16.o: /usr/include/pthread.h /usr/include/features.h
 Register16.o: /usr/include/stdc-predef.h /usr/include/endian.h

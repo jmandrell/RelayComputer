@@ -8,12 +8,21 @@ Processor::Processor() :
 	alu("ALU"),
 	pc("PC"),
 	inst("inst"),
+	increment16("increment16"),
+	nextPc("Next PC"),
+	interal16("internal16"),
 	memory("Memory") {
-	pc.AttachInputBus(&addressBus);
+	pc.AttachInputBus(&interal16);
 	pc.AttachOutputBus(&addressBus);
 	
 	memory.AttachAddressBus(&addressBus);
 	memory.AttachDataBus(&dataBus);
+	
+	increment16.AttachInputBus(&addressBus);
+	increment16.AttachOutputBus(&interal16);
+	
+	nextPc.AttachInputBus(&interal16);
+	nextPc.AttachOutputBus(&interal16);
 	
 	inst.AttachInputBus(&dataBus);
 
@@ -23,7 +32,17 @@ Processor::Processor() :
 	// cycle 1, read memory and keep PC address on bus
 	pc.AttachEnable(sequencer.Get1());
 	memory.AttachEnable(sequencer.Get1());
-	// cycle 2, continue memory read, latch into instruction register
+	inst.AttachCapture(sequencer.Get1());
+	increment16.AttachEnable(sequencer.Get1());
+	nextPc.AttachCapture(sequencer.Get1());
+	
+	// cycle 2, continue memory read, latch into instruction register, increment PC
 	memory.AttachEnable(sequencer.Get2());
-	inst.AttachCapture(sequencer.Get2());
+	increment16.AttachEnable(sequencer.Get1());
+	nextPc.AttachEnable(sequencer.Get2());
+	pc.AttachCapture(sequencer.Get2());
+	
+	// cycle 3, keep next pc on bus
+	nextPc.AttachEnable(sequencer.Get2());
 }
+

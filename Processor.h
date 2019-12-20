@@ -8,6 +8,7 @@
 #include "Bus8.h"
 #include "Memory.h"
 #include "Register8.h"
+#include "Increment16.h"
 
 class Processor {
 public:
@@ -20,6 +21,9 @@ public:
 	ALU alu;
 	Register16 pc;
 	Register8 inst;
+	Increment16 increment16;
+	Register16 nextPc;
+	Bus16 interal16;
 	Memory memory;
 };
 
