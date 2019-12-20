@@ -37,12 +37,17 @@ Processor::Processor() :
 	nextPc.AttachCapture(sequencer.Get1());
 	
 	// cycle 2, continue memory read, latch into instruction register, increment PC
+	pc.AttachEnable(sequencer.Get2());
 	memory.AttachEnable(sequencer.Get2());
-	increment16.AttachEnable(sequencer.Get1());
+	increment16.AttachEnable(sequencer.Get2());
 	nextPc.AttachEnable(sequencer.Get2());
-	pc.AttachCapture(sequencer.Get2());
 	
 	// cycle 3, keep next pc on bus
-	nextPc.AttachEnable(sequencer.Get2());
+	nextPc.AttachEnable(sequencer.Get3());
+	pc.AttachCapture(sequencer.Get3());
+	
+	// temporary shortcut!
+	//cycle 4: reset to cycle 0
+	sequencer.AttachClear(sequencer.Get4());
 }
 
