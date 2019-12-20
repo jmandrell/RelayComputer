@@ -23,7 +23,9 @@ GATELIB_SRCS = \
 	Bus8.cc \
 	Bus16.cc \
 	ALU.cc \
-	Memory.cc
+	Memory.cc \
+	Clock.cc \
+	Sequencer.cc
 
 TEST_SRCS = \
 	RelayTest.cc \
@@ -46,7 +48,8 @@ TEST_SRCS = \
 	Bus8Test.cc \
 	Bus16Test.cc \
 	ALUTest.cc \
-	MemoryTest.cc
+	MemoryTest.cc \
+	SequencerTest.cc
 
 GATELIB = gatelib.a
 
@@ -157,6 +160,9 @@ Bus8Test.o: /usr/include/stdio.h /usr/include/unctrl.h /usr/include/curses.h
 Bus8Test.o: Io.h Bus8.h Display8Bit.h Updatable.h /usr/include/pthread.h
 Bus8Test.o: /usr/include/endian.h /usr/include/sched.h /usr/include/time.h
 Bus8Test.o: Bus16.h Display16Bit.h
+Clock.o: /usr/include/unistd.h /usr/include/features.h
+Clock.o: /usr/include/stdc-predef.h Clock.h /usr/include/pthread.h
+Clock.o: /usr/include/endian.h /usr/include/sched.h /usr/include/time.h
 Display16Bit.o: /usr/include/ncurses.h /usr/include/ncurses_dll.h
 Display16Bit.o: /usr/include/stdint.h /usr/include/stdio.h
 Display16Bit.o: /usr/include/unctrl.h /usr/include/curses.h Display16Bit.h
@@ -309,6 +315,19 @@ RelayTest.o: /usr/include/stdio.h /usr/include/unctrl.h /usr/include/curses.h
 RelayTest.o: Io.h Bus8.h Display8Bit.h Updatable.h /usr/include/pthread.h
 RelayTest.o: /usr/include/endian.h /usr/include/sched.h /usr/include/time.h
 RelayTest.o: Bus16.h Display16Bit.h Relay.h
+Sequencer.o: Sequencer.h Clock.h /usr/include/pthread.h
+Sequencer.o: /usr/include/features.h /usr/include/stdc-predef.h
+Sequencer.o: /usr/include/endian.h /usr/include/sched.h /usr/include/time.h
+Sequencer.o: Mux.h Relay.h Io.h Updatable.h
+SequencerTest.o: Sequencer.h Clock.h /usr/include/pthread.h
+SequencerTest.o: /usr/include/features.h /usr/include/stdc-predef.h
+SequencerTest.o: /usr/include/endian.h /usr/include/sched.h
+SequencerTest.o: /usr/include/time.h Mux.h Relay.h Io.h Updatable.h
+SequencerTest.o: TestHarness.h /usr/include/ncurses.h
+SequencerTest.o: /usr/include/ncurses_dll.h /usr/include/stdint.h
+SequencerTest.o: /usr/include/stdio.h /usr/include/unctrl.h
+SequencerTest.o: /usr/include/curses.h Bus8.h Display8Bit.h Bus16.h
+SequencerTest.o: Display16Bit.h
 TestHarness.o: /usr/include/stdlib.h /usr/include/string.h
 TestHarness.o: /usr/include/unistd.h /usr/include/features.h
 TestHarness.o: /usr/include/stdc-predef.h TestHarness.h
