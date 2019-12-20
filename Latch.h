@@ -22,6 +22,10 @@ public:
 	Io* GetOutput() {
 		return relay4.GetNo();
 	}
+	// this is used to query the internal state of the latch
+	bool GetInternalState() {
+		return relay3.GetNc()->GetOutput();
+	}
 	
 private:
 	const std::string name;

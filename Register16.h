@@ -5,12 +5,13 @@
 
 #include "Latch.h"
 #include "Bus16.h"
+#include "Display16Bit.h"
 
 /// A 16-bit register. Data on the input
 /// lines is latched when the capture line is driven,
 /// and the outputs are driven when the enable line is
 /// driven.
-class Register16 {
+class Register16 : public Display16Bit {
 public:
 	Register16(const std::string& initName);
 	void AttachCapture(Io* io);
@@ -19,6 +20,7 @@ public:
 	void AttachOutputBus(Bus16* bus);
 	
 private:
+	void GetValues(bool* bitValues);
 	const std::string name;
 	Latch latch0;
 	Latch latch1;

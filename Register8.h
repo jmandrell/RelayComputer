@@ -5,12 +5,13 @@
 
 #include "Latch.h"
 #include "Bus8.h"
+#include "Display8Bit.h"
 
 /// An 8-bit register. Data on the input
 /// lines is latched when the capture line is driven,
 /// and the outputs are driven when the enable line is
 /// driven.
-class Register8 {
+class Register8 : public Display8Bit {
 public:
 	Register8(const std::string& initName);
 	void AttachCapture(Io* io);
@@ -19,6 +20,7 @@ public:
 	void AttachOutputBus(Bus8* bus);
 	
 private:
+	void GetValues(bool* bitValues);
 	const std::string name;
 	Latch latch0;
 	Latch latch1;

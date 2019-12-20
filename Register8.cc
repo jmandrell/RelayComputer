@@ -1,6 +1,7 @@
 #include "Register8.h"
 
 Register8::Register8(const std::string& initName) :
+	Display8Bit(initName),
 	name(initName),
 	latch0(name + " latch0"),
 	latch1(name + " latch1"),
@@ -58,4 +59,16 @@ void Register8::AttachOutputBus(Bus8* bus) {
 	bus->bits[5].AttachInput(latch5.GetOutput());
 	bus->bits[6].AttachInput(latch6.GetOutput());
 	bus->bits[7].AttachInput(latch7.GetOutput());
+}
+
+
+void Register8::GetValues(bool* bitValues) {
+	bitValues[0] = latch0.GetInternalState();
+	bitValues[1] = latch1.GetInternalState();
+	bitValues[2] = latch2.GetInternalState();
+	bitValues[3] = latch3.GetInternalState();
+	bitValues[4] = latch4.GetInternalState();
+	bitValues[5] = latch5.GetInternalState();
+	bitValues[6] = latch6.GetInternalState();
+	bitValues[7] = latch7.GetInternalState();
 }

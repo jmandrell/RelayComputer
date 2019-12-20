@@ -1,6 +1,7 @@
 #include "Register16.h"
 
 Register16::Register16(const std::string& initName) :
+	Display16Bit(initName),
 	name(initName),
 	latch0(name + " latch0"),
 	latch1(name + " latch1"),
@@ -98,4 +99,24 @@ void Register16::AttachOutputBus(Bus16* bus) {
 	bus->bits[13].AttachInput(latch13.GetOutput());
 	bus->bits[14].AttachInput(latch14.GetOutput());
 	bus->bits[15].AttachInput(latch15.GetOutput());
+}
+
+
+void Register16::GetValues(bool* bitValues) {
+	bitValues[0] = latch0.GetInternalState();
+	bitValues[1] = latch1.GetInternalState();
+	bitValues[2] = latch2.GetInternalState();
+	bitValues[3] = latch3.GetInternalState();
+	bitValues[4] = latch4.GetInternalState();
+	bitValues[5] = latch5.GetInternalState();
+	bitValues[6] = latch6.GetInternalState();
+	bitValues[7] = latch7.GetInternalState();
+	bitValues[8] = latch8.GetInternalState();
+	bitValues[9] = latch9.GetInternalState();
+	bitValues[10] = latch10.GetInternalState();
+	bitValues[11] = latch11.GetInternalState();
+	bitValues[12] = latch12.GetInternalState();
+	bitValues[13] = latch13.GetInternalState();
+	bitValues[14] = latch14.GetInternalState();
+	bitValues[15] = latch15.GetInternalState();
 }
