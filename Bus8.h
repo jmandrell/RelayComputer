@@ -9,9 +9,11 @@
 class Bus8 : public Display8Bit {
 public:
 	Bus8(const std::string& initName);
+	unsigned int GetValue();
 	Io bits[8];
+	
 private:
-	void GetValue(bool* bitValues);
+	void GetValues(bool* bitValues);
 	
 	const std::string name;
 };

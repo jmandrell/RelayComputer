@@ -22,7 +22,8 @@ GATELIB_SRCS = \
 	Mux.cc \
 	Bus8.cc \
 	Bus16.cc \
-	ALU.cc
+	ALU.cc \
+	Memory.cc
 
 TEST_SRCS = \
 	RelayTest.cc \
@@ -44,13 +45,14 @@ TEST_SRCS = \
 	MuxTest.cc \
 	Bus8Test.cc \
 	Bus16Test.cc \
-	ALUTest.cc
+	ALUTest.cc \
+	MemoryTest.cc
 
 GATELIB = gatelib.a
 
 CC=g++
 LDLIBS=-lncurses -lpthread
-CXXFLAGS=-g -Wall -pedantic -ansi
+CXXFLAGS=-g -Wall -pedantic -ansi -Werror
 
 GATELIB_OBJS = $(GATELIB_SRCS:.cc=.o)
 TESTS = $(TEST_SRCS:.cc=)
@@ -216,6 +218,17 @@ LatchTest.o: /usr/include/stdio.h /usr/include/unctrl.h /usr/include/curses.h
 LatchTest.o: Io.h Bus8.h Display8Bit.h Updatable.h /usr/include/pthread.h
 LatchTest.o: /usr/include/endian.h /usr/include/sched.h /usr/include/time.h
 LatchTest.o: Bus16.h Display16Bit.h Latch.h Relay.h
+Memory.o: /usr/include/stdlib.h Memory.h Bus8.h Io.h Display8Bit.h
+Memory.o: Updatable.h /usr/include/pthread.h /usr/include/features.h
+Memory.o: /usr/include/stdc-predef.h /usr/include/endian.h
+Memory.o: /usr/include/sched.h /usr/include/time.h Bus16.h Display16Bit.h
+MemoryTest.o: TestHarness.h /usr/include/ncurses.h /usr/include/ncurses_dll.h
+MemoryTest.o: /usr/include/stdint.h /usr/include/stdio.h
+MemoryTest.o: /usr/include/unctrl.h /usr/include/curses.h Io.h Bus8.h
+MemoryTest.o: Display8Bit.h Updatable.h /usr/include/pthread.h
+MemoryTest.o: /usr/include/features.h /usr/include/stdc-predef.h
+MemoryTest.o: /usr/include/endian.h /usr/include/sched.h /usr/include/time.h
+MemoryTest.o: Bus16.h Display16Bit.h Memory.h
 Mux.o: Mux.h Relay.h Io.h Updatable.h /usr/include/pthread.h
 Mux.o: /usr/include/features.h /usr/include/stdc-predef.h
 Mux.o: /usr/include/endian.h /usr/include/sched.h /usr/include/time.h

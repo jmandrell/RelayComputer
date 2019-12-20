@@ -28,7 +28,7 @@ TestHarness::TestHarness() {
 	nodelay(stdscr, TRUE);
 	clear();
 
-	mvaddstr(29, 0, "ESC to exit");
+	mvaddstr(32, 0, "ESC to exit");
 	atexit(exitFunc);
 }
 

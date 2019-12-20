@@ -13,8 +13,8 @@ Display8Bit::Display8Bit(const std::string& initName) :
 
 void Display8Bit::Update() {
 	bool bits[8];
-	GetValue(bits);
-	move(ourScreenLine, 10 - name.size());
+	GetValues(bits);
+	move(ourScreenLine, 20 - name.size());
 	addstr(name.c_str());
 	addstr(": ");
 	unsigned int value = 0;

@@ -11,8 +11,8 @@ Display16Bit::Display16Bit(const std::string& initName) :
 
 void Display16Bit::Update() {
 	bool bits[16];
-	GetValue(bits);
-	move(ourScreenLine, 10 - name.size());
+	GetValues(bits);
+	move(ourScreenLine, 20 - name.size());
 	addstr(name.c_str());
 	addstr(": ");
 	unsigned int value = 0;
