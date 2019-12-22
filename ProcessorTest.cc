@@ -4,7 +4,6 @@
 int main() {
 	TestHarness harness;
 	Processor processor;
-	Io enable;
 	
 	harness.AddOutput("Sequence 0", processor.sequencer.Get0());
 	harness.AddOutput("Sequence 1", processor.sequencer.Get1());
@@ -15,9 +14,8 @@ int main() {
 	harness.AddOutput("Sequence 6", processor.sequencer.Get6());
 	harness.AddOutput("Sequence 7", processor.sequencer.Get7());
 	
-	processor.pc.AttachEnable(&enable);
-	// a dummy input just to allow this to work
-	harness.AddInput("Enable", &enable);
+	harness.AddInput("Run", &Clock::runInput);
+	harness.AddInput("Step", &Clock::stepInput);
 	
 	harness.Run();
 	return 0;

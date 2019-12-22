@@ -62,7 +62,7 @@ void TestHarness::AddInput(const std::string& label, Io* io) {
 	const unsigned int row = inputCount % 26;
 	char letter = "aA"[col] + row;
 	std::string label1 = label + " [" + letter + "]";
-	mvaddstr(row + 5, (col + 1) * 25 - label1.size(), label1.c_str());
+	mvaddstr(row + 5, 50 + (col + 1) * 25 - label1.size(), label1.c_str());
 	refresh();
 	inputs[inputCount++] = io;
 }
@@ -87,7 +87,7 @@ void TestHarness::AddOutputBus16(const std::string& label, Bus16* bus) {
 
 
 void TestHarness::AddOutput(const std::string& label, Io* io) {
-	mvaddstr(outputCount + 5, 75 - label.size(), label.c_str());
+	mvaddstr(outputCount + 5, 100 - label.size(), label.c_str());
 	outputs[outputCount++] = io;
 }
 
@@ -98,7 +98,7 @@ void TestHarness::UpdateInputs() {
 		const int col = i / 26;
 		if (inputs[i]) {
 			bool value = inputs[i]->GetOutput();
-			mvaddstr(row + 5, (col + 1) * 25 + 5, value ? "*" : "O");
+			mvaddstr(row + 5, 50 + (col + 1) * 25 + 5, value ? "*" : "O");
 		}
 	}
 }
@@ -108,7 +108,7 @@ void TestHarness::UpdateOutputs() {
 	for (unsigned int i = 0; i < 26; ++i) {
 		if (outputs[i]) {
 			bool value = outputs[i]->GetOutput();
-			mvaddstr(i + 5, 77, value ? "*" : "O");
+			mvaddstr(i + 5, 102, value ? "*" : "O");
 		}
 	}
 }

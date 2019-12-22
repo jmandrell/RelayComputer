@@ -69,7 +69,7 @@ TESTS = $(TEST_SRCS:.cc=)
 all: $(TESTS)
 
 clean:
-	rm -f *.o *.a $(TESTS)
+	rm -f *.o *.a *.bak $(TESTS)
 
 $(TESTS): TestHarness.o $(GATELIB)
 
@@ -166,7 +166,7 @@ Bus8Test.o: /usr/include/endian.h /usr/include/sched.h /usr/include/time.h
 Bus8Test.o: Bus16.h Display16Bit.h
 Clock.o: /usr/include/unistd.h /usr/include/features.h
 Clock.o: /usr/include/stdc-predef.h Clock.h /usr/include/pthread.h
-Clock.o: /usr/include/endian.h /usr/include/sched.h /usr/include/time.h
+Clock.o: /usr/include/endian.h /usr/include/sched.h /usr/include/time.h Io.h
 Display16Bit.o: /usr/include/ncurses.h /usr/include/ncurses_dll.h
 Display16Bit.o: /usr/include/stdint.h /usr/include/stdio.h
 Display16Bit.o: /usr/include/unctrl.h /usr/include/curses.h Display16Bit.h
@@ -220,6 +220,15 @@ Increment8Test.o: Display8Bit.h Updatable.h /usr/include/pthread.h
 Increment8Test.o: /usr/include/endian.h /usr/include/sched.h
 Increment8Test.o: /usr/include/time.h Bus16.h Display16Bit.h Increment8.h
 Increment8Test.o: FullAdder.h XorGate.h Relay.h OrGate.h AndGate.h
+InstructionDecoder.o: /usr/include/unistd.h /usr/include/features.h
+InstructionDecoder.o: /usr/include/stdc-predef.h Processor.h Sequencer.h
+InstructionDecoder.o: Clock.h /usr/include/pthread.h /usr/include/endian.h
+InstructionDecoder.o: /usr/include/sched.h /usr/include/time.h Io.h Mux.h
+InstructionDecoder.o: Relay.h Updatable.h ALU.h Bus8.h Display8Bit.h And8.h
+InstructionDecoder.o: AndGate.h Or8.h OrGate.h Not8.h Inverter.h Xor8.h
+InstructionDecoder.o: XorGate.h Adder8.h FullAdder.h Increment8.h
+InstructionDecoder.o: Register16.h Latch.h Bus16.h Display16Bit.h Memory.h
+InstructionDecoder.o: Register8.h Increment16.h
 Inverter.o: Inverter.h Relay.h Io.h Updatable.h /usr/include/pthread.h
 Inverter.o: /usr/include/features.h /usr/include/stdc-predef.h
 Inverter.o: /usr/include/endian.h /usr/include/sched.h /usr/include/time.h
@@ -299,7 +308,7 @@ OrGateTest.o: OrGate.h Relay.h
 Processor.o: /usr/include/unistd.h /usr/include/features.h
 Processor.o: /usr/include/stdc-predef.h Processor.h Sequencer.h Clock.h
 Processor.o: /usr/include/pthread.h /usr/include/endian.h
-Processor.o: /usr/include/sched.h /usr/include/time.h Mux.h Relay.h Io.h
+Processor.o: /usr/include/sched.h /usr/include/time.h Io.h Mux.h Relay.h
 Processor.o: Updatable.h ALU.h Bus8.h Display8Bit.h And8.h AndGate.h Or8.h
 Processor.o: OrGate.h Not8.h Inverter.h Xor8.h XorGate.h Adder8.h FullAdder.h
 Processor.o: Increment8.h Register16.h Latch.h Bus16.h Display16Bit.h
@@ -307,7 +316,7 @@ Processor.o: Memory.h Register8.h Increment16.h
 ProcessorTest.o: Processor.h Sequencer.h Clock.h /usr/include/pthread.h
 ProcessorTest.o: /usr/include/features.h /usr/include/stdc-predef.h
 ProcessorTest.o: /usr/include/endian.h /usr/include/sched.h
-ProcessorTest.o: /usr/include/time.h Mux.h Relay.h Io.h Updatable.h ALU.h
+ProcessorTest.o: /usr/include/time.h Io.h Mux.h Relay.h Updatable.h ALU.h
 ProcessorTest.o: Bus8.h Display8Bit.h And8.h AndGate.h Or8.h OrGate.h Not8.h
 ProcessorTest.o: Inverter.h Xor8.h XorGate.h Adder8.h FullAdder.h
 ProcessorTest.o: Increment8.h Register16.h Latch.h Bus16.h Display16Bit.h
@@ -355,11 +364,11 @@ RelayTest.o: Bus16.h Display16Bit.h Relay.h
 Sequencer.o: Sequencer.h Clock.h /usr/include/pthread.h
 Sequencer.o: /usr/include/features.h /usr/include/stdc-predef.h
 Sequencer.o: /usr/include/endian.h /usr/include/sched.h /usr/include/time.h
-Sequencer.o: Mux.h Relay.h Io.h Updatable.h
+Sequencer.o: Io.h Mux.h Relay.h Updatable.h
 SequencerTest.o: Sequencer.h Clock.h /usr/include/pthread.h
 SequencerTest.o: /usr/include/features.h /usr/include/stdc-predef.h
 SequencerTest.o: /usr/include/endian.h /usr/include/sched.h
-SequencerTest.o: /usr/include/time.h Mux.h Relay.h Io.h Updatable.h
+SequencerTest.o: /usr/include/time.h Io.h Mux.h Relay.h Updatable.h
 SequencerTest.o: TestHarness.h /usr/include/ncurses.h
 SequencerTest.o: /usr/include/ncurses_dll.h /usr/include/stdint.h
 SequencerTest.o: /usr/include/stdio.h /usr/include/unctrl.h
