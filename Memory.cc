@@ -1,14 +1,14 @@
 #include <iostream>
 #include <stdlib.h>
+#include <fcntl.h>
+#include <unistd.h>
 
 #include "Memory.h"
 
 Memory::Memory(const std::string& initName) :
 	name(initName),
 	outputData(name + " databus") {
-	memory[0] = 0xff;
-	memory[1] = 0xcc;
-	memory[2] = 0x55;
+	memFd = open("memory.img", O_RDWR);
 }
 
 
@@ -20,11 +20,25 @@ void Memory::AttachDataBus(Bus8* bus) {
 }
 
 
+unsigned char Memory::ReadMem(unsigned int address) {
+	unsigned char c;
+	lseek(memFd, address, SEEK_SET);
+	read(memFd, &c, 1);
+	return c;
+}
+
+
+void Memory::WriteMem(unsigned int address, unsigned char value) {
+	lseek(memFd, address, SEEK_SET);
+	write(memFd, &value, 1);
+}
+
+
 void Memory::Update() {
 	if (enable.GetOutput()) {
 		// they are reading memory, get the address from the address bus
 		unsigned int address = addressBus->GetValue();
-		unsigned char value = memory[address];
+		unsigned char value = ReadMem(address);
 		for (unsigned int i = 0; i < 8; ++i) {
 			outputData.bits[i].Force((value & 1) != 0);
 			value >>= 1;
@@ -35,12 +49,12 @@ void Memory::Update() {
 			outputData.bits[i].Force(false);
 		}
 	}
-	if (write.GetOutput()) {
+	if (writeSignal.GetOutput()) {
 		// they are writing memory, get the address from the address bus
 		unsigned int address = addressBus->GetValue();
 		// get the data from the data bus
 		unsigned char value = dataBus->GetValue();
 		std::cerr << address << " " << (unsigned int)value << std::endl;
-		memory[address] = value;
+		WriteMem(address, value);
 	}
 }

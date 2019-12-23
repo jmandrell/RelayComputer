@@ -7,12 +7,12 @@ int main() {
 	Bus8 dataBus("dataBus");
 	Bus16 addressBus("addressBus");
 	Io enable;
-	Io write;
+	Io writeSignal;
 	
 	memory.AttachEnable(&enable);
 	harness.AddInput("Enable", &enable);
-	memory.AttachWrite(&write);
-	harness.AddInput("Write", &write);
+	memory.AttachWrite(&writeSignal);
+	harness.AddInput("Write", &writeSignal);
 	
 	memory.AttachDataBus(&dataBus);
 	harness.AddInputBus8("Data in", &dataBus);

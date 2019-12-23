@@ -251,10 +251,11 @@ LatchTest.o: /usr/include/stdio.h /usr/include/unctrl.h /usr/include/curses.h
 LatchTest.o: Io.h Bus8.h Display8Bit.h Updatable.h /usr/include/pthread.h
 LatchTest.o: /usr/include/endian.h /usr/include/sched.h /usr/include/time.h
 LatchTest.o: Bus16.h Display16Bit.h Latch.h Relay.h
-Memory.o: /usr/include/stdlib.h Memory.h Bus8.h Io.h Display8Bit.h
-Memory.o: Updatable.h /usr/include/pthread.h /usr/include/features.h
-Memory.o: /usr/include/stdc-predef.h /usr/include/endian.h
-Memory.o: /usr/include/sched.h /usr/include/time.h Bus16.h Display16Bit.h
+Memory.o: /usr/include/stdlib.h /usr/include/fcntl.h /usr/include/features.h
+Memory.o: /usr/include/stdc-predef.h /usr/include/unistd.h Memory.h Bus8.h
+Memory.o: Io.h Display8Bit.h Updatable.h /usr/include/pthread.h
+Memory.o: /usr/include/endian.h /usr/include/sched.h /usr/include/time.h
+Memory.o: Bus16.h Display16Bit.h
 MemoryTest.o: TestHarness.h /usr/include/ncurses.h /usr/include/ncurses_dll.h
 MemoryTest.o: /usr/include/stdint.h /usr/include/stdio.h
 MemoryTest.o: /usr/include/unctrl.h /usr/include/curses.h Io.h Bus8.h

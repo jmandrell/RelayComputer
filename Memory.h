@@ -25,19 +25,21 @@ public:
 		enable.AttachInput(io);
 	}
 	void AttachWrite(Io* io) {
-		write.AttachInput(io);
+		writeSignal.AttachInput(io);
 	}
 
 private:
 	void Update();
+	unsigned char ReadMem(unsigned int address);
+	void WriteMem(unsigned int address, unsigned char value);
 	const std::string name;
 	Bus16* addressBus;
 	Bus8* dataBus;
 	Bus8 outputData;	// we need to keep a local output bus to
 						// drive for reads
 	Io enable;
-	Io write;
-	unsigned char memory[65535];
+	Io writeSignal;
+	int memFd;
 };
 
 #endif
