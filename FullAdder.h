@@ -20,12 +20,14 @@ public:
 		and2.AttachInput1(io);
 	}
 	void AttachInput2(Io* io) {
-		xor1.AttachInput2(io);
-		and2.AttachInput2(io);
+		xor0.AttachInput1(io);
 	}
 	void AttachCarryIn(Io* io) {
 		xor2.AttachInput2(io);
 		and1.AttachInput1(io);
+	}
+	void AttachInputComplement(Io* io) {
+		xor0.AttachInput2(io);
 	}
 	Io* GetSum() {
 		return xor2.GetOutput();
@@ -37,6 +39,8 @@ public:
 private:
 	const std::string name;
 	Io power;	
+	XorGate xor0;	// used to complement one of the inputs to
+					// support subtraction
 	XorGate xor1;
 	XorGate xor2;
 	AndGate and1;

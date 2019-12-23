@@ -12,6 +12,7 @@ int main() {
 	Io input2;
 	Io carryIn;
 	Io enable;
+	Io inputComplement;
 	
 	adder.AttachEnable(&enable);
 	harness.AddInput("Enable", &enable);
@@ -21,6 +22,8 @@ int main() {
 	harness.AddInput("input 2", &input2);
 	adder.AttachCarryIn(&carryIn);
 	harness.AddInput("Carry In", &carryIn);
+	adder.AttachInputComplement(&inputComplement);
+	harness.AddInput("Input complement", &inputComplement);
 	
 	harness.AddOutput("Sum", adder.GetSum());
 	harness.AddOutput("Carry Out", adder.GetCarryOut());
