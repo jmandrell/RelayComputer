@@ -24,5 +24,8 @@ private:
 	static Io* outputs[26];
 	static unsigned int outputCount;
 	static WINDOW* mainwin;
+	static int maxX;
+	static int maxY;
+	static int columnWidth;
 };
 
