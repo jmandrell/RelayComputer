@@ -10,7 +10,10 @@ ALU::ALU(const std::string& initName) :
 	adder8(name + " adder8"),
 	sub8(name + " sub8"),
 	mux(name + " mux"),
-	aluBus(name + " aluBus") {
+	internalBus(name + " bus"),
+	outputRegister(name + " outReg") {
+	power.Force(true);
+	mux.GetLeftSignal()->AttachInput(&power);
 	increment8.AttachEnable(mux.GetRightSignal0());
 	not8.AttachEnable(mux.GetRightSignal1());
 	and8.AttachEnable(mux.GetRightSignal2());
@@ -19,7 +22,14 @@ ALU::ALU(const std::string& initName) :
 	// compare operation needs to be here
 	adder8.AttachEnable(mux.GetRightSignal6());
 	sub8.AttachEnable(mux.GetRightSignal7());
-	AttachOutputBus(&aluBus);
+	and8.AttachOutputBus(&internalBus);
+	or8.AttachOutputBus(&internalBus);
+	not8.AttachOutputBus(&internalBus);
+	xor8.AttachOutputBus(&internalBus);
+	increment8.AttachOutputBus(&internalBus);
+	adder8.AttachOutputBus(&internalBus);
+	sub8.AttachOutputBus(&internalBus);
+	outputRegister.AttachInputBus(&internalBus);
 }
 
 
@@ -43,11 +53,5 @@ void ALU::AttachInputBusB(Bus8* bus) {
 
 
 void ALU::AttachOutputBus(Bus8* bus) {
-	and8.AttachOutputBus(bus);
-	or8.AttachOutputBus(bus);
-	not8.AttachOutputBus(bus);
-	xor8.AttachOutputBus(bus);
-	increment8.AttachOutputBus(bus);
-	adder8.AttachOutputBus(bus);
-	sub8.AttachOutputBus(bus);
+	outputRegister.AttachOutputBus(bus);
 }

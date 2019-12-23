@@ -7,6 +7,7 @@ main() {
 	TestHarness harness;
 	ALU alu("alu");
 	Io enable;
+	Io compute;
 	Io channel0;
 	Io channel1;
 	Io channel2;
@@ -16,7 +17,9 @@ main() {
 	
 	alu.AttachEnable(&enable);
 	harness.AddInput("Enable", &enable);
-
+	alu.AttachCompute(&compute);
+	harness.AddInput("Compute", &compute);
+	
 	alu.AttachChannel0(&channel0);
 	harness.AddInput("Channel 0", &channel0);
 	alu.AttachChannel1(&channel1);

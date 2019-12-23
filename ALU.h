@@ -3,6 +3,7 @@
 
 #include <string>
 
+#include "Register8.h"
 #include "Bus8.h"
 #include "And8.h"
 #include "Or8.h"
@@ -16,8 +17,11 @@
 class ALU {
 public:
 	ALU(const std::string& initName);
+	void AttachCompute(Io* io) {
+		outputRegister.AttachCapture(io);
+	}
 	void AttachEnable(Io* io) {
-		mux.GetLeftSignal()->AttachInput(io);
+		outputRegister.AttachEnable(io);
 	}
 	void AttachInputBusA(Bus8* bus);
 	void AttachInputBusB(Bus8* bus);
@@ -34,6 +38,7 @@ public:
 	
 private:
 	const std::string name;
+	Io power;
 	And8 and8;
 	Or8 or8;
 	Not8 not8;
@@ -42,7 +47,8 @@ private:
 	Adder8 adder8;
 	Sub8 sub8;
 	Mux mux;
-	Bus8 aluBus;
+	Bus8 internalBus;
+	Register8 outputRegister;
 };
 
 #endif
