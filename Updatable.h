@@ -18,7 +18,7 @@ public:
 	virtual void Update() = 0;
 	
 private:
-	static const unsigned int MAX_UPDATABLES = 1000;
+	static const unsigned int MAX_UPDATABLES = 2000;
 	static void* UpdateAll(void*);
 
 	static bool delay;
