@@ -10,6 +10,7 @@
 #include "Xor8.h"
 #include "Adder8.h"
 #include "Increment8.h"
+#include "Sub8.h"
 #include "Mux.h"
 
 class ALU {
@@ -39,7 +40,9 @@ private:
 	Xor8 xor8;
 	Increment8 increment8;
 	Adder8 adder8;
+	Sub8 sub8;
 	Mux mux;
+	Bus8 aluBus;
 };
 
 #endif
