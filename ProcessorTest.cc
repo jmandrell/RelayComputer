@@ -1,5 +1,7 @@
 #include "Processor.h"
 #include "TestHarness.h"
+#include "Clock.h"
+
 
 int main() {
 	TestHarness harness;

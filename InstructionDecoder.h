@@ -1,6 +1,8 @@
 #ifndef INSTRUCTIONDECODER_H
 #define INSTRUCTIONDECODER_H
 
+#include <string>
+
 #include "Sequencer.h"
 #include "ALU.h"
 #include "Register16.h"
@@ -14,12 +16,13 @@
 
 class InstructionDecoder {
 public:
-	InstructionDecoder(Memory& memory);
+	InstructionDecoder(const std::string& initName);
 	
 private:
 	// connect up a 4-cycle memory read and increment from the PC
 	unsigned int PCReadAndIncrement(Register8& data, unsigned int startCycle);
-	Memory& memory;
+	
+	const std::string name;
 	Io power;
 	Sequencer sequencer;
 	Register8 inst;

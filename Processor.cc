@@ -2,15 +2,13 @@
 #include "Processor.h"
 #include "Registers.h"
 #include "Buses.h"
+#include "Components.h"
 
 
-Processor::Processor() :
-	alu("ALU"),
-	memory("Memory"),
-	decoder(memory) {
+Processor::Processor() {
 	
-	pc.AttachOutputBus(&addressBus);
+	Registers::pc.AttachOutputBus(&addressBus);
 	
-	memory.AttachAddressBus(&addressBus);
-	memory.AttachDataBus(&dataBus);
+	Components::memory.AttachAddressBus(&addressBus);
+	Components::memory.AttachDataBus(&dataBus);
 }

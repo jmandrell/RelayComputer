@@ -2,10 +2,11 @@
 #include "InstructionDecoder.h"
 #include "Registers.h"
 #include "Buses.h"
+#include "Components.h"
 
 
-InstructionDecoder::InstructionDecoder(Memory& initMemory) :
-	memory(initMemory),
+InstructionDecoder::InstructionDecoder(const std::string& initName) :
+	name(initName),
 	sequencer("sequencer"),
 	inst("inst"),
 	increment16("increment16"),
@@ -27,7 +28,7 @@ InstructionDecoder::InstructionDecoder(Memory& initMemory) :
 	
 	sequencer.AttachOutputBus(&sequencerBus);
 	
-	pc.AttachInputBus(&interal16);
+	Registers::pc.AttachInputBus(&interal16);
 	
 	increment16.AttachInputBus(&addressBus);
 	increment16.AttachOutputBus(&interal16);
@@ -93,23 +94,24 @@ InstructionDecoder::InstructionDecoder(Memory& initMemory) :
 
 unsigned int InstructionDecoder::PCReadAndIncrement(Register8& data, unsigned int startCycle) {
 	// cycle 0, put the PC on the address bus
-	pc.AttachEnable(&sequencerBus.bits[startCycle]);
+	Registers::pc.AttachEnable(&sequencerBus.bits[startCycle]);
 	// cycle 1, read memory and keep PC address on bus
-	pc.AttachEnable(&sequencerBus.bits[startCycle + 1]);
-	memory.AttachEnable(&sequencerBus.bits[startCycle + 1]);
+	Registers::pc.AttachEnable(&sequencerBus.bits[startCycle + 1]);
+	Components::memory.AttachEnable(&sequencerBus.bits[startCycle + 1]);
 	data.AttachCapture(&sequencerBus.bits[startCycle + 1]);
 	increment16.AttachEnable(&sequencerBus.bits[startCycle + 1]);
 	arg16.AttachCapture(&sequencerBus.bits[startCycle + 1]);
 	
 	// cycle 2, continue memory read, latch into instruction register, increment PC
-	pc.AttachEnable(&sequencerBus.bits[startCycle + 2]);
-	memory.AttachEnable(&sequencerBus.bits[startCycle + 2]);
+	Registers::pc.AttachEnable(&sequencerBus.bits[startCycle + 2]);
+	Components::memory.AttachEnable(&sequencerBus.bits[startCycle + 2]);
 	increment16.AttachEnable(&sequencerBus.bits[startCycle + 2]);
 	arg16.AttachEnable(&sequencerBus.bits[startCycle + 2]);
 	
 	// cycle 3, keep next pc on bus
 	arg16.AttachEnable(&sequencerBus.bits[startCycle + 3]);
-	pc.AttachCapture(&sequencerBus.bits[startCycle + 3]);
+	Registers::pc.AttachCapture(&sequencerBus.bits[startCycle + 3]);
+
 	return 4;
 	
 }
