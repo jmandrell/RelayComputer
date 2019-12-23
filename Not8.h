@@ -3,10 +3,12 @@
 
 #include "Inverter.h"
 #include "Bus8.h"
+#include "Enablable.h"
+
 
 /// an 8-bit binary NOT gate. The output is
 /// driven when the enable line is active.
-class Not8 {
+class Not8 : public Enablable {
 public:
 	Not8(const std::string& initName);
 	void AttachEnable(Io* io);

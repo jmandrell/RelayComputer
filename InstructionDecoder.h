@@ -14,12 +14,11 @@
 
 class InstructionDecoder {
 public:
-	InstructionDecoder(Register16& pc, Bus16& addressBus, Bus8& dataBus, Memory& memory);
+	InstructionDecoder(Memory& memory);
 	
 private:
 	// connect up a 4-cycle memory read and increment from the PC
 	unsigned int PCReadAndIncrement(Register8& data, unsigned int startCycle);
-	Register16& pc;
 	Memory& memory;
 	Io power;
 	Sequencer sequencer;

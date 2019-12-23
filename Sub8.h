@@ -3,11 +3,13 @@
 
 #include "FullAdder.h"
 #include "Bus8.h"
+#include "Enablable.h"
+
 
 /// an 8-bit wide subtractor, including carry in and out.
 /// The results are only output when the enable line is
 /// driven.
-class Sub8 {
+class Sub8 : public Enablable {
 public:
 	Sub8(const std::string& initName);
 	void AttachEnable(Io* io);

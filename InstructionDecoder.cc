@@ -1,11 +1,10 @@
 #include <unistd.h>
 #include "InstructionDecoder.h"
+#include "Registers.h"
+#include "Buses.h"
 
-InstructionDecoder::InstructionDecoder(
-	Register16& initPc,
-	Bus16& addressBus, Bus8& dataBus,
-	Memory& initMemory) :
-	pc(initPc),
+
+InstructionDecoder::InstructionDecoder(Memory& initMemory) :
 	memory(initMemory),
 	sequencer("sequencer"),
 	inst("inst"),

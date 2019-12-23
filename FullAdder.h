@@ -4,11 +4,13 @@
 #include "XorGate.h"
 #include "OrGate.h"
 #include "AndGate.h"
+#include "Enablable.h"
+
 
 /// a single bit-wide adder, including a carry in and out.
 /// The outputs are only enabled when the enable line is
 /// driven.
-class FullAdder {
+class FullAdder : public Enablable {
 public:
 	FullAdder(const std::string& initName);
 	void AttachEnable(Io* io) {

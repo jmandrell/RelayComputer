@@ -2,10 +2,12 @@
 #define INVERTER_H
 
 #include "Relay.h"
+#include "Enablable.h"
+
 
 /// Implement an inverter (NOT gate) using a relay.
 /// This gate outputs a 1 if the input is 0 and the output is enabled.
-class Inverter {
+class Inverter : public Enablable {
 public:
 	Inverter(const std::string& initName);
 	void AttachEnable(Io* io) {

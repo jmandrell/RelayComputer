@@ -2,11 +2,13 @@
 #define ORGATE_H
 
 #include "Relay.h"
+#include "Enablable.h"
+
 
 /// Implement an OR gate using relays.
 /// The output is only enabled if the enable pin is
 /// driven.
-class OrGate {
+class OrGate : public Enablable {
 public:
 	OrGate(const std::string& initName);
 	void AttachEnable(Io* io) {

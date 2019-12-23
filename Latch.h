@@ -2,12 +2,14 @@
 #define LATCH_H
 
 #include "Relay.h"
+#include "Enablable.h"
+
 
 /// Implement a single-bit data latch using relays.
 /// The data comes in the data line, and is captured when the
 /// captuire line is driven. The data is driven out when the
 /// enable line is active.
-class Latch {
+class Latch : public Enablable {
 public:
 	Latch(const std::string& initName);
 	void AttachEnable(Io* io) {

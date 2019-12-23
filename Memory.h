@@ -6,6 +6,8 @@
 #include "Bus8.h"
 #include "Bus16.h"
 #include "Updatable.h"
+#include "Enablable.h"
+
 
 /// This class implements a 64K block of 8-bit memory.
 /// It's sort of a cop-out since I'm not actually
@@ -14,7 +16,7 @@
 /// thing running. Maybe later.
 /// I'm also taking a short-cut and assuming there is only
 /// one address and data bus attached to the memory.
-class Memory : public Updatable {
+class Memory : public Updatable, Enablable {
 public:
 	Memory(const std::string& initName);
 	void AttachDataBus(Bus8* bus);

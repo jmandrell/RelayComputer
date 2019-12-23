@@ -13,8 +13,10 @@
 #include "Increment8.h"
 #include "Sub8.h"
 #include "Mux.h"
+#include "Enablable.h"
 
-class ALU {
+
+class ALU : public Enablable {
 public:
 	ALU(const std::string& initName);
 	void AttachCompute(Io* io) {

@@ -3,11 +3,13 @@
 
 #include "FullAdder.h"
 #include "Bus16.h"
+#include "Enablable.h"
+
 
 /// a 16-bit wide adder, including carry in and out.
 /// The results are only output when the enable line is
 /// driven.
-class Adder16 {
+class Adder16 : public Enablable {
 public:
 	Adder16(const std::string& initName);
 	void AttachEnable(Io* io);

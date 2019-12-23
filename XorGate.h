@@ -2,11 +2,13 @@
 #define XORGATE_H
 
 #include "Relay.h"
+#include "Enablable.h"
+
 
 /// Implement an XOR gate using relays.
 /// The output is only enabled if the enable pin is
 /// driven.
-class XorGate {
+class XorGate : public Enablable {
 public:
 	XorGate(const std::string& initName);
 	void AttachEnable(Io* io) {
