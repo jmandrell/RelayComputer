@@ -15,7 +15,10 @@ public:
 	static void AddOutputBus8(const std::string& label, Bus8* bus);
 	static void AddOutputBus16(const std::string& label, Bus16* bus);
 	static void Run();
-	
+	static int GetReservedLines() {
+		return 4;
+	}
+
 private:
 	static void UpdateInputs();
 	static void UpdateOutputs();

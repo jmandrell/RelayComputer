@@ -2,8 +2,9 @@
 #include <iostream>
 
 #include "Display8Bit.h"
+#include "TestHarness.h"
 
-unsigned int Display8Bit::screenLine = 0;
+unsigned int Display8Bit::screenLine = TestHarness::GetReservedLines();
 
 Display8Bit::Display8Bit(const std::string& initName) :
 	name(initName) {
