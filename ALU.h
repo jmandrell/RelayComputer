@@ -22,11 +22,16 @@ public:
 	void AttachCompute(Io* io) {
 		outputRegister.AttachCapture(io);
 	}
+	void AttachCaptureA(Io* io) {
+		inputA.AttachCapture(io);
+	}
+	void AttachCaptureB(Io* io) {
+		inputB.AttachCapture(io);
+	}
 	void AttachEnable(Io* io) {
 		outputRegister.AttachEnable(io);
 	}
-	void AttachInputBusA(Bus8* bus);
-	void AttachInputBusB(Bus8* bus);
+	void AttachInputBus(Bus8* bus);
 	void AttachChannel0(Io* io) {
 		mux.AttachChannel0(io);
 	}
@@ -36,11 +41,18 @@ public:
 	void AttachChannel2(Io* io) {
 		mux.AttachChannel2(io);
 	}
+	void AttachCaptureOut(Io* io) {
+		outputRegister.AttachCapture(io);
+	}
 	void AttachOutputBus(Bus8* bus);
 	
 private:
 	const std::string name;
 	Io power;
+	Register8 inputA;
+	Bus8 inputABus;
+	Register8 inputB;
+	Bus8 inputBBus;
 	And8 and8;
 	Or8 or8;
 	Not8 not8;

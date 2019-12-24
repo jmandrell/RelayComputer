@@ -14,6 +14,18 @@
 #include "Mux.h"
 
 
+/// This class handles operaions that start with '01', which involve
+/// ALU-based operations.
+class DecoderAluOperations : public Enablable {
+public:
+	DecoderAluOperations(Io* channel0, Io* channel1, Io* channel2);
+	void AttachEnable(Io* io);
+
+private:
+	ALU alu;
+};
+
+
 class InstructionDecoder {
 public:
 	InstructionDecoder(const std::string& initName);
@@ -37,6 +49,7 @@ private:
 	Bus8 test0;
 	Bus8 test1;
 	Bus8 test2;
+	DecoderAluOperations decAluOp;
 };
 
 #endif

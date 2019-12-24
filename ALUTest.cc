@@ -6,14 +6,20 @@ int
 main() {
 	TestHarness harness;
 	ALU alu("alu");
+	Io captureA;
+	Io captureB;
 	Io enable;
 	Io compute;
 	Io channel0;
 	Io channel1;
 	Io channel2;
-	Bus8 inputA("Input A");
-	Bus8 inputB("Input B");
+	Bus8 input("Input");
 	Bus8 output("Output");
+	
+	alu.AttachCaptureA(&captureA);
+	harness.AddInput("Capture A", &captureA);
+	alu.AttachCaptureB(&captureB);
+	harness.AddInput("Capture B", &captureB);
 	
 	alu.AttachEnable(&enable);
 	harness.AddInput("Enable", &enable);
@@ -27,10 +33,8 @@ main() {
 	alu.AttachChannel2(&channel2);
 	harness.AddInput("Channel 2", &channel2);
 	
-	alu.AttachInputBusA(&inputA);
-	harness.AddInputBus8("Input A", &inputA);
-	alu.AttachInputBusB(&inputB);
-	harness.AddInputBus8("Input B", &inputB);
+	alu.AttachInputBus(&input);
+	harness.AddInputBus8("Input", &input);
 	alu.AttachOutputBus(&output);
 	harness.AddOutputBus8("Output", &output);
 	

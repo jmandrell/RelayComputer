@@ -3,6 +3,19 @@
 #include "Registers.h"
 #include "Buses.h"
 #include "Components.h"
+#include "ALU.h"
+
+
+DecoderAluOperations::DecoderAluOperations(Io* channel0, Io* channel1, Io* channel2) :
+	alu("ALU") {
+	alu.AttachChannel0(channel0);
+	alu.AttachChannel1(channel1);
+	alu.AttachChannel2(channel2);
+}
+
+
+void DecoderAluOperations::AttachEnable(Io* io) {
+}
 
 
 InstructionDecoder::InstructionDecoder(const std::string& initName) :
@@ -19,7 +32,8 @@ InstructionDecoder::InstructionDecoder(const std::string& initName) :
 	bottom3Bits("bottom3Bits"),
 	test0("test0"),
 	test1("test1"),
-	test2("test2") {
+	test2("test2"),
+	decAluOp(&decoderBus.bits[3], &decoderBus.bits[4], &decoderBus.bits[5]) {
 	// set up the instruction muxers
 	power.Force(true);
 	top2Bits.GetLeftSignal()->AttachInput(&power);
@@ -87,9 +101,10 @@ InstructionDecoder::InstructionDecoder(const std::string& initName) :
 	// at this point we have the instruction read into the 'inst' register
 	// so we can decode that to see what we need to do
 	
-	// temporary shortcut!
-	//cycle 4: reset to cycle 0
-	sequencer.AttachClear(&sequencerBus.bits[nextCycle]);
+	// TODO: process instructions that start with 00 (register moves)
+	
+	// process instructions that start with 01 (ALU operations)
+	decAluOp.AttachEnable(top2Bits.GetRightSignal1());
 }
 
 unsigned int InstructionDecoder::PCReadAndIncrement(Register8& data, unsigned int startCycle) {
@@ -115,3 +130,4 @@ unsigned int InstructionDecoder::PCReadAndIncrement(Register8& data, unsigned in
 	return 4;
 	
 }
+

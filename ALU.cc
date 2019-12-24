@@ -2,6 +2,10 @@
 
 ALU::ALU(const std::string& initName) :
 	name(initName),
+	inputA(name + " inputA"),
+	inputABus(name + " inputABus"),
+	inputB(name + " inputB"),
+	inputBBus(name + " inputBBus"),
 	and8(name + " and8"),
 	or8(name + " or8"),
 	not8(name + " not8"),
@@ -30,25 +34,28 @@ ALU::ALU(const std::string& initName) :
 	adder8.AttachOutputBus(&internalBus);
 	sub8.AttachOutputBus(&internalBus);
 	outputRegister.AttachInputBus(&internalBus);
+	inputA.AttachOutputBus(&inputABus);
+	inputA.AttachEnable(&power);
+	and8.AttachInputBusA(&inputABus);
+	or8.AttachInputBusA(&inputABus);
+	not8.AttachInputBus(&inputABus);
+	xor8.AttachInputBusA(&inputABus);
+	increment8.AttachInputBus(&inputABus);
+	adder8.AttachInputBusA(&inputABus);
+	sub8.AttachInputBusA(&inputABus);
+	inputB.AttachOutputBus(&inputBBus);
+	inputB.AttachEnable(&power);
+	and8.AttachInputBusB(&inputBBus);
+	or8.AttachInputBusB(&inputBBus);
+	xor8.AttachInputBusB(&inputBBus);
+	adder8.AttachInputBusB(&inputBBus);
+	sub8.AttachInputBusB(&inputBBus);
 }
 
 
-void ALU::AttachInputBusA(Bus8* bus) {
-	and8.AttachInputBusA(bus);
-	or8.AttachInputBusA(bus);
-	not8.AttachInputBus(bus);
-	xor8.AttachInputBusA(bus);
-	increment8.AttachInputBus(bus);
-	adder8.AttachInputBusA(bus);
-	sub8.AttachInputBusA(bus);
-}
-
-void ALU::AttachInputBusB(Bus8* bus) {
-	and8.AttachInputBusB(bus);
-	or8.AttachInputBusB(bus);
-	xor8.AttachInputBusB(bus);
-	adder8.AttachInputBusB(bus);
-	sub8.AttachInputBusB(bus);
+void ALU::AttachInputBus(Bus8* bus) {
+	inputA.AttachInputBus(bus);
+	inputB.AttachInputBus(bus);
 }
 
 
