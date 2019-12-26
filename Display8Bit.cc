@@ -6,16 +6,19 @@
 
 unsigned int Display8Bit::screenLine = TestHarness::GetReservedLines();
 
-Display8Bit::Display8Bit(const std::string& initName) :
+Display8Bit::Display8Bit(const std::string& initName, bool show) :
+	Updatable(show),
 	name(initName) {
-	ourScreenLine = GetScreenLine();
+	if (show) {
+		ourScreenLine = GetScreenLine();
+	}
 }
 
 
 void Display8Bit::Update() {
 	bool bits[8];
 	GetValues(bits);
-	move(ourScreenLine, 20 - name.size());
+	move(ourScreenLine, 30 - name.size());
 	addstr(name.c_str());
 	addstr(": ");
 	unsigned int value = 0;

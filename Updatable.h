@@ -8,7 +8,7 @@
 /// inherits from it to do whatever that class needs done.
 class Updatable {
 public:
-	Updatable();
+	Updatable(bool show = true);
 	static void Lock() {
 		pthread_mutex_lock(&mutex);
 	}

@@ -1,4 +1,7 @@
 GATELIB_SRCS = \
+	Registers.cc \
+	Buses.cc \
+	Components.cc \
 	Io.cc \
 	Updatable.cc \
 	Display8Bit.cc \
@@ -28,9 +31,6 @@ GATELIB_SRCS = \
 	Memory.cc \
 	Clock.cc \
 	Sequencer.cc \
-	Registers.cc \
-	Buses.cc \
-	Components.cc \
 	InstructionDecoder.cc \
 	Processor.cc
 

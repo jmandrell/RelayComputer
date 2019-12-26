@@ -7,7 +7,7 @@
 
 Memory::Memory(const std::string& initName) :
 	name(initName),
-	outputData(name + " databus") {
+	outputData(name + " databus", false) {
 	memFd = open("memory.img", O_RDWR);
 }
 

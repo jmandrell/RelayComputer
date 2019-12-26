@@ -8,7 +8,7 @@
 
 class Bus16 : public Display16Bit {
 public:
-	Bus16(const std::string& initName);
+	Bus16(const std::string& initName, bool show = true);
 	unsigned int GetValue();
 	Io bits[16];
 

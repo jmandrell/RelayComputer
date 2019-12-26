@@ -7,7 +7,7 @@
 
 class Display8Bit : public Updatable {
 public:
-	Display8Bit(const std::string& initName);
+	Display8Bit(const std::string& initName, bool show = true);
 	virtual void GetValues(bool* bits) = 0;
 	static unsigned int GetScreenLine() {
 		return screenLine++;

@@ -9,7 +9,7 @@
 
 class Display16Bit : public Updatable {
 public:
-	Display16Bit(const std::string& initName);
+	Display16Bit(const std::string& initName, bool show = true);
 	virtual void GetValues(bool* bits) = 0;
 	
 private:

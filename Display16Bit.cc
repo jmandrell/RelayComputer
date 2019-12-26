@@ -3,16 +3,19 @@
 
 #include "Display16Bit.h"
 
-Display16Bit::Display16Bit(const std::string& initName) :
+Display16Bit::Display16Bit(const std::string& initName, bool show) :
+	Updatable(show),
 	name(initName) {
-	ourScreenLine = Display8Bit::GetScreenLine();
+	if (show) {
+		ourScreenLine = Display8Bit::GetScreenLine();
+	}
 }
 
 
 void Display16Bit::Update() {
 	bool bits[16];
 	GetValues(bits);
-	move(ourScreenLine, 20 - name.size());
+	move(ourScreenLine, 30 - name.size());
 	addstr(name.c_str());
 	addstr(": ");
 	unsigned int value = 0;

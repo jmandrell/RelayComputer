@@ -16,13 +16,19 @@
 
 /// This class handles operaions that start with '01', which involve
 /// ALU-based operations.
-class DecoderAluOperations : public Enablable {
+class Decoder01 {
 public:
-	DecoderAluOperations(Io* channel0, Io* channel1, Io* channel2);
+	Decoder01(const std::string& initName,
+		Bus8& decoderBus);
 	void AttachEnable(Io* io);
 
 private:
+	const std::string name;
+	Mux readRegister;
+	Mux writeRegister;
 	ALU alu;
+	Register16 seqBuffer;
+	Bus16 seqOutBus;
 };
 
 
@@ -36,20 +42,14 @@ private:
 	
 	const std::string name;
 	Io power;
-	Sequencer sequencer;
 	Register8 inst;
 	Increment16 increment16;
 	Register16 arg16;
 	Bus16 interal16;
-	Bus16 sequencerBus;
 	Bus8 decoderBus;
 	Mux top2Bits;
-	Mux middle3Bits;
-	Mux bottom3Bits;
 	Bus8 test0;
-	Bus8 test1;
-	Bus8 test2;
-	DecoderAluOperations decAluOp;
+	Decoder01 dec01;
 };
 
 #endif

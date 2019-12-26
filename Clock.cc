@@ -21,7 +21,7 @@ Clock::Clock() {
 void* Clock::ClockThread(void*) {
 	for (;;) {
 		while (runInput.GetOutput()) {
-			usleep(1000000);
+			usleep(100000);
 			DoTick();
 		}
 		while (!runInput.GetOutput()) {

@@ -1,7 +1,7 @@
 #include "Bus16.h"
 
-Bus16::Bus16(const std::string& initName) :
-	Display16Bit(initName), name(initName) {
+Bus16::Bus16(const std::string& initName, bool show) :
+	Display16Bit(initName, show), name(initName) {
 }
 
 

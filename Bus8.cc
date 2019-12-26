@@ -1,7 +1,7 @@
 #include "Bus8.h"
 
-Bus8::Bus8(const std::string& initName) :
-	Display8Bit(initName), name(initName) {
+Bus8::Bus8(const std::string& initName, bool show) :
+	Display8Bit(initName, show), name(initName) {
 }
 
 

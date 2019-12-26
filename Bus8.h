@@ -8,7 +8,7 @@
 
 class Bus8 : public Display8Bit {
 public:
-	Bus8(const std::string& initName);
+	Bus8(const std::string& initName, bool show = true);
 	unsigned int GetValue();
 	Io bits[8];
 	

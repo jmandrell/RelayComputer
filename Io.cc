@@ -1,3 +1,5 @@
+#include <stdlib.h>
+
 #include "Io.h"
 
 Io::Io() {
@@ -12,6 +14,9 @@ void Io::AttachInput(Io* input) {
 		inputs = new Io*[100];
 	}
 	inputs[inputCount++] = input;
+	if (inputCount >= 100) {
+		exit(1);
+	}
 }
 
 bool Io::GetOutput(bool useForce) {
