@@ -14,6 +14,23 @@
 #include "Mux.h"
 
 
+/// This class handles operaions that start with '00', which involve
+/// moves between registers
+class Decoder00 {
+public:
+	Decoder00(const std::string& initName,
+		Bus8& decoderBus);
+	void AttachEnable(Io* io);
+
+private:
+	const std::string name;
+	Mux readRegister;
+	Mux writeRegister;
+	Register16 seqBuffer;
+	Bus16 seqOutBus;
+};
+
+
 /// This class handles operaions that start with '01', which involve
 /// ALU-based operations.
 class Decoder01 {
@@ -48,7 +65,7 @@ private:
 	Bus16 interal16;
 	Bus8 decoderBus;
 	Mux top2Bits;
-	Bus8 test0;
+	Decoder00 dec00;
 	Decoder01 dec01;
 };
 
