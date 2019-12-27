@@ -14,6 +14,7 @@ public:
 	static void AddOutput(const std::string& label, Io* io);
 	static void AddOutputBus8(const std::string& label, Bus8* bus);
 	static void AddOutputBus16(const std::string& label, Bus16* bus);
+	static void AddInt(const std::string& label, int* value);
 	static void Run();
 	static int GetReservedLines() {
 		return 4;
@@ -26,6 +27,8 @@ private:
 	static unsigned int inputCount;
 	static Io* outputs[26];
 	static unsigned int outputCount;
+	static std::string intLabel;
+	static int* intValue;
 	static WINDOW* mainwin;
 	static int maxX;
 	static int maxY;

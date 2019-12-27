@@ -9,7 +9,7 @@ int main() {
 		
 	harness.AddInput("Run", &Clock::runInput);
 	harness.AddInput("Step", &Clock::stepInput);
-	
+	harness.AddInt("Delay between clock cycles", &Clock::clockDelay);
 	harness.Run();
 	return 0;
 }

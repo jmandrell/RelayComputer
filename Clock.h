@@ -11,7 +11,8 @@ public:
 	virtual void Tick() = 0;
 	static Io runInput;
 	static Io stepInput;
-	
+	static int clockDelay;
+
 private:
 	static void DoTick();
 	static void* ClockThread(void*);

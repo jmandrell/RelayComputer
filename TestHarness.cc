@@ -12,6 +12,9 @@ unsigned int TestHarness::inputCount;
 unsigned int TestHarness::outputCount;
 Io* TestHarness::inputs[52];
 Io* TestHarness::outputs[26];
+int* TestHarness::intValue = 0;
+std::string TestHarness::intLabel;
+
 int TestHarness::maxX;
 int TestHarness::maxY;
 int TestHarness::columnWidth;
@@ -30,7 +33,8 @@ TestHarness::TestHarness() {
 	noecho();
 	nodelay(stdscr, TRUE);
 	clear();
-
+	keypad(mainwin, TRUE);
+	
 	getmaxyx(mainwin, maxY, maxX);
 	columnWidth = maxX / 4;
 	mvaddstr(maxY-1, maxX / 2 - 5, "ESC to exit");
@@ -97,8 +101,14 @@ void TestHarness::AddOutput(const std::string& label, Io* io) {
 }
 
 
+void TestHarness::AddInt(const std::string& label, int* value) {
+	intLabel = label;
+	intValue = value;
+}
+
+
 void TestHarness::UpdateInputs() {
-	for (unsigned int i = 0; i < 52; ++i) {
+	for (unsigned int i = 0; i < inputCount; ++i) {
 		const int row = i % 26;
 		const int col = i / 26;
 		if (inputs[i]) {
@@ -106,11 +116,18 @@ void TestHarness::UpdateInputs() {
 			mvaddstr(row + GetReservedLines(), (col + 2) * columnWidth - 2, value ? "*" : "O");
 		}
 	}
+	static int lastIntValue = -999999999;
+	if (intValue && lastIntValue != *intValue) {
+		std::ostringstream newLabel;
+		newLabel << intLabel << " " << *intValue << "        ";
+		mvaddstr(maxY - 2, columnWidth, newLabel.str().c_str());
+		lastIntValue = *intValue;
+	}
 }
 
 
 void TestHarness::UpdateOutputs() {
-	for (unsigned int i = 0; i < 26; ++i) {
+	for (unsigned int i = 0; i < outputCount; ++i) {
 		if (outputs[i]) {
 			bool value = outputs[i]->GetOutput();
 			mvaddstr(i + GetReservedLines(), columnWidth * 4 - 2, value ? "*" : "O");
@@ -132,7 +149,11 @@ void TestHarness::Run() {
 		if (ch != ERR) {
 			move(0, 0);
 			clrtoeol();
-			if (ch == 27) {
+			if (ch == KEY_UP) {
+				*intValue = *intValue + *intValue / 4;
+			} else if (ch == KEY_DOWN) {
+				*intValue = *intValue * 8 / 10;
+			} else if (ch == 27) {
 				return;
 			} else if ((ch >= 'a') && (ch <= 'z')) {
 				unsigned int item = ch - 'a';

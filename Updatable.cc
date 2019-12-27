@@ -29,7 +29,7 @@ Updatable::Updatable(bool show) {
 
 void* Updatable::UpdateAll(void*) {
 	for (;;) {
-		usleep(10000);
+		usleep(500);
 		while (delay) {
 			delay = false;
 			usleep(50000);

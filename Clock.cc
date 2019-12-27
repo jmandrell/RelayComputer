@@ -7,6 +7,7 @@ unsigned int Clock::clockCount = 0;
 pthread_t Clock::thread;
 Io Clock::runInput;
 Io Clock::stepInput;
+int Clock::clockDelay = 1000000;
 
 static bool started = false;
 
@@ -21,7 +22,7 @@ Clock::Clock() {
 void* Clock::ClockThread(void*) {
 	for (;;) {
 		while (runInput.GetOutput()) {
-			usleep(100000);
+			usleep(clockDelay);
 			DoTick();
 		}
 		while (!runInput.GetOutput()) {
