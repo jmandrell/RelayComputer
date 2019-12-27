@@ -49,6 +49,25 @@ private:
 };
 
 
+/// This class handles operaions that start with '10'
+class Decoder10 {
+public:
+	Decoder10(const std::string& initName,
+		Bus8& decoderBus,
+		Increment16& increment16,
+		Register16& arg16);
+	void AttachEnable(Io* io);
+
+private:
+	const std::string name;
+	Mux operation;
+	Mux whichRegister;
+	Register16 seqBuffer;
+	Bus16 seqOutBus;
+	Register8 arg8;
+};
+
+
 class InstructionDecoder {
 public:
 	InstructionDecoder(const std::string& initName);
@@ -67,6 +86,7 @@ private:
 	Mux top2Bits;
 	Decoder00 dec00;
 	Decoder01 dec01;
+	Decoder10 dec10;
 };
 
 #endif
