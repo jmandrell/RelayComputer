@@ -146,13 +146,12 @@ void Decoder01::AttachEnable(Io* io) {
 }
 
 
-Decoder10::Decoder10(
+Decoder10000::Decoder10000(
 	const std::string& initName,
 	Bus8& decoderBus,
 	Increment16& increment16,
 	Register16& arg16) :
 	name(initName),
-	operation(name + " operation"),
 	whichRegister(name + " whichReg"),
 	seqBuffer(name + " seqBuffer"),
 	seqOutBus(name + " seqOutBus"),
@@ -200,9 +199,31 @@ Decoder10::Decoder10(
 }
 
 
-void Decoder10::AttachEnable(Io* io) {
+void Decoder10000::AttachEnable(Io* io) {
 	seqBuffer.AttachEnable(io);
 	seqBuffer.AttachCapture(io);
+}
+
+
+Decoder10::Decoder10(
+        const std::string& initName,
+        Bus8& decoderBus,
+        Increment16& increment16,
+        Register16& arg16) :
+        name(initName),
+        operation(name + " operation"),
+        dec10000("dec10000", decoderBus, increment16, arg16) {
+        // the middle 3 bits determine which family of operations we are performing
+        operation.AttachChannel0(&decoderBus.bits[3]);
+        operation.AttachChannel1(&decoderBus.bits[4]);
+        operation.AttachChannel2(&decoderBus.bits[5]);
+
+        dec10000.AttachEnable(operation.GetRightSignal0());
+}
+
+
+void Decoder10::AttachEnable(Io* io) {
+        operation.GetLeftSignal()->AttachInput(io);
 }
 
 
