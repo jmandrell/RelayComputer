@@ -5,7 +5,7 @@
 int
 main() {
 	TestHarness harness;
-	ALU alu("alu");
+	ALU alu("ALU");
 	Io captureA;
 	Io captureB;
 	Io enable;
@@ -23,7 +23,7 @@ main() {
 	
 	alu.AttachEnable(&enable);
 	harness.AddInput("Enable", &enable);
-	alu.AttachCompute(&compute);
+	alu.AttachCaptureOut(&compute);
 	harness.AddInput("Compute", &compute);
 	
 	alu.AttachChannel0(&channel0);

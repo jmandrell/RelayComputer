@@ -19,9 +19,6 @@
 class ALU : public Enablable {
 public:
 	ALU(const std::string& initName);
-	void AttachCompute(Io* io) {
-		outputRegister.AttachCapture(io);
-	}
 	void AttachCaptureA(Io* io) {
 		inputA.AttachCapture(io);
 	}
@@ -43,6 +40,7 @@ public:
 	}
 	void AttachCaptureOut(Io* io) {
 		outputRegister.AttachCapture(io);
+		flagsRegister.AttachCapture(io);
 	}
 	void AttachOutputBus(Bus8* bus);
 	
@@ -62,7 +60,10 @@ private:
 	Sub8 sub8;
 	Mux mux;
 	Bus8 internalBus;
+	Bus8 flagsBus;
+	Inverter inverter;
 	Register8 outputRegister;
+	Register8 flagsRegister;
 };
 
 #endif

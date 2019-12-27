@@ -15,9 +15,33 @@ ALU::ALU(const std::string& initName) :
 	sub8(name + " sub8"),
 	mux(name + " mux"),
 	internalBus(name + " bus"),
-	outputRegister(name + " outReg") {
+	flagsBus(name + " flagsBus"),
+	inverter(name + " signInverter"),
+	outputRegister(name + " outReg"),
+	flagsRegister(name + " flagsReg") {
 	power.Force(true);
 	mux.GetLeftSignal()->AttachInput(&power);
+	
+	// set up the registure to capture flags
+	flagsRegister.AttachInputBus(&flagsBus);
+	// the zero flag
+	inverter.AttachEnable(&power);
+	inverter.AttachInput(&internalBus.bits[0]);
+	inverter.AttachInput(&internalBus.bits[1]);
+	inverter.AttachInput(&internalBus.bits[2]);
+	inverter.AttachInput(&internalBus.bits[3]);
+	inverter.AttachInput(&internalBus.bits[4]);
+	inverter.AttachInput(&internalBus.bits[5]);
+	inverter.AttachInput(&internalBus.bits[6]);
+	inverter.AttachInput(&internalBus.bits[7]);
+	flagsBus.bits[0].AttachInput(inverter.GetOutput());
+	// the carry flag
+	flagsBus.bits[1].AttachInput(increment8.GetCarryOut());
+	flagsBus.bits[1].AttachInput(adder8.GetCarryOut());
+	flagsBus.bits[1].AttachInput(sub8.GetCarryOut());
+	// the sign flag
+	flagsBus.bits[2].AttachInput(&internalBus.bits[7]);
+
 	increment8.AttachEnable(mux.GetRightSignal0());
 	not8.AttachEnable(mux.GetRightSignal1());
 	and8.AttachEnable(mux.GetRightSignal2());

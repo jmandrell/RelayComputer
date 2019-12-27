@@ -269,7 +269,7 @@ InverterTest.o: Display8Bit.h Updatable.h /usr/include/pthread.h
 InverterTest.o: /usr/include/endian.h /usr/include/sched.h
 InverterTest.o: /usr/include/time.h Bus16.h Display16Bit.h Inverter.h Relay.h
 InverterTest.o: Enablable.h
-Io.o: Io.h
+Io.o: /usr/include/stdlib.h Io.h
 Latch.o: Latch.h Relay.h Io.h Updatable.h /usr/include/pthread.h
 Latch.o: /usr/include/features.h /usr/include/stdc-predef.h
 Latch.o: /usr/include/endian.h /usr/include/sched.h /usr/include/time.h
