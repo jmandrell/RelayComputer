@@ -15,7 +15,7 @@
 /// driven.
 class Register16 : public Display16Bit, Enablable {
 public:
-	Register16(const std::string& initName);
+	Register16(const std::string& initName, bool show = true);
 	void AttachCapture(Io* io);
 	void AttachEnable(Io* io);
 	void AttachInputBus(Bus16* bus);

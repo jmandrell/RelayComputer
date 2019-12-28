@@ -5,6 +5,7 @@
 
 #include "Latch.h"
 #include "Bus8.h"
+#include "Bus16.h"
 #include "Display8Bit.h"
 #include "Enablable.h"
 
@@ -15,11 +16,12 @@
 /// driven.
 class Register8 : public Display8Bit, Enablable {
 public:
-	Register8(const std::string& initName);
+	Register8(const std::string& initName, bool show = true);
 	void AttachCapture(Io* io);
 	void AttachEnable(Io* io);
 	void AttachInputBus(Bus8* bus);
 	void AttachOutputBus(Bus8* bus);
+	void AttachOutputBus(Bus16* bus, bool msb);
 	
 private:
 	void GetValues(bool* bitValues);

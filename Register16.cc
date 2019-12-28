@@ -1,7 +1,7 @@
 #include "Register16.h"
 
-Register16::Register16(const std::string& initName) :
-	Display16Bit(initName),
+Register16::Register16(const std::string& initName, bool show) :
+	Display16Bit(initName, show),
 	name(initName),
 	latch0(name + " latch0"),
 	latch1(name + " latch1"),

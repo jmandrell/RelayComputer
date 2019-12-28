@@ -1,7 +1,7 @@
 #include "Register8.h"
 
-Register8::Register8(const std::string& initName) :
-	Display8Bit(initName),
+Register8::Register8(const std::string& initName, bool show) :
+	Display8Bit(initName, show),
 	name(initName),
 	latch0(name + " latch0"),
 	latch1(name + " latch1"),
@@ -59,6 +59,24 @@ void Register8::AttachOutputBus(Bus8* bus) {
 	bus->bits[5].AttachInput(latch5.GetOutput());
 	bus->bits[6].AttachInput(latch6.GetOutput());
 	bus->bits[7].AttachInput(latch7.GetOutput());
+}
+
+
+void Register8::AttachOutputBus(Bus16* bus, bool msb) {
+	int startBit;
+	if (msb) {
+		startBit = 8;
+	} else {
+		startBit = 0;
+	}
+	bus->bits[startBit].AttachInput(latch0.GetOutput());
+	bus->bits[startBit + 1].AttachInput(latch1.GetOutput());
+	bus->bits[startBit + 2].AttachInput(latch2.GetOutput());
+	bus->bits[startBit + 3].AttachInput(latch3.GetOutput());
+	bus->bits[startBit + 4].AttachInput(latch4.GetOutput());
+	bus->bits[startBit + 5].AttachInput(latch5.GetOutput());
+	bus->bits[startBit + 6].AttachInput(latch6.GetOutput());
+	bus->bits[startBit + 7].AttachInput(latch7.GetOutput());
 }
 
 
