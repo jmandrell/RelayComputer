@@ -90,9 +90,9 @@ depend:
 ALU.o: ALU.h Register8.h Latch.h Relay.h Io.h Updatable.h
 ALU.o: /usr/include/pthread.h /usr/include/features.h
 ALU.o: /usr/include/stdc-predef.h /usr/include/endian.h /usr/include/sched.h
-ALU.o: /usr/include/time.h Enablable.h Bus8.h Display8Bit.h And8.h AndGate.h
-ALU.o: Or8.h OrGate.h Not8.h Inverter.h Xor8.h XorGate.h Adder8.h FullAdder.h
-ALU.o: Increment8.h Sub8.h Mux.h
+ALU.o: /usr/include/time.h Enablable.h Bus8.h Display8Bit.h Bus16.h
+ALU.o: Display16Bit.h And8.h AndGate.h Or8.h OrGate.h Not8.h Inverter.h
+ALU.o: Xor8.h XorGate.h Adder8.h FullAdder.h Increment8.h Sub8.h Mux.h
 ALUTest.o: TestHarness.h /usr/include/ncurses.h /usr/include/ncurses_dll.h
 ALUTest.o: /usr/include/stdint.h /usr/include/stdio.h /usr/include/unctrl.h
 ALUTest.o: /usr/include/curses.h Io.h Bus8.h Display8Bit.h Updatable.h
@@ -372,7 +372,7 @@ Register8.o: Register8.h Latch.h Relay.h Io.h Updatable.h
 Register8.o: /usr/include/pthread.h /usr/include/features.h
 Register8.o: /usr/include/stdc-predef.h /usr/include/endian.h
 Register8.o: /usr/include/sched.h /usr/include/time.h Enablable.h Bus8.h
-Register8.o: Display8Bit.h
+Register8.o: Display8Bit.h Bus16.h Display16Bit.h
 Register8Test.o: /usr/include/unistd.h /usr/include/features.h
 Register8Test.o: /usr/include/stdc-predef.h TestHarness.h
 Register8Test.o: /usr/include/ncurses.h /usr/include/ncurses_dll.h

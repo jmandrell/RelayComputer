@@ -2,10 +2,10 @@
 
 ALU::ALU(const std::string& initName) :
 	name(initName),
-	inputA(name + " inputA"),
-	inputABus(name + " inputABus"),
-	inputB(name + " inputB"),
-	inputBBus(name + " inputBBus"),
+	inputA(name + " inputA", false),
+	inputABus(name + " inputABus", false),
+	inputB(name + " inputB", false),
+	inputBBus(name + " inputBBus", false),
 	and8(name + " and8"),
 	or8(name + " or8"),
 	not8(name + " not8"),
