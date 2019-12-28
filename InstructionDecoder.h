@@ -49,7 +49,7 @@ private:
 };
 
 
-/// This class handles operaions that start with '10000'
+/// This class handles operations that start with '10000' (8-bit immediate register loads)
 class Decoder10000 {
 public:
 	Decoder10000(const std::string& initName,
@@ -67,6 +67,25 @@ private:
 };
 
 
+/// This class handles operations that start with '10001' (8-bit register load from memory)
+class Decoder10001 {
+public:
+	Decoder10001(const std::string& initName,
+		Bus8& decoderBus,
+		Increment16& increment16,
+		Register16& arg16);
+	void AttachEnable(Io* io);
+
+private:
+	const std::string name;
+	Mux whichRegister;
+	Register16 seqBuffer;
+	Bus16 seqOutBus;
+	Register8 arg8_1;		// the LSB of the address
+	Register8 arg8_2;		// the MSB of the address
+};
+
+
 /// This class handles operaions that start with '10'
 class Decoder10 {
 public:
@@ -80,6 +99,7 @@ private:
 	const std::string name;
 	Mux operation;
 	Decoder10000 dec10000;
+	Decoder10001 dec10001;
 };
 
 
