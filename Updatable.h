@@ -15,6 +15,8 @@ public:
 	static void Unlock() {
 		pthread_mutex_unlock(&mutex);
 	}
+	static void DoUpdate();
+	
 	virtual void Update() = 0;
 	
 private:

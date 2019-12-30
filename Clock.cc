@@ -1,6 +1,8 @@
 #include <unistd.h>
 
 #include "Clock.h"
+#include "Updatable.h"
+
 
 Clock* Clock::clocks[16];
 unsigned int Clock::clockCount = 0;
@@ -23,6 +25,9 @@ void* Clock::ClockThread(void*) {
 	for (;;) {
 		while (runInput.GetOutput()) {
 			usleep(clockDelay);
+			// make sure we have an update across all relays
+			Updatable::DoUpdate();
+			Updatable::DoUpdate();
 			DoTick();
 		}
 		while (!runInput.GetOutput()) {

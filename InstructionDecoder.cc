@@ -394,30 +394,24 @@ Decoder1110::Decoder1110(
 	flagsBus(name + " flagsBus"),
 	flagsGate_1(name + " flagsGate_1"),
 	flagsGate_2(name + " flagsGate_2"),
+	flagsGate_3(name + " flagsGate_3"),
 	xor1(name + " xorGate"),
 	arg8_1(name + " arg8_1"),
 	arg8_2(name + " arg8_2") {
-	static Bus16 test0("test0");
 	seqBuffer.AttachInputBus(&Buses::sequencerBus);
 	seqBuffer.AttachOutputBus(&seqOutBus);
 
 	Registers::flags.AttachOutputBus(&flagsBus);
-	test0.bits[0].AttachInput(&decoderBus.bits[0]);
-	test0.bits[1].AttachInput(&decoderBus.bits[1]);
-	test0.bits[2].AttachInput(&decoderBus.bits[2]);
-	test0.bits[3].AttachInput(&flagsBus.bits[0]);
-	test0.bits[4].AttachInput(&flagsBus.bits[1]);
-	test0.bits[5].AttachInput(&flagsBus.bits[2]);
-	test0.bits[6].AttachInput(flagsGate_2.GetArmature());
-	test0.bits[7].AttachInput(xor1.GetOutput());
-
 	flagsGate_1.AttachActivate(&decoderBus.bits[0]);
 	flagsGate_1.GetNc()->AttachInput(&flagsBus.bits[0]);
 	flagsGate_1.GetNo()->AttachInput(&flagsBus.bits[1]);
-	flagsGate_2.AttachActivate(&decoderBus.bits[1]);
-	flagsGate_2.GetNc()->AttachInput(flagsGate_1.GetArmature());
-	flagsGate_2.GetNo()->AttachInput(&flagsBus.bits[2]);
-	xor1.AttachInput1(flagsGate_2.GetArmature());
+	flagsGate_2.AttachActivate(&decoderBus.bits[0]);
+	flagsGate_2.GetNc()->AttachInput(&flagsBus.bits[2]);
+	// note that No() is left purposely disconnected for non-conditional branches
+	flagsGate_3.AttachActivate(&decoderBus.bits[1]);
+	flagsGate_3.GetNc()->AttachInput(flagsGate_1.GetArmature());
+	flagsGate_3.GetNo()->AttachInput(flagsGate_2.GetArmature());
+	xor1.AttachInput1(flagsGate_3.GetArmature());
 	xor1.AttachInput2(&decoderBus.bits[2]);
 
 	arg8_1.AttachInputBus(&Buses::dataBus);

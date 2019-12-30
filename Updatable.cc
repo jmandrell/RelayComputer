@@ -27,6 +27,16 @@ Updatable::Updatable(bool show) {
 	}
 }
 
+
+void Updatable::DoUpdate(void) {
+	pthread_mutex_lock(&mutex);
+	for (unsigned int i = 0; i < count; ++i) {
+		updatables[i]->Update();
+	}
+	pthread_mutex_unlock(&mutex);
+}
+
+
 void* Updatable::UpdateAll(void*) {
 	for (;;) {
 		usleep(500);
@@ -34,11 +44,7 @@ void* Updatable::UpdateAll(void*) {
 			delay = false;
 			usleep(50000);
 		}
-		pthread_mutex_lock(&mutex);
-		for (unsigned int i = 0; i < count; ++i) {
-			updatables[i]->Update();
-		}
-		pthread_mutex_unlock(&mutex);
+		DoUpdate();
 	}
 	return 0;
 }

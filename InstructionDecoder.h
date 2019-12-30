@@ -123,6 +123,7 @@ private:
 	Bus8 flagsBus;
 	Relay flagsGate_1;
 	Relay flagsGate_2;
+	Relay flagsGate_3;
 	XorGate xor1;
 	Register8 arg8_1;		// the LSB of the address
 	Register8 arg8_2;		// the MSB of the address
