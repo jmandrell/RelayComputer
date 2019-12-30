@@ -1,12 +1,15 @@
+// fibonacci calculation
 	ORG 0
 start:
-	MVI(r0,1)
-	MVI(r1,2)
-	MVI(r2,3)
-	MVI(R3,4)
-	STO(0x1000,r0)
-	STO(0x1001,r1)
-	STO(0x1002,r2)
-	STO(0x1003,r3)
+// set up the starting values
+	MVI(r0,0)
+	MVI(r1,1)
+
+loop:
+	mov(r2,r1)
+	add(r2)
+	mov(r0,r1)
+	mov(r1,r2)
+	jmp loop
 
 	END

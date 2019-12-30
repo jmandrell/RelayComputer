@@ -75,12 +75,19 @@
 
 // Branching operations
 #define	JZ(l)	DB(0xe0); DW(l)
+#define	jz(l)	DB(0xe0); DW(l)
 #define	JC(l)	DB(0xe1); DW(l)
+#define	jc(l)	DB(0xe1); DW(l)
 #define	JNEG(l)	DB(0xe2); DW(l)
-#define JMP(l)	DB(0xe3); DW(l) 
+#define	jneg(l)	DB(0xe2); DW(l)
 #define	JNZ(l)	DB(0xe4); DW(l)
+#define	jnz(l)	DB(0xe4); DW(l)
 #define	JNC(l)	DB(0xe5); DW(l)
+#define	jnc(l)	DB(0xe5); DW(l)
 #define	JPOS(l)	DB(0xe6); DW(l)
+#define	jpos(l)	DB(0xe6); DW(l)
+#define JMP(l)	DB(0xe7); DW(l) 
+#define jmp(l)	DB(0xe7); DW(l) 
 
 
 #endif
