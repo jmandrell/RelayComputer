@@ -12,7 +12,7 @@ Decoder00::Decoder00(
 	name(initName),
 	readRegister("readRegister"),
 	writeRegister("writeRegister"),
-	seqBuffer(name + " seqBuffer", false),
+	seqBuffer(name + " seqBuffer"),
 	seqOutBus(name + " seqOutBus", false) {
 	seqBuffer.AttachInputBus(&Buses::sequencerBus);
 	seqBuffer.AttachOutputBus(&seqOutBus);
@@ -60,7 +60,6 @@ Decoder00::Decoder00(
 
 void Decoder00::AttachEnable(Io* io) {
 	seqBuffer.AttachEnable(io);
-	seqBuffer.AttachCapture(io);
 }
 
 
@@ -71,7 +70,7 @@ Decoder01::Decoder01(
 	readRegister(name + " readRegister"),
 	writeRegister(name + " writeRegister"),
 	alu(name + " ALU"),
-	seqBuffer(name + " seqBuffer", false),
+	seqBuffer(name + " seqBuffer"),
 	seqOutBus(name + " seqOutBus", false) {
 	seqBuffer.AttachInputBus(&Buses::sequencerBus);
 	seqBuffer.AttachOutputBus(&seqOutBus);
@@ -142,7 +141,6 @@ Decoder01::Decoder01(
 
 void Decoder01::AttachEnable(Io* io) {
 	seqBuffer.AttachEnable(io);
-	seqBuffer.AttachCapture(io);
 }
 
 
@@ -153,7 +151,7 @@ Decoder10000::Decoder10000(
 	Register16& arg16) :
 	name(initName),
 	whichRegister(name + " whichReg"),
-	seqBuffer(name + " seqBuffer", false),
+	seqBuffer(name + " seqBuffer"),
 	seqOutBus(name + " seqOutBus", false),
 	arg8(name + " arg8") {
 
@@ -203,7 +201,6 @@ Decoder10000::Decoder10000(
 
 void Decoder10000::AttachEnable(Io* io) {
 	seqBuffer.AttachEnable(io);
-	seqBuffer.AttachCapture(io);
 }
 
 
@@ -293,7 +290,6 @@ Decoder10001::Decoder10001(
 
 void Decoder10001::AttachEnable(Io* io) {
 	seqBuffer.AttachEnable(io);
-	seqBuffer.AttachCapture(io);
 }
 
 
@@ -383,7 +379,6 @@ Decoder10010::Decoder10010(
 
 void Decoder10010::AttachEnable(Io* io) {
 	seqBuffer.AttachEnable(io);
-	seqBuffer.AttachCapture(io);
 }
 
 
@@ -459,7 +454,6 @@ Decoder1110::Decoder1110(
 
 void Decoder1110::AttachEnable(Io* io) {
 	seqBuffer.AttachEnable(io);
-	seqBuffer.AttachCapture(io);
 }
 
 

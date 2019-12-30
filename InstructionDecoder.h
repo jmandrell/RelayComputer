@@ -12,6 +12,7 @@
 #include "Register8.h"
 #include "Increment16.h"
 #include "Mux.h"
+#include "Buffer16.h"
 
 
 /// This class handles operaions that start with '00', which involve
@@ -26,7 +27,7 @@ private:
 	const std::string name;
 	Mux readRegister;
 	Mux writeRegister;
-	Register16 seqBuffer;
+	Buffer16 seqBuffer;
 	Bus16 seqOutBus;
 };
 
@@ -44,7 +45,7 @@ private:
 	Mux readRegister;
 	Mux writeRegister;
 	ALU alu;
-	Register16 seqBuffer;
+	Buffer16 seqBuffer;
 	Bus16 seqOutBus;
 };
 
@@ -61,7 +62,7 @@ public:
 private:
 	const std::string name;
 	Mux whichRegister;
-	Register16 seqBuffer;
+	Buffer16 seqBuffer;
 	Bus16 seqOutBus;
 	Register8 arg8;
 };
@@ -79,7 +80,7 @@ public:
 private:
 	const std::string name;
 	Mux whichRegister;
-	Register16 seqBuffer;
+	Buffer16 seqBuffer;
 	Bus16 seqOutBus;
 	Register8 arg8_1;		// the LSB of the address
 	Register8 arg8_2;		// the MSB of the address
@@ -98,7 +99,7 @@ public:
 private:
 	const std::string name;
 	Mux whichRegister;
-	Register16 seqBuffer;
+	Buffer16 seqBuffer;
 	Bus16 seqOutBus;
 	Register8 arg8_1;		// the LSB of the address
 	Register8 arg8_2;		// the MSB of the address
@@ -116,7 +117,7 @@ public:
 
 private:
 	const std::string name;
-	Register16 seqBuffer;
+	Buffer16 seqBuffer;
 	Bus16 seqOutBus;
 	Register8 arg8_1;		// the LSB of the address
 	Register8 arg8_2;		// the MSB of the address

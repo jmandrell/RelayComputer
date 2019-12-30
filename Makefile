@@ -7,6 +7,7 @@ GATELIB_SRCS = \
 	Display8Bit.cc \
 	Display16Bit.cc \
 	Relay.cc \
+	Buffer8.cc \
 	Buffer16.cc \
 	Inverter.cc \
 	Not8.cc \
@@ -37,6 +38,7 @@ GATELIB_SRCS = \
 
 TEST_SRCS = \
 	RelayTest.cc \
+	Buffer8Test.cc \
 	Buffer16Test.cc \
 	InverterTest.cc \
 	Not8Test.cc \
