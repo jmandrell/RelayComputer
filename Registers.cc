@@ -10,4 +10,5 @@ namespace Registers {
 	Register8 r5("R5");
 	Register8 r6("R6");
 	Register8 r7("R7");
+	Register8 flags("flags");
 }

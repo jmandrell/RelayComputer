@@ -111,6 +111,7 @@ class Decoder1110 {
 public:
 	Decoder1110(const std::string& initName,
 		Bus8& decoderBus,
+		Bus16& internalBus,
 		Increment16& increment16,
 		Register16& arg16);
 	void AttachEnable(Io* io);
@@ -119,6 +120,10 @@ private:
 	const std::string name;
 	Buffer16 seqBuffer;
 	Bus16 seqOutBus;
+	Bus8 flagsBus;
+	Relay flagsGate_1;
+	Relay flagsGate_2;
+	XorGate xor1;
 	Register8 arg8_1;		// the LSB of the address
 	Register8 arg8_2;		// the MSB of the address
 };
@@ -137,7 +142,7 @@ private:
 	Register8 inst;
 	Increment16 increment16;
 	Register16 arg16;
-	Bus16 interal16;
+	Bus16 internal16;
 	Bus8 decoderBus;
 	Relay bit7Relay;
 	Relay bit6Relay_0;

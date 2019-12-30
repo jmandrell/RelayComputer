@@ -14,6 +14,7 @@ namespace Registers {
 	extern Register8 r5;
 	extern Register8 r6;
 	extern Register8 r7;
+	extern Register8 flags;
 }
 
 #endif

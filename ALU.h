@@ -14,6 +14,7 @@
 #include "Sub8.h"
 #include "Mux.h"
 #include "Enablable.h"
+#include "Registers.h"
 
 
 class ALU : public Enablable {
@@ -40,7 +41,7 @@ public:
 	}
 	void AttachCaptureOut(Io* io) {
 		outputRegister.AttachCapture(io);
-		flagsRegister.AttachCapture(io);
+		Registers::flags.AttachCapture(io);
 	}
 	void AttachOutputBus(Bus8* bus);
 	
@@ -63,7 +64,6 @@ private:
 	Bus8 flagsBus;
 	Inverter inverter;
 	Register8 outputRegister;
-	Register8 flagsRegister;
 };
 
 #endif

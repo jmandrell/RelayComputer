@@ -13,7 +13,7 @@ Decoder00::Decoder00(
 	readRegister("readRegister"),
 	writeRegister("writeRegister"),
 	seqBuffer(name + " seqBuffer"),
-	seqOutBus(name + " seqOutBus", false) {
+	seqOutBus(name + " seqOutBus") {
 	seqBuffer.AttachInputBus(&Buses::sequencerBus);
 	seqBuffer.AttachOutputBus(&seqOutBus);
 
@@ -71,7 +71,7 @@ Decoder01::Decoder01(
 	writeRegister(name + " writeRegister"),
 	alu(name + " ALU"),
 	seqBuffer(name + " seqBuffer"),
-	seqOutBus(name + " seqOutBus", false) {
+	seqOutBus(name + " seqOutBus") {
 	seqBuffer.AttachInputBus(&Buses::sequencerBus);
 	seqBuffer.AttachOutputBus(&seqOutBus);
 
@@ -152,7 +152,7 @@ Decoder10000::Decoder10000(
 	name(initName),
 	whichRegister(name + " whichReg"),
 	seqBuffer(name + " seqBuffer"),
-	seqOutBus(name + " seqOutBus", false),
+	seqOutBus(name + " seqOutBus"),
 	arg8(name + " arg8") {
 
 	seqBuffer.AttachInputBus(&Buses::sequencerBus);
@@ -182,8 +182,8 @@ Decoder10000::Decoder10000(
 	Registers::pc.AttachEnable(&seqOutBus.bits[5]);
 	Components::memory.AttachEnable(&seqOutBus.bits[5]);
 	whichRegister.GetLeftSignal()->AttachInput(&seqOutBus.bits[5]);
-	increment16.AttachEnable(&Buses::sequencerBus.bits[5]);
-	arg16.AttachCapture(&Buses::sequencerBus.bits[5]);
+	increment16.AttachEnable(&seqOutBus.bits[5]);
+	arg16.AttachCapture(&seqOutBus.bits[5]);
 
 	// cycle 6, continue memory read, latch into instruction register, increment PC
 	Registers::pc.AttachEnable(&seqOutBus.bits[6]);
@@ -243,12 +243,12 @@ Decoder10001::Decoder10001(
 	Registers::pc.AttachEnable(&seqOutBus.bits[4]);
 	Components::memory.AttachEnable(&seqOutBus.bits[4]);
 	arg8_1.AttachCapture(&seqOutBus.bits[4]);
-	increment16.AttachEnable(&Buses::sequencerBus.bits[4]);
-	arg16.AttachCapture(&Buses::sequencerBus.bits[4]);
+	increment16.AttachEnable(&seqOutBus.bits[4]);
+	arg16.AttachCapture(&seqOutBus.bits[4]);
 	
 	// cycle 5, continue memory read, latch into instruction register, increment PC
 	Registers::pc.AttachEnable(&seqOutBus.bits[5]);
-	increment16.AttachEnable(&Buses::sequencerBus.bits[5]);
+	increment16.AttachEnable(&seqOutBus.bits[5]);
 
 	// cycle 6, put new PC on bus and capture it
 	arg16.AttachEnable(&seqOutBus.bits[6]);
@@ -263,8 +263,8 @@ Decoder10001::Decoder10001(
 
 	// cycle 8, increment PC
 	Registers::pc.AttachEnable(&seqOutBus.bits[8]);
-	increment16.AttachEnable(&Buses::sequencerBus.bits[8]);
-	arg16.AttachCapture(&Buses::sequencerBus.bits[8]);
+	increment16.AttachEnable(&seqOutBus.bits[8]);
+	arg16.AttachCapture(&seqOutBus.bits[8]);
 
 	// cycle 9, store the incremented PC
 	arg16.AttachEnable(&seqOutBus.bits[9]);
@@ -332,12 +332,12 @@ Decoder10010::Decoder10010(
 	Registers::pc.AttachEnable(&seqOutBus.bits[4]);
 	Components::memory.AttachEnable(&seqOutBus.bits[4]);
 	arg8_1.AttachCapture(&seqOutBus.bits[4]);
-	increment16.AttachEnable(&Buses::sequencerBus.bits[4]);
-	arg16.AttachCapture(&Buses::sequencerBus.bits[4]);
+	increment16.AttachEnable(&seqOutBus.bits[4]);
+	arg16.AttachCapture(&seqOutBus.bits[4]);
 	
 	// cycle 5, continue memory read, latch into instruction register, increment PC
 	Registers::pc.AttachEnable(&seqOutBus.bits[5]);
-	increment16.AttachEnable(&Buses::sequencerBus.bits[5]);
+	increment16.AttachEnable(&seqOutBus.bits[5]);
 
 	// cycle 6, put new PC on bus and capture it
 	arg16.AttachEnable(&seqOutBus.bits[6]);
@@ -352,8 +352,8 @@ Decoder10010::Decoder10010(
 
 	// cycle 8, increment PC
 	Registers::pc.AttachEnable(&seqOutBus.bits[8]);
-	increment16.AttachEnable(&Buses::sequencerBus.bits[8]);
-	arg16.AttachCapture(&Buses::sequencerBus.bits[8]);
+	increment16.AttachEnable(&seqOutBus.bits[8]);
+	arg16.AttachCapture(&seqOutBus.bits[8]);
 
 	// cycle 9, store the incremented PC
 	arg16.AttachEnable(&seqOutBus.bits[9]);
@@ -385,32 +385,57 @@ void Decoder10010::AttachEnable(Io* io) {
 Decoder1110::Decoder1110(
 	const std::string& initName,
 	Bus8& decoderBus,
+	Bus16& internalBus,
 	Increment16& increment16,
 	Register16& arg16) :
 	name(initName),
 	seqBuffer(name + " seqBuffer"),
 	seqOutBus(name + " seqOutBus"),
+	flagsBus(name + " flagsBus"),
+	flagsGate_1(name + " flagsGate_1"),
+	flagsGate_2(name + " flagsGate_2"),
+	xor1(name + " xorGate"),
 	arg8_1(name + " arg8_1"),
 	arg8_2(name + " arg8_2") {
+	static Bus16 test0("test0");
 	seqBuffer.AttachInputBus(&Buses::sequencerBus);
 	seqBuffer.AttachOutputBus(&seqOutBus);
 
+	Registers::flags.AttachOutputBus(&flagsBus);
+	test0.bits[0].AttachInput(&decoderBus.bits[0]);
+	test0.bits[1].AttachInput(&decoderBus.bits[1]);
+	test0.bits[2].AttachInput(&decoderBus.bits[2]);
+	test0.bits[3].AttachInput(&flagsBus.bits[0]);
+	test0.bits[4].AttachInput(&flagsBus.bits[1]);
+	test0.bits[5].AttachInput(&flagsBus.bits[2]);
+	test0.bits[6].AttachInput(flagsGate_2.GetArmature());
+	test0.bits[7].AttachInput(xor1.GetOutput());
+
+	flagsGate_1.AttachActivate(&decoderBus.bits[0]);
+	flagsGate_1.GetNc()->AttachInput(&flagsBus.bits[0]);
+	flagsGate_1.GetNo()->AttachInput(&flagsBus.bits[1]);
+	flagsGate_2.AttachActivate(&decoderBus.bits[1]);
+	flagsGate_2.GetNc()->AttachInput(flagsGate_1.GetArmature());
+	flagsGate_2.GetNo()->AttachInput(&flagsBus.bits[2]);
+	xor1.AttachInput1(flagsGate_2.GetArmature());
+	xor1.AttachInput2(&decoderBus.bits[2]);
+
 	arg8_1.AttachInputBus(&Buses::dataBus);
-	arg8_1.AttachOutputBus(&Buses::addressBus, false);
+	arg8_1.AttachOutputBus(&internalBus, false);
 	arg8_2.AttachInputBus(&Buses::dataBus);
-	arg8_2.AttachOutputBus(&Buses::addressBus, true);
+	arg8_2.AttachOutputBus(&internalBus, true);
 	
 	// read the next byte (LSB of address)
 	// cycle 4, put the PC on the address bus
 	Registers::pc.AttachEnable(&seqOutBus.bits[4]);
 	Components::memory.AttachEnable(&seqOutBus.bits[4]);
 	arg8_1.AttachCapture(&seqOutBus.bits[4]);
-	increment16.AttachEnable(&Buses::sequencerBus.bits[4]);
-	arg16.AttachCapture(&Buses::sequencerBus.bits[4]);
+	increment16.AttachEnable(&seqOutBus.bits[4]);
+	arg16.AttachCapture(&seqOutBus.bits[4]);
 	
 	// cycle 5, continue memory read, latch into instruction register, increment PC
 	Registers::pc.AttachEnable(&seqOutBus.bits[5]);
-	increment16.AttachEnable(&Buses::sequencerBus.bits[5]);
+	increment16.AttachEnable(&seqOutBus.bits[5]);
 
 	// cycle 6, put new PC on bus and capture it
 	arg16.AttachEnable(&seqOutBus.bits[6]);
@@ -425,30 +450,35 @@ Decoder1110::Decoder1110(
 
 	// cycle 8, increment PC
 	Registers::pc.AttachEnable(&seqOutBus.bits[8]);
-	increment16.AttachEnable(&Buses::sequencerBus.bits[8]);
-	arg16.AttachCapture(&Buses::sequencerBus.bits[8]);
+	increment16.AttachEnable(&seqOutBus.bits[8]);
+	arg16.AttachCapture(&seqOutBus.bits[8]);
 
 	// cycle 9, store the incremented PC
 	arg16.AttachEnable(&seqOutBus.bits[9]);
 	Registers::pc.AttachCapture(&seqOutBus.bits[9]);
-	
+
 	// cycle 10, keep the PC there
 	arg16.AttachEnable(&seqOutBus.bits[10]);
-
-#if 0
-	// now we need to perform the memory write as requested
-	// cycle 11, put out the address and write the data
+	
+	// cycle 11, put the jump address on the bus
 	arg8_1.AttachEnable(&seqOutBus.bits[11]);
 	arg8_2.AttachEnable(&seqOutBus.bits[11]);
-	Components::memory.AttachWrite(&seqOutBus.bits[11]);
-	whichRegister.GetLeftSignal()->AttachInput(&seqOutBus.bits[11]);
-	
-	// cycle 12, keep address and stop capture
+	Registers::flags.AttachEnable(&seqOutBus.bits[11]);
+
+	// cycle 12: capture the address if we are supposed to jump
 	arg8_1.AttachEnable(&seqOutBus.bits[12]);
 	arg8_2.AttachEnable(&seqOutBus.bits[12]);
-	whichRegister.GetLeftSignal()->AttachInput(&seqOutBus.bits[12]);
-	Components::sequencer.AttachClear(&seqOutBus.bits[12]);
-#endif
+	Registers::flags.AttachEnable(&seqOutBus.bits[12]);
+	xor1.AttachEnable(&seqOutBus.bits[12]);
+	Registers::pc.AttachCapture(xor1.GetOutput());
+
+// TODO: save PC off if requested	
+	// cycle 13: keep the address on the internal bus
+	xor1.AttachEnable(&seqOutBus.bits[13]);
+	arg8_1.AttachEnable(xor1.GetOutput());
+	arg8_2.AttachEnable(xor1.GetOutput());
+	Registers::flags.AttachEnable(&seqOutBus.bits[13]);
+	Components::sequencer.AttachClear(&seqOutBus.bits[13]);
 }
 
 
@@ -462,7 +492,7 @@ InstructionDecoder::InstructionDecoder(const std::string& initName) :
 	inst(name + " inst"),
 	increment16(name + " increment16"),
 	arg16(name + " arg16"),
-	interal16(name + " internal16"),
+	internal16(name + " internal16"),
 	decoderBus(name + " decoderBus", true),
 	bit7Relay(name + " bit7Relay"),
 	bit6Relay_0(name + " bit6Relay_0"),
@@ -478,14 +508,14 @@ InstructionDecoder::InstructionDecoder(const std::string& initName) :
 	dec10000(name + " dec10000", decoderBus, increment16, arg16),
 	dec10001(name + " dec10001", decoderBus, increment16, arg16),
 	dec10010(name + " dec10010", decoderBus, increment16, arg16),
-	dec1110(name + " dec1110", decoderBus, increment16, arg16) {
-	Registers::pc.AttachInputBus(&interal16);
+	dec1110(name + " dec1110", decoderBus, internal16, increment16, arg16) {
+	Registers::pc.AttachInputBus(&internal16);
 
 	increment16.AttachInputBus(&Buses::addressBus);
-	increment16.AttachOutputBus(&interal16);
+	increment16.AttachOutputBus(&internal16);
 
-	arg16.AttachInputBus(&interal16);
-	arg16.AttachOutputBus(&interal16);
+	arg16.AttachInputBus(&internal16);
+	arg16.AttachOutputBus(&internal16);
 
 	inst.AttachInputBus(&Buses::dataBus);
 	inst.AttachEnable(&power);

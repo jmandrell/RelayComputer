@@ -17,13 +17,13 @@ ALU::ALU(const std::string& initName) :
 	internalBus(name + " bus"),
 	flagsBus(name + " flagsBus"),
 	inverter(name + " signInverter"),
-	outputRegister(name + " outReg"),
-	flagsRegister(name + " flagsReg") {
+	outputRegister(name + " outReg") {
 	power.Force(true);
 	mux.GetLeftSignal()->AttachInput(&power);
 	
 	// set up the registure to capture flags
-	flagsRegister.AttachInputBus(&flagsBus);
+	Registers::flags.AttachInputBus(&flagsBus);
+
 	// the zero flag
 	inverter.AttachEnable(&power);
 	inverter.AttachInput(&internalBus.bits[0]);
