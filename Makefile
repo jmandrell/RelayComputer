@@ -169,6 +169,18 @@ Buffer16Test.o: /usr/include/pthread.h /usr/include/features.h
 Buffer16Test.o: /usr/include/stdc-predef.h /usr/include/endian.h
 Buffer16Test.o: /usr/include/sched.h /usr/include/time.h Bus16.h
 Buffer16Test.o: Display16Bit.h Buffer16.h Relay.h
+Buffer8.o: Buffer8.h Relay.h Io.h Updatable.h /usr/include/pthread.h
+Buffer8.o: /usr/include/features.h /usr/include/stdc-predef.h
+Buffer8.o: /usr/include/endian.h /usr/include/sched.h /usr/include/time.h
+Buffer8.o: Bus8.h Display8Bit.h
+Buffer8Test.o: TestHarness.h /usr/include/ncurses.h
+Buffer8Test.o: /usr/include/ncurses_dll.h /usr/include/stdint.h
+Buffer8Test.o: /usr/include/stdio.h /usr/include/unctrl.h
+Buffer8Test.o: /usr/include/curses.h Io.h Bus8.h Display8Bit.h Updatable.h
+Buffer8Test.o: /usr/include/pthread.h /usr/include/features.h
+Buffer8Test.o: /usr/include/stdc-predef.h /usr/include/endian.h
+Buffer8Test.o: /usr/include/sched.h /usr/include/time.h Bus16.h
+Buffer8Test.o: Display16Bit.h Buffer8.h Relay.h
 Bus16.o: Bus16.h Io.h Display16Bit.h Updatable.h /usr/include/pthread.h
 Bus16.o: /usr/include/features.h /usr/include/stdc-predef.h
 Bus16.o: /usr/include/endian.h /usr/include/sched.h /usr/include/time.h
@@ -205,6 +217,7 @@ Components.o: Enablable.h InstructionDecoder.h Sequencer.h Clock.h Mux.h
 Components.o: Relay.h ALU.h Register8.h Latch.h And8.h AndGate.h Or8.h
 Components.o: OrGate.h Not8.h Inverter.h Xor8.h XorGate.h Adder8.h
 Components.o: FullAdder.h Increment8.h Sub8.h Register16.h Increment16.h
+Components.o: Buffer16.h
 Display16Bit.o: /usr/include/ncurses.h /usr/include/ncurses_dll.h
 Display16Bit.o: /usr/include/stdint.h /usr/include/stdio.h
 Display16Bit.o: /usr/include/unctrl.h /usr/include/curses.h Display16Bit.h
@@ -271,7 +284,8 @@ InstructionDecoder.o: Bus16.h Display16Bit.h Display8Bit.h ALU.h Register8.h
 InstructionDecoder.o: Latch.h Enablable.h Bus8.h And8.h AndGate.h Or8.h
 InstructionDecoder.o: OrGate.h Not8.h Inverter.h Xor8.h XorGate.h Adder8.h
 InstructionDecoder.o: FullAdder.h Increment8.h Sub8.h Register16.h Memory.h
-InstructionDecoder.o: Increment16.h Registers.h Buses.h Components.h
+InstructionDecoder.o: Increment16.h Buffer16.h Registers.h Buses.h
+InstructionDecoder.o: Components.h
 Inverter.o: Inverter.h Relay.h Io.h Updatable.h /usr/include/pthread.h
 Inverter.o: /usr/include/features.h /usr/include/stdc-predef.h
 Inverter.o: /usr/include/endian.h /usr/include/sched.h /usr/include/time.h
@@ -361,7 +375,7 @@ Processor.o: Enablable.h Bus16.h Display16Bit.h Display8Bit.h Register8.h
 Processor.o: Bus8.h Buses.h Components.h Memory.h InstructionDecoder.h
 Processor.o: Sequencer.h Clock.h Mux.h ALU.h And8.h AndGate.h Or8.h OrGate.h
 Processor.o: Not8.h Inverter.h Xor8.h XorGate.h Adder8.h FullAdder.h
-Processor.o: Increment8.h Sub8.h Increment16.h
+Processor.o: Increment8.h Sub8.h Increment16.h Buffer16.h
 ProcessorTest.o: Processor.h TestHarness.h /usr/include/ncurses.h
 ProcessorTest.o: /usr/include/ncurses_dll.h /usr/include/stdint.h
 ProcessorTest.o: /usr/include/stdio.h /usr/include/unctrl.h
