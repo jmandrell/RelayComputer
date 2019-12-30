@@ -34,9 +34,9 @@ main() {
 	harness.AddInput("Channel 2", &channel2);
 	
 	alu.AttachInputBus(&input);
-	harness.AddInputBus8("Input", &input);
+	harness.AddInput("Input", &input);
 	alu.AttachOutputBus(&output);
-	harness.AddOutputBus8("Output", &output);
+	harness.AddOutput("Output", &output);
 	
 	harness.Run();
 	return 0;

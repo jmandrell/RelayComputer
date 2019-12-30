@@ -17,13 +17,13 @@ int main() {
 	harness.AddInput("Enable", &enable);
 
 	xor8.AttachInputBusA(&inputA);
-	harness.AddInputBus8("Input A", &inputA);
+	harness.AddInput("Input A", &inputA);
 
 	xor8.AttachInputBusB(&inputB);
-	harness.AddInputBus8("Input B", &inputB);
+	harness.AddInput("Input B", &inputB);
 
 	xor8.AttachOutputBus(&output);
-	harness.AddOutputBus8("Ouput", &output);
+	harness.AddOutput("Ouput", &output);
 	
 	harness.Run();
 	return 0;

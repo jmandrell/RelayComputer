@@ -16,10 +16,10 @@ int main() {
 	harness.AddInput("Enable", &enable);
 	
 	not8.AttachInputBus(&input);
-	harness.AddInputBus8("Input", &input);
+	harness.AddInput("Input", &input);
 
 	not8.AttachOutputBus(&output);
-	harness.AddOutputBus8("Output", &output);
+	harness.AddOutput("Output", &output);
 
 	harness.Run();
 	return 0;

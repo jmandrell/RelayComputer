@@ -17,13 +17,13 @@ int main() {
 	and8.AttachEnable(&enable);
 	harness.AddInput("Enable", &enable);
 	and8.AttachInputBusA(&inputA);
-	harness.AddInputBus8("Input A", &inputA);
+	harness.AddInput("Input A", &inputA);
 
 	and8.AttachInputBusB(&inputB);
-	harness.AddInputBus8("Input B", &inputB);
+	harness.AddInput("Input B", &inputB);
 	
 	and8.AttachOutputBus(&output);
-	harness.AddOutputBus8("Output", &output);
+	harness.AddOutput("Output", &output);
 	
 	harness.Run();
 	return 0;

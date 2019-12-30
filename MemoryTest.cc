@@ -15,10 +15,10 @@ int main() {
 	harness.AddInput("Write", &writeSignal);
 	
 	memory.AttachDataBus(&dataBus);
-	harness.AddInputBus8("Data in", &dataBus);
+	harness.AddInput("Data in", &dataBus);
 	memory.AttachAddressBus(&addressBus);
-	harness.AddInputBus16("Address", &addressBus);
-	harness.AddOutputBus8("Data out", &dataBus);
+	harness.AddInput("Address", &addressBus);
+	harness.AddOutput("Data out", &dataBus);
 	
 	harness.Run();
 	return 0;

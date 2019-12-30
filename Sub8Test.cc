@@ -16,13 +16,13 @@ int main() {
 	sub8.AttachEnable(&enable);
 	harness.AddInput("Enable", &enable);
 	sub8.AttachInputBusA(&inputA);
-	harness.AddInputBus8("Input A", &inputA);
+	harness.AddInput("Input A", &inputA);
 	sub8.AttachInputBusB(&inputB);
-	harness.AddInputBus8("Input B", &inputB);
+	harness.AddInput("Input B", &inputB);
 	
 	harness.AddOutput("Carry Out", sub8.GetCarryOut());
 	sub8.AttachOutputBus(&output);
-	harness.AddOutputBus8("Output", &output);
+	harness.AddOutput("Output", &output);
 	
 	harness.Run();
 	

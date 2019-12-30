@@ -105,6 +105,24 @@ private:
 };
 
 
+/// This class handles operations that start with '1110' (branching operations)
+class Decoder1110 {
+public:
+	Decoder1110(const std::string& initName,
+		Bus8& decoderBus,
+		Increment16& increment16,
+		Register16& arg16);
+	void AttachEnable(Io* io);
+
+private:
+	const std::string name;
+	Register16 seqBuffer;
+	Bus16 seqOutBus;
+	Register8 arg8_1;		// the LSB of the address
+	Register8 arg8_2;		// the MSB of the address
+};
+
+
 class InstructionDecoder {
 public:
 	InstructionDecoder(const std::string& initName);
@@ -124,7 +142,9 @@ private:
 	Relay bit6Relay_0;
 	Relay bit6Relay_1;
 	Relay bit5Relay_10;
+	Relay bit5Relay_11;
 	Relay bit4Relay_100;
+	Relay bit4Relay_111;
 	Relay bit3Relay_1000;
 	Relay bit3Relay_1001;
 	Decoder00 dec00;
@@ -132,6 +152,7 @@ private:
 	Decoder10000 dec10000;
 	Decoder10001 dec10001;
 	Decoder10010 dec10010;
+	Decoder1110 dec1110;
 };
 
 #endif

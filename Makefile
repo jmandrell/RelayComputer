@@ -7,6 +7,7 @@ GATELIB_SRCS = \
 	Display8Bit.cc \
 	Display16Bit.cc \
 	Relay.cc \
+	Buffer16.cc \
 	Inverter.cc \
 	Not8.cc \
 	AndGate.cc \
@@ -36,6 +37,7 @@ GATELIB_SRCS = \
 
 TEST_SRCS = \
 	RelayTest.cc \
+	Buffer16Test.cc \
 	InverterTest.cc \
 	Not8Test.cc \
 	AndGateTest.cc \
@@ -153,6 +155,18 @@ AndGateTest.o: /usr/include/unctrl.h /usr/include/curses.h Io.h Bus8.h
 AndGateTest.o: Display8Bit.h Updatable.h /usr/include/pthread.h
 AndGateTest.o: /usr/include/endian.h /usr/include/sched.h /usr/include/time.h
 AndGateTest.o: Bus16.h Display16Bit.h AndGate.h Relay.h Enablable.h
+Buffer16.o: Buffer16.h Relay.h Io.h Updatable.h /usr/include/pthread.h
+Buffer16.o: /usr/include/features.h /usr/include/stdc-predef.h
+Buffer16.o: /usr/include/endian.h /usr/include/sched.h /usr/include/time.h
+Buffer16.o: Bus16.h Display16Bit.h Display8Bit.h
+Buffer16Test.o: TestHarness.h /usr/include/ncurses.h
+Buffer16Test.o: /usr/include/ncurses_dll.h /usr/include/stdint.h
+Buffer16Test.o: /usr/include/stdio.h /usr/include/unctrl.h
+Buffer16Test.o: /usr/include/curses.h Io.h Bus8.h Display8Bit.h Updatable.h
+Buffer16Test.o: /usr/include/pthread.h /usr/include/features.h
+Buffer16Test.o: /usr/include/stdc-predef.h /usr/include/endian.h
+Buffer16Test.o: /usr/include/sched.h /usr/include/time.h Bus16.h
+Buffer16Test.o: Display16Bit.h Buffer16.h Relay.h
 Bus16.o: Bus16.h Io.h Display16Bit.h Updatable.h /usr/include/pthread.h
 Bus16.o: /usr/include/features.h /usr/include/stdc-predef.h
 Bus16.o: /usr/include/endian.h /usr/include/sched.h /usr/include/time.h

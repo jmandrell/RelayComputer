@@ -9,11 +9,11 @@ public:
 	TestHarness();
 	static void exitFunc();
 	static void AddInput(const std::string& label, Io* io);
-	static void AddInputBus8(const std::string& label, Bus8* bus);
-	static void AddInputBus16(const std::string& label, Bus16* bus);
+	static void AddInput(const std::string& label, Bus8* bus);
+	static void AddInput(const std::string& label, Bus16* bus);
 	static void AddOutput(const std::string& label, Io* io);
-	static void AddOutputBus8(const std::string& label, Bus8* bus);
-	static void AddOutputBus16(const std::string& label, Bus16* bus);
+	static void AddOutput(const std::string& label, Bus8* bus);
+	static void AddOutput(const std::string& label, Bus16* bus);
 	static void AddInt(const std::string& label, int* value);
 	static void Run();
 	static int GetReservedLines() {

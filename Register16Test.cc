@@ -18,10 +18,10 @@ int main() {
 	reg16.AttachCapture(&capture);
 	harness.AddInput("Capture", &capture);
 	reg16.AttachInputBus(&input);
-	harness.AddInputBus16("Input", &input);
+	harness.AddInput("Input", &input);
 
 	reg16.AttachOutputBus(&output);
-	harness.AddOutputBus16("Output", &output);
+	harness.AddOutput("Output", &output);
 	
 	harness.Run();
 	return 0;

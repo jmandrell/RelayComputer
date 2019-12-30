@@ -19,12 +19,12 @@ int main() {
 	adder.AttachCarryIn(&carryIn);
 	harness.AddInput("Carry In", &carryIn);
 	adder.AttachInputBusA(&inputA);
-	harness.AddInputBus8("Input A", &inputA);
+	harness.AddInput("Input A", &inputA);
 	adder.AttachInputBusB(&inputB);
-	harness.AddInputBus8("Input B", &inputB);
+	harness.AddInput("Input B", &inputB);
 
 	adder.AttachOutputBus(&output);
-	harness.AddOutputBus8("Sum", &output);
+	harness.AddOutput("Sum", &output);
 	harness.AddOutput("Carry out", adder.GetCarryOut());
 	
 	harness.Run();

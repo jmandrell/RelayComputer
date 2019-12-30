@@ -48,7 +48,7 @@ void TestHarness::exitFunc() {
 }
 
 
-void TestHarness::AddInputBus8(const std::string& label, Bus8* bus) {
+void TestHarness::AddInput(const std::string& label, Bus8* bus) {
 	for (int i = 0; i < 8; ++i) {
 		std::ostringstream newLabel;
 		newLabel << label << " " << i;
@@ -57,7 +57,7 @@ void TestHarness::AddInputBus8(const std::string& label, Bus8* bus) {
 }
 
 
-void TestHarness::AddInputBus16(const std::string& label, Bus16* bus) {
+void TestHarness::AddInput(const std::string& label, Bus16* bus) {
 	for (int i = 0; i < 16; ++i) {
 		std::ostringstream newLabel;
 		newLabel << label << " " << i;
@@ -77,7 +77,7 @@ void TestHarness::AddInput(const std::string& label, Io* io) {
 }
 
 
-void TestHarness::AddOutputBus8(const std::string& label, Bus8* bus) {
+void TestHarness::AddOutput(const std::string& label, Bus8* bus) {
 	for (int i = 0; i < 8; ++i) {
 		std::ostringstream newLabel;
 		newLabel << label << " " << i;
@@ -86,7 +86,7 @@ void TestHarness::AddOutputBus8(const std::string& label, Bus8* bus) {
 }
 
 
-void TestHarness::AddOutputBus16(const std::string& label, Bus16* bus) {
+void TestHarness::AddOutput(const std::string& label, Bus16* bus) {
 	for (int i = 0; i < 16; ++i) {
 		std::ostringstream newLabel;
 		newLabel << label << " " << i;

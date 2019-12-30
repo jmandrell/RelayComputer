@@ -15,10 +15,10 @@ int main() {
 	adder.AttachEnable(&enable);
 	harness.AddInput("Enable", &enable);
 	adder.AttachInputBus(&input);
-	harness.AddInputBus16("Input", &input);
+	harness.AddInput("Input", &input);
 
 	adder.AttachOutputBus(&output);
-	harness.AddOutputBus16("Sum", &output);
+	harness.AddOutput("Sum", &output);
 	harness.AddOutput("Carry out", adder.GetCarryOut());
 	
 	harness.Run();
