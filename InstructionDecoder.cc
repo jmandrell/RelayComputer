@@ -13,7 +13,7 @@ Decoder00::Decoder00(
 	readRegister("readRegister"),
 	writeRegister("writeRegister"),
 	seqBuffer(name + " seqBuffer"),
-	seqOutBus(name + " seqOutBus") {
+	seqOutBus(name + " seqOutBus", false) {
 	seqBuffer.AttachInputBus(&Buses::sequencerBus);
 	seqBuffer.AttachOutputBus(&seqOutBus);
 
@@ -71,7 +71,7 @@ Decoder01::Decoder01(
 	writeRegister(name + " writeRegister"),
 	alu(name + " ALU"),
 	seqBuffer(name + " seqBuffer"),
-	seqOutBus(name + " seqOutBus") {
+	seqOutBus(name + " seqOutBus", false) {
 	seqBuffer.AttachInputBus(&Buses::sequencerBus);
 	seqBuffer.AttachOutputBus(&seqOutBus);
 
@@ -152,7 +152,7 @@ Decoder10000::Decoder10000(
 	name(initName),
 	whichRegister(name + " whichReg"),
 	seqBuffer(name + " seqBuffer"),
-	seqOutBus(name + " seqOutBus"),
+	seqOutBus(name + " seqOutBus", false),
 	arg8(name + " arg8") {
 
 	seqBuffer.AttachInputBus(&Buses::sequencerBus);
@@ -212,9 +212,9 @@ Decoder10001::Decoder10001(
 	name(initName),
 	whichRegister(name + " whichReg"),
 	seqBuffer(name + " seqBuffer"),
-	seqOutBus(name + " seqOutBus"),
-	arg8_1(name + " arg8_1"),
-	arg8_2(name + " arg8_2") {
+	seqOutBus(name + " seqOutBus", false),
+	arg8_1(name + " arg8_1", false),
+	arg8_2(name + " arg8_2", false) {
 	seqBuffer.AttachInputBus(&Buses::sequencerBus);
 	seqBuffer.AttachOutputBus(&seqOutBus);
 
@@ -301,9 +301,9 @@ Decoder10010::Decoder10010(
 	name(initName),
 	whichRegister(name + " whichReg"),
 	seqBuffer(name + " seqBuffer"),
-	seqOutBus(name + " seqOutBus"),
-	arg8_1(name + " arg8_1"),
-	arg8_2(name + " arg8_2") {
+	seqOutBus(name + " seqOutBus", false),
+	arg8_1(name + " arg8_1", false),
+	arg8_2(name + " arg8_2", false) {
 	seqBuffer.AttachInputBus(&Buses::sequencerBus);
 	seqBuffer.AttachOutputBus(&seqOutBus);
 
@@ -390,14 +390,14 @@ Decoder1110::Decoder1110(
 	Register16& arg16) :
 	name(initName),
 	seqBuffer(name + " seqBuffer"),
-	seqOutBus(name + " seqOutBus"),
+	seqOutBus(name + " seqOutBus", false),
 	flagsBus(name + " flagsBus"),
 	flagsGate_1(name + " flagsGate_1"),
 	flagsGate_2(name + " flagsGate_2"),
 	flagsGate_3(name + " flagsGate_3"),
 	xor1(name + " xorGate"),
-	arg8_1(name + " arg8_1"),
-	arg8_2(name + " arg8_2") {
+	arg8_1(name + " arg8_1", false),
+	arg8_2(name + " arg8_2", false) {
 	seqBuffer.AttachInputBus(&Buses::sequencerBus);
 	seqBuffer.AttachOutputBus(&seqOutBus);
 

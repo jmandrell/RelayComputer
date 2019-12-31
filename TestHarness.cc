@@ -140,7 +140,7 @@ void TestHarness::Run() {
 	Relay::Lock();
 	for (;;) {
 		Relay::Unlock();
-		usleep(50000);
+		usleep(100000);
 		Relay::Lock();
 		UpdateInputs();
 		UpdateOutputs();
