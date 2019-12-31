@@ -14,3 +14,7 @@ harnesses as well as the final tester named 'ProcessorTest'.
 
 Running the executable ProcessorTest will run the full CPU. It expects a
 memory image to be provided in the file 'memory.img'.
+
+There are 16 7-segment LEDs in the UI, mapped to the memory addresses
+0xfff0-0xffff. Writes to these addresses are bit-mapped to each of the
+segments in each display. A "Hello People" example is in helloj80.asm.
