@@ -1,0 +1,4 @@
+Add a shift operation to the ALU.
+Implement memory access through an address stored in the registers.
+Implement call and return.
+Add 7-segment LED displays to the UI.
