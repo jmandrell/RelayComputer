@@ -1,5 +1,6 @@
 #include "ALU.h"
 
+
 ALU::ALU(const std::string& initName) :
 	name(initName),
 	inputA(name + " inputA", false),
@@ -9,6 +10,7 @@ ALU::ALU(const std::string& initName) :
 	and8(name + " and8"),
 	or8(name + " or8"),
 	not8(name + " not8"),
+	shr8(name + " shr8"),
 	xor8(name + " xor8"),
 	increment8(name + " increment8"),
 	adder8(name + " adder8"),
@@ -47,12 +49,13 @@ ALU::ALU(const std::string& initName) :
 	and8.AttachEnable(mux.GetRightSignal2());
 	or8.AttachEnable(mux.GetRightSignal3());
 	xor8.AttachEnable(mux.GetRightSignal4());
-	// compare operation needs to be here
+	shr8.AttachEnable(mux.GetRightSignal5());
 	adder8.AttachEnable(mux.GetRightSignal6());
 	sub8.AttachEnable(mux.GetRightSignal7());
 	and8.AttachOutputBus(&internalBus);
 	or8.AttachOutputBus(&internalBus);
 	not8.AttachOutputBus(&internalBus);
+	shr8.AttachOutputBus(&internalBus);
 	xor8.AttachOutputBus(&internalBus);
 	increment8.AttachOutputBus(&internalBus);
 	adder8.AttachOutputBus(&internalBus);
@@ -63,6 +66,7 @@ ALU::ALU(const std::string& initName) :
 	and8.AttachInputBusA(&inputABus);
 	or8.AttachInputBusA(&inputABus);
 	not8.AttachInputBus(&inputABus);
+	shr8.AttachInputBus(&inputABus);
 	xor8.AttachInputBusA(&inputABus);
 	increment8.AttachInputBus(&inputABus);
 	adder8.AttachInputBusA(&inputABus);

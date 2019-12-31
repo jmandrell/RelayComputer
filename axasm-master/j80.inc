@@ -54,7 +54,7 @@
 #define AND(r)		DB(0x50+REGPOS0(r))	// r = r & r0
 #define OR(r)		DB(0x58+REGPOS0(r))	// r = r | r0
 #define XOR(r)		DB(0x60+REGPOS0(r))	// r = r ^ r0
-// this one left empty for the moment
+#define SHR(r)		DB(0x68+REGPOS0(r))	// r = r >> 1
 #define ADD(r)		DB(0x70+REGPOS0(r))	// r = r + r0
 #define SUB(r)		DB(0x78+REGPOS0(r))	// r = r - r0
 

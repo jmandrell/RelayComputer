@@ -8,6 +8,7 @@ GATELIB_SRCS = \
 	Buffer16.cc \
 	Inverter.cc \
 	Not8.cc \
+	Shr8.cc \
 	AndGate.cc \
 	And8.cc \
 	OrGate.cc \
@@ -39,6 +40,7 @@ TEST_SRCS = \
 	Buffer16Test.cc \
 	InverterTest.cc \
 	Not8Test.cc \
+	Shr8Test.cc \
 	AndGateTest.cc \
 	And8Test.cc \
 	OrGateTest.cc \
@@ -94,7 +96,7 @@ ALU.o: /usr/include/stdc-predef.h /usr/include/endian.h /usr/include/sched.h
 ALU.o: /usr/include/time.h Enablable.h Bus8.h Display8Bit.h Bus16.h
 ALU.o: Display16Bit.h And8.h AndGate.h Or8.h OrGate.h Not8.h Inverter.h
 ALU.o: Xor8.h XorGate.h Adder8.h FullAdder.h Increment8.h Sub8.h Mux.h
-ALU.o: Registers.h Register16.h
+ALU.o: Registers.h Register16.h Shr8.h
 ALUTest.o: TestHarness.h /usr/include/ncurses.h /usr/include/ncurses_dll.h
 ALUTest.o: /usr/include/stdint.h /usr/include/stdio.h /usr/include/unctrl.h
 ALUTest.o: /usr/include/curses.h Io.h Bus8.h Display8Bit.h Updatable.h
@@ -104,6 +106,7 @@ ALUTest.o: /usr/include/sched.h /usr/include/time.h Bus16.h Display16Bit.h
 ALUTest.o: ALU.h Register8.h Latch.h Relay.h Enablable.h And8.h AndGate.h
 ALUTest.o: Or8.h OrGate.h Not8.h Inverter.h Xor8.h XorGate.h Adder8.h
 ALUTest.o: FullAdder.h Increment8.h Sub8.h Mux.h Registers.h Register16.h
+ALUTest.o: Shr8.h
 Adder16.o: Adder16.h FullAdder.h XorGate.h Relay.h Io.h Updatable.h
 Adder16.o: /usr/include/pthread.h /usr/include/features.h
 Adder16.o: /usr/include/stdc-predef.h /usr/include/endian.h
@@ -270,8 +273,8 @@ InstructionDecoder.o: Bus16.h Display16Bit.h Display8Bit.h ALU.h Register8.h
 InstructionDecoder.o: Latch.h Enablable.h Bus8.h And8.h AndGate.h Or8.h
 InstructionDecoder.o: OrGate.h Not8.h Inverter.h Xor8.h XorGate.h Adder8.h
 InstructionDecoder.o: FullAdder.h Increment8.h Sub8.h Registers.h
-InstructionDecoder.o: Register16.h Memory.h Increment16.h Buffer16.h Buses.h
-InstructionDecoder.o: Components.h
+InstructionDecoder.o: Register16.h Shr8.h Memory.h Increment16.h Buffer16.h
+InstructionDecoder.o: Buses.h Components.h
 Inverter.o: Inverter.h Relay.h Io.h Updatable.h /usr/include/pthread.h
 Inverter.o: /usr/include/features.h /usr/include/stdc-predef.h
 Inverter.o: /usr/include/endian.h /usr/include/sched.h /usr/include/time.h
@@ -361,7 +364,7 @@ Processor.o: Enablable.h Bus16.h Display16Bit.h Display8Bit.h Register8.h
 Processor.o: Bus8.h Buses.h Components.h Memory.h InstructionDecoder.h
 Processor.o: Sequencer.h Clock.h Mux.h ALU.h And8.h AndGate.h Or8.h OrGate.h
 Processor.o: Not8.h Inverter.h Xor8.h XorGate.h Adder8.h FullAdder.h
-Processor.o: Increment8.h Sub8.h Increment16.h Buffer16.h
+Processor.o: Increment8.h Sub8.h Shr8.h Increment16.h Buffer16.h
 ProcessorTest.o: Processor.h TestHarness.h /usr/include/ncurses.h
 ProcessorTest.o: /usr/include/ncurses_dll.h /usr/include/stdint.h
 ProcessorTest.o: /usr/include/stdio.h /usr/include/unctrl.h
@@ -373,8 +376,8 @@ ProcessorTest.o: Display16Bit.h Clock.h Components.h Memory.h Enablable.h
 ProcessorTest.o: InstructionDecoder.h Sequencer.h Mux.h Relay.h ALU.h
 ProcessorTest.o: Register8.h Latch.h And8.h AndGate.h Or8.h OrGate.h Not8.h
 ProcessorTest.o: Inverter.h Xor8.h XorGate.h Adder8.h FullAdder.h
-ProcessorTest.o: Increment8.h Sub8.h Registers.h Register16.h Increment16.h
-ProcessorTest.o: Buffer16.h
+ProcessorTest.o: Increment8.h Sub8.h Registers.h Register16.h Shr8.h
+ProcessorTest.o: Increment16.h Buffer16.h
 Register16.o: Register16.h Latch.h Relay.h Io.h Updatable.h
 Register16.o: /usr/include/pthread.h /usr/include/features.h
 Register16.o: /usr/include/stdc-predef.h /usr/include/endian.h
@@ -426,6 +429,17 @@ SequencerTest.o: Display16Bit.h Display8Bit.h TestHarness.h
 SequencerTest.o: /usr/include/ncurses.h /usr/include/ncurses_dll.h
 SequencerTest.o: /usr/include/stdint.h /usr/include/stdio.h
 SequencerTest.o: /usr/include/unctrl.h /usr/include/curses.h Bus8.h
+Shr8.o: Shr8.h Relay.h Io.h Updatable.h /usr/include/pthread.h
+Shr8.o: /usr/include/features.h /usr/include/stdc-predef.h
+Shr8.o: /usr/include/endian.h /usr/include/sched.h /usr/include/time.h Bus8.h
+Shr8.o: Display8Bit.h
+Shr8Test.o: TestHarness.h /usr/include/ncurses.h /usr/include/ncurses_dll.h
+Shr8Test.o: /usr/include/stdint.h /usr/include/stdio.h /usr/include/unctrl.h
+Shr8Test.o: /usr/include/curses.h Io.h Bus8.h Display8Bit.h Updatable.h
+Shr8Test.o: /usr/include/pthread.h /usr/include/features.h
+Shr8Test.o: /usr/include/stdc-predef.h /usr/include/endian.h
+Shr8Test.o: /usr/include/sched.h /usr/include/time.h Bus16.h Display16Bit.h
+Shr8Test.o: Shr8.h Relay.h
 Sub8.o: Sub8.h FullAdder.h XorGate.h Relay.h Io.h Updatable.h
 Sub8.o: /usr/include/pthread.h /usr/include/features.h
 Sub8.o: /usr/include/stdc-predef.h /usr/include/endian.h /usr/include/sched.h

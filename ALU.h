@@ -15,6 +15,7 @@
 #include "Mux.h"
 #include "Enablable.h"
 #include "Registers.h"
+#include "Shr8.h"
 
 
 class ALU : public Enablable {
@@ -55,6 +56,7 @@ private:
 	And8 and8;
 	Or8 or8;
 	Not8 not8;
+	Shr8 shr8;
 	Xor8 xor8;
 	Increment8 increment8;
 	Adder8 adder8;
