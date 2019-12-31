@@ -29,10 +29,10 @@ public:
 	void AttachWrite(Io* io) {
 		writeSignal.AttachInput(io);
 	}
+	unsigned char ReadMem(unsigned int address);
 
 private:
 	void Update();
-	unsigned char ReadMem(unsigned int address);
 	void WriteMem(unsigned int address, unsigned char value);
 	const std::string name;
 	Bus16* addressBus;

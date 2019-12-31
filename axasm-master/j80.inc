@@ -50,44 +50,27 @@
 
 // ALU operations
 #define INC(r)		DB(0x40+REGPOS0(r))	// r = r + 1
-#define inc(r)		DB(0x40+REGPOS0(r))	// r = r + 1
 #define NOT(r)		DB(0x48+REGPOS0(r))	// r = ~r
-#define not(r)		DB(0x48+REGPOS0(r))	// r = ~r
 #define AND(r)		DB(0x50+REGPOS0(r))	// r = r & r0
-#define and(r)		DB(0x50+REGPOS0(r))	// r = r & r0
 #define OR(r)		DB(0x58+REGPOS0(r))	// r = r | r0
-#define or(r)		DB(0x58+REGPOS0(r))	// r = r | r0
 #define XOR(r)		DB(0x60+REGPOS0(r))	// r = r ^ r0
-#define xor(r)		DB(0x60+REGPOS0(r))	// r = r ^ r0
 // this one left empty for the moment
 #define ADD(r)		DB(0x70+REGPOS0(r))	// r = r + r0
-#define add(r)		DB(0x70+REGPOS0(r))	// r = r + r0
 #define SUB(r)		DB(0x78+REGPOS0(r))	// r = r - r0
-#define sub(r)		DB(0x78+REGPOS0(r))	// r = r - r0
 
 // Register load immediate instructions
 #define MVI(d,i)	DB(0x80+REGPOS0(d)); DB(i)
-#define mvi(d,i)	DB(0x80+REGPOS0(d)); DB(i)
 #define LD(d,l)		DB(0x88+REGPOS0(d)); DW(l)
-#define ld(d,l)		DB(0x88+REGPOS0(d)); DW(l)
 #define STO(l,d)	DB(0x90+REGPOS0(d)); DW(l)
-#define sto(l,d)	DB(0x90+REGPOS0(d)); DW(l)
 
 // Branching operations
 #define	JZ(l)	DB(0xe0); DW(l)
-#define	jz(l)	DB(0xe0); DW(l)
 #define	JC(l)	DB(0xe1); DW(l)
-#define	jc(l)	DB(0xe1); DW(l)
 #define	JNEG(l)	DB(0xe2); DW(l)
-#define	jneg(l)	DB(0xe2); DW(l)
 #define	JNZ(l)	DB(0xe4); DW(l)
-#define	jnz(l)	DB(0xe4); DW(l)
 #define	JNC(l)	DB(0xe5); DW(l)
-#define	jnc(l)	DB(0xe5); DW(l)
 #define	JPOS(l)	DB(0xe6); DW(l)
-#define	jpos(l)	DB(0xe6); DW(l)
 #define JMP(l)	DB(0xe7); DW(l) 
-#define jmp(l)	DB(0xe7); DW(l) 
 
 
 #endif

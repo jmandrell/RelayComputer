@@ -6,6 +6,10 @@
 
 class TestHarness {
 public:
+	class Callback {
+	public:
+		virtual unsigned char Read(unsigned int address) = 0;
+	};
 	TestHarness();
 	static void exitFunc();
 	static void AddInput(const std::string& label, Io* io);
@@ -19,6 +23,7 @@ public:
 	static int GetReservedLines() {
 		return 4;
 	}
+	void Add7SegmentDisplay(unsigned int address, Callback* callback);
 
 private:
 	static void UpdateInputs();
@@ -33,5 +38,11 @@ private:
 	static int maxX;
 	static int maxY;
 	static int columnWidth;
+	struct Display {
+		unsigned int address;
+		unsigned char lastValue;
+		Callback* callback;
+	};
+	static unsigned int displayCount;
+	static Display displays[32];
 };
-

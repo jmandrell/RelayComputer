@@ -3,7 +3,6 @@
 
 
 Relay::Relay(const std::string& initName) : name(initName) {
-	std::cerr << "Creating relay " << name << std::endl;
 }
 
 void Relay::Update() {

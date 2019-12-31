@@ -14,6 +14,8 @@ Io* TestHarness::inputs[52];
 Io* TestHarness::outputs[26];
 int* TestHarness::intValue = 0;
 std::string TestHarness::intLabel;
+unsigned int TestHarness::displayCount = 0;
+TestHarness::Display TestHarness::displays[32];
 
 int TestHarness::maxX;
 int TestHarness::maxY;
@@ -37,7 +39,7 @@ TestHarness::TestHarness() {
 	
 	getmaxyx(mainwin, maxY, maxX);
 	columnWidth = maxX / 4;
-	mvaddstr(maxY-1, maxX / 2 - 5, "ESC to exit");
+	mvaddstr(0, maxX / 2, "ESC to exit");
 	atexit(exitFunc);
 }
 
@@ -120,7 +122,7 @@ void TestHarness::UpdateInputs() {
 	if (intValue && lastIntValue != *intValue) {
 		std::ostringstream newLabel;
 		newLabel << intLabel << " " << *intValue << "        ";
-		mvaddstr(maxY - 2, columnWidth, newLabel.str().c_str());
+		mvaddstr(1, columnWidth * 2, newLabel.str().c_str());
 		lastIntValue = *intValue;
 	}
 }
@@ -131,6 +133,22 @@ void TestHarness::UpdateOutputs() {
 		if (outputs[i]) {
 			bool value = outputs[i]->GetOutput();
 			mvaddstr(i + GetReservedLines(), columnWidth * 4 - 2, value ? "*" : "O");
+		}
+	}
+	const int row = maxY - 3;
+	for (unsigned int i = 0; i < displayCount; ++i) {
+		unsigned char value = displays[i].callback->Read(displays[i].address);
+		if (value != displays[i].lastValue) {
+			displays[i].lastValue = value;
+			int col = i * 6;
+			mvaddstr(row, col+1, value & 1 ? "_" : " ");
+			mvaddstr(row+1, col, value & 2 ? "|" : " ");
+			addstr(value & 4 ? "_" : " ");
+			addstr(value & 8 ? "|" : " ");
+			mvaddstr(row+2, col, value & 0x10 ? "|" : " ");
+			addstr(value & 0x20 ? "_" : " ");
+			addstr(value & 0x40 ? "|" : " ");
+			addstr(value & 0x80 ? "." : " ");
 		}
 	}
 }
@@ -179,4 +197,12 @@ void TestHarness::Run() {
 			}
 		}
 	}
+}
+
+
+void TestHarness::Add7SegmentDisplay(unsigned int address, Callback* callback) {
+	unsigned int index = displayCount++;
+	displays[index].address = address;
+	displays[index].callback = callback;
+	displays[index].lastValue = 0;
 }

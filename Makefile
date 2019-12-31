@@ -1,7 +1,4 @@
 GATELIB_SRCS = \
-	Registers.cc \
-	Buses.cc \
-	Components.cc \
 	Io.cc \
 	Updatable.cc \
 	Display8Bit.cc \
@@ -203,23 +200,10 @@ Bus8Test.o: /usr/include/stdio.h /usr/include/unctrl.h /usr/include/curses.h
 Bus8Test.o: Io.h Bus8.h Display8Bit.h Updatable.h /usr/include/pthread.h
 Bus8Test.o: /usr/include/endian.h /usr/include/sched.h /usr/include/time.h
 Bus8Test.o: Bus16.h Display16Bit.h
-Buses.o: Buses.h Bus8.h Io.h Display8Bit.h Updatable.h /usr/include/pthread.h
-Buses.o: /usr/include/features.h /usr/include/stdc-predef.h
-Buses.o: /usr/include/endian.h /usr/include/sched.h /usr/include/time.h
-Buses.o: Bus16.h Display16Bit.h
 Clock.o: /usr/include/unistd.h /usr/include/features.h
 Clock.o: /usr/include/stdc-predef.h Clock.h /usr/include/pthread.h
 Clock.o: /usr/include/endian.h /usr/include/sched.h /usr/include/time.h Io.h
 Clock.o: Updatable.h
-Components.o: Components.h Memory.h Bus8.h Io.h Display8Bit.h Updatable.h
-Components.o: /usr/include/pthread.h /usr/include/features.h
-Components.o: /usr/include/stdc-predef.h /usr/include/endian.h
-Components.o: /usr/include/sched.h /usr/include/time.h Bus16.h Display16Bit.h
-Components.o: Enablable.h InstructionDecoder.h Sequencer.h Clock.h Mux.h
-Components.o: Relay.h ALU.h Register8.h Latch.h And8.h AndGate.h Or8.h
-Components.o: OrGate.h Not8.h Inverter.h Xor8.h XorGate.h Adder8.h
-Components.o: FullAdder.h Increment8.h Sub8.h Registers.h Register16.h
-Components.o: Increment16.h Buffer16.h
 Display16Bit.o: /usr/include/ncurses.h /usr/include/ncurses_dll.h
 Display16Bit.o: /usr/include/stdint.h /usr/include/stdio.h
 Display16Bit.o: /usr/include/unctrl.h /usr/include/curses.h Display16Bit.h
@@ -385,7 +369,12 @@ ProcessorTest.o: /usr/include/curses.h Io.h Bus8.h Display8Bit.h Updatable.h
 ProcessorTest.o: /usr/include/pthread.h /usr/include/features.h
 ProcessorTest.o: /usr/include/stdc-predef.h /usr/include/endian.h
 ProcessorTest.o: /usr/include/sched.h /usr/include/time.h Bus16.h
-ProcessorTest.o: Display16Bit.h Clock.h
+ProcessorTest.o: Display16Bit.h Clock.h Components.h Memory.h Enablable.h
+ProcessorTest.o: InstructionDecoder.h Sequencer.h Mux.h Relay.h ALU.h
+ProcessorTest.o: Register8.h Latch.h And8.h AndGate.h Or8.h OrGate.h Not8.h
+ProcessorTest.o: Inverter.h Xor8.h XorGate.h Adder8.h FullAdder.h
+ProcessorTest.o: Increment8.h Sub8.h Registers.h Register16.h Increment16.h
+ProcessorTest.o: Buffer16.h
 Register16.o: Register16.h Latch.h Relay.h Io.h Updatable.h
 Register16.o: /usr/include/pthread.h /usr/include/features.h
 Register16.o: /usr/include/stdc-predef.h /usr/include/endian.h
@@ -414,11 +403,6 @@ Register8Test.o: Display8Bit.h Updatable.h /usr/include/pthread.h
 Register8Test.o: /usr/include/endian.h /usr/include/sched.h
 Register8Test.o: /usr/include/time.h Bus16.h Display16Bit.h Register8.h
 Register8Test.o: Latch.h Relay.h Enablable.h
-Registers.o: Registers.h Register16.h Latch.h Relay.h Io.h Updatable.h
-Registers.o: /usr/include/pthread.h /usr/include/features.h
-Registers.o: /usr/include/stdc-predef.h /usr/include/endian.h
-Registers.o: /usr/include/sched.h /usr/include/time.h Enablable.h Bus16.h
-Registers.o: Display16Bit.h Display8Bit.h Register8.h Bus8.h
 Relay.o: Relay.h Io.h Updatable.h /usr/include/pthread.h
 Relay.o: /usr/include/features.h /usr/include/stdc-predef.h
 Relay.o: /usr/include/endian.h /usr/include/sched.h /usr/include/time.h
