@@ -1,2 +1,4 @@
-Implement memory access through an address stored in the registers.
 Implement call and return.
+Indirect jumps
+halt
+Port a small-C compiler to the J80.
