@@ -106,6 +106,26 @@ private:
 };
 
 
+/// This class handles operations that start with '10011' (8-bit R0 read/write indirect)
+class Decoder10011 {
+public:
+	Decoder10011(const std::string& initName,
+		Bus8& decoderBus,
+		Increment16& increment16,
+		Register16& arg16);
+	void AttachEnable(Io* io);
+
+private:
+	const std::string name;
+	Mux readRegister;
+	Buffer16 seqBuffer;
+	Bus16 seqOutBus;
+	Register8 msb;
+	Register8 lsb;
+	Relay readWrite;
+};
+
+
 /// This class handles operations that start with '1110' (branching operations)
 class Decoder1110 {
 public:
@@ -159,6 +179,7 @@ private:
 	Decoder10000 dec10000;
 	Decoder10001 dec10001;
 	Decoder10010 dec10010;
+	Decoder10011 dec10011;
 	Decoder1110 dec1110;
 };
 

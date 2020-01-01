@@ -382,6 +382,105 @@ void Decoder10010::AttachEnable(Io* io) {
 }
 
 
+Decoder10011::Decoder10011(
+	const std::string& initName,
+	Bus8& decoderBus,
+	Increment16& increment16,
+	Register16& arg16) :
+	name(initName),
+	readRegister(name + " readReg"),
+	seqBuffer(name + " seqBuffer"),
+	seqOutBus(name + " seqOutBus", true),
+	msb(name + " msb"),
+	lsb(name + " lsb"),
+	readWrite(name + " readWrite") {
+	seqBuffer.AttachInputBus(&Buses::sequencerBus);
+	seqBuffer.AttachOutputBus(&seqOutBus);
+	static Bus8 test0("test0");
+
+	// this relay will determine whether we actuate a read or a write cycle
+	readWrite.AttachActivate(&decoderBus.bits[2]);
+
+	msb.AttachInputBus(&Buses::dataBus);
+	msb.AttachOutputBus(&Buses::addressBus, true);
+	lsb.AttachInputBus(&Buses::dataBus);
+	lsb.AttachOutputBus(&Buses::addressBus, false);
+	
+	// the bottom 2 bits determine which registers we are going use
+	// to make up the 16-bit address to access. The bottom bit is
+	// toggled as necessary to access each register
+	readRegister.AttachChannel1(&decoderBus.bits[0]);
+	readRegister.AttachChannel2(&decoderBus.bits[1]);
+
+	test0.bits[0].AttachInput(readRegister.GetRightSignal0());
+	test0.bits[1].AttachInput(readRegister.GetRightSignal1());
+	test0.bits[2].AttachInput(readRegister.GetRightSignal2());
+	test0.bits[3].AttachInput(readRegister.GetRightSignal3());
+	test0.bits[4].AttachInput(readRegister.GetRightSignal4());
+	test0.bits[5].AttachInput(readRegister.GetRightSignal5());
+	test0.bits[6].AttachInput(readRegister.GetRightSignal6());
+	test0.bits[7].AttachInput(readRegister.GetRightSignal7());
+	
+	// enable register reads based on which registers are requested
+	Registers::r0.AttachEnable(readRegister.GetRightSignal0());
+	Registers::r1.AttachEnable(readRegister.GetRightSignal1());
+	Registers::r2.AttachEnable(readRegister.GetRightSignal2());
+	Registers::r3.AttachEnable(readRegister.GetRightSignal3());
+	Registers::r4.AttachEnable(readRegister.GetRightSignal4());
+	Registers::r5.AttachEnable(readRegister.GetRightSignal5());
+	Registers::r6.AttachEnable(readRegister.GetRightSignal6());
+	Registers::r7.AttachEnable(readRegister.GetRightSignal7());
+
+	// cycle 4: put the MSB on the data bus to be captured
+	readRegister.GetLeftSignal()->AttachInput(&seqOutBus.bits[4]);
+	msb.AttachCapture(&seqOutBus.bits[4]);
+
+	// cycle 5: keep the MSB on the data bus
+	readRegister.GetLeftSignal()->AttachInput(&seqOutBus.bits[5]);
+	
+	// cycle 6: put the LSB on the data bus to be captured
+	readRegister.AttachChannel0(&seqOutBus.bits[6]);
+	readRegister.GetLeftSignal()->AttachInput(&seqOutBus.bits[6]);
+	lsb.AttachCapture(&seqOutBus.bits[6]);
+
+	// cycle 7: keep the LSB on the data bus to be captured
+	readRegister.AttachChannel0(&seqOutBus.bits[7]);
+	readRegister.GetLeftSignal()->AttachInput(&seqOutBus.bits[7]);
+
+	// cycle 8: put the address on the address bus
+	msb.AttachEnable(&seqOutBus.bits[8]);
+	lsb.AttachEnable(&seqOutBus.bits[8]);
+	readWrite.GetArmature()->AttachInput(&seqOutBus.bits[8]);
+	// for reads, the data comes from memory, and is captured in R0
+	// this is triggered by the normally closed side of the relay
+	Components::memory.AttachEnable(readWrite.GetNc());
+	Registers::r0.AttachCapture(readWrite.GetNc());
+	// for writes, the data comes from R0, and it captured into
+	// memory. This is triggered by the normally open side of the
+	// relay
+	Components::memory.AttachWrite(readWrite.GetNo());
+	Registers::r0.AttachEnable(readWrite.GetNo());
+
+	// cycle 9: keep the address on the address bus
+	msb.AttachEnable(&seqOutBus.bits[9]);
+	lsb.AttachEnable(&seqOutBus.bits[9]);
+	readWrite.GetArmature()->AttachInput(&seqOutBus.bits[9]);
+	// for reads, the data comes from memory, and is captured in R0
+	// this is triggered by the normally closed side of the relay
+	Components::memory.AttachEnable(readWrite.GetNc());
+	// for writes, the data comes from R0, and it captured into
+	// memory. This is triggered by the normally open side of the
+	// relay
+	Registers::r0.AttachEnable(readWrite.GetNo());
+	Components::sequencer.AttachClear(&seqOutBus.bits[9]);
+}
+
+
+void Decoder10011::AttachEnable(Io* io) {
+	seqBuffer.AttachEnable(io);
+}
+
+
 Decoder1110::Decoder1110(
 	const std::string& initName,
 	Bus8& decoderBus,
@@ -391,7 +490,7 @@ Decoder1110::Decoder1110(
 	name(initName),
 	seqBuffer(name + " seqBuffer"),
 	seqOutBus(name + " seqOutBus", false),
-	flagsBus(name + " flagsBus"),
+	flagsBus(name + " flagsBus", false),
 	flagsGate_1(name + " flagsGate_1"),
 	flagsGate_2(name + " flagsGate_2"),
 	flagsGate_3(name + " flagsGate_3"),
@@ -502,6 +601,7 @@ InstructionDecoder::InstructionDecoder(const std::string& initName) :
 	dec10000(name + " dec10000", decoderBus, increment16, arg16),
 	dec10001(name + " dec10001", decoderBus, increment16, arg16),
 	dec10010(name + " dec10010", decoderBus, increment16, arg16),
+	dec10011(name + " dec10011", decoderBus, increment16, arg16),
 	dec1110(name + " dec1110", decoderBus, internal16, increment16, arg16) {
 	Registers::pc.AttachInputBus(&internal16);
 
@@ -557,6 +657,8 @@ InstructionDecoder::InstructionDecoder(const std::string& initName) :
 	dec10001.AttachEnable(bit3Relay_1000.GetNo());
 	// process instructions that start with 10010
 	dec10010.AttachEnable(bit3Relay_1001.GetNc());
+	// process instructions that start with 10011
+	dec10011.AttachEnable(bit3Relay_1001.GetNo());
 
 	// process instructions that start with 1110 (branches and calls)
 	dec1110.AttachEnable(bit4Relay_111.GetNc());

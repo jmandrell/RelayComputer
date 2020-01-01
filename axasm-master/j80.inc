@@ -22,6 +22,7 @@
 #define DB(n) _solo_info.ary[_solo_add++]=(n)
 #define DW(n) DB((n)%256); DB((n)/256)
 
+// register values for 8-bit operations
 #define R0 0
 #define R1 1
 #define R2 2
@@ -38,6 +39,15 @@
 #define r5 5
 #define r6 6
 #define r7 7
+// register values when a 16-bit register pair is used
+#define R01 0
+#define R23 1
+#define R45 2
+#define R67 3
+#define r01 0
+#define r23 1
+#define r45 2
+#define r67 3
 
 #define REGPOS0(r)	((r)&7)
 #define REGPOS1(r)	(((r)&7)<< 3)
@@ -62,6 +72,10 @@
 #define MVI(d,i)	DB(0x80+REGPOS0(d)); DB(i)
 #define LD(d,l)		DB(0x88+REGPOS0(d)); DW(l)
 #define STO(l,d)	DB(0x90+REGPOS0(d)); DW(l)
+
+// R0 load/store indirect through a register pair
+#define LDI(rp)		DB(0x98+((rp)&3))
+#define STOI(rp)	DB(0x9c+((rp)&3))
 
 // Branching operations
 #define	JZ(l)	DB(0xe0); DW(l)
