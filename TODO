@@ -1,4 +1,3 @@
 Implement call and return.
 Indirect jumps
-halt
 Port a small-C compiler to the J80.
