@@ -18,6 +18,10 @@ Sequencer::Sequencer(const std::string& initName) :
 
 static unsigned int count = 99;
 
+void Sequencer::Reset() {
+	count = 0;
+}
+
 void Sequencer::Tick() {
 	// TODO: this should be converted to a relay counter
 	if (clear.GetOutput()) {

@@ -2,10 +2,17 @@
 
 #include "Io.h"
 
+static bool forcedReset = false;
+
 Io::Io() {
 	force = false;
 	inputCount = 0;
 	inputs = 0;
+}
+
+
+void Io::ForceReset(bool reset) {
+	forcedReset = reset;
 }
 
 
@@ -20,6 +27,9 @@ void Io::AttachInput(Io* input) {
 }
 
 bool Io::GetOutput(bool useForce) {
+	if (forcedReset) {
+		return false;
+	}
 	if (useForce && force) {
 		return true;
 	}

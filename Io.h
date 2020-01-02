@@ -13,7 +13,8 @@ public:
 		force = value;
 	}
 	bool GetOutput(bool useForce = true);
-
+	static void ForceReset(bool reset);
+	
 private:
 	bool force;
 	unsigned int inputCount;

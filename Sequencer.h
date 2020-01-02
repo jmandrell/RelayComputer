@@ -14,6 +14,7 @@ public:
 		clear.AttachInput(io);
 	}
 	void AttachOutputBus(Bus16* bus);
+	static void Reset();
 
 private:
 	void Tick();

@@ -22,6 +22,7 @@ int main() {
 
 	harness.AddInput("Run", &Clock::runInput);
 	harness.AddInput("Step", &Clock::stepInput);
+	harness.AddInput("Reset", &Clock::resetInput);
 	harness.AddInt("Delay between clock cycles", &Clock::clockDelay);
 
 	for (unsigned int i = 0xfff0; i <= 0xffff; ++i) {

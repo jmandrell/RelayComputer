@@ -2,6 +2,7 @@
 
 #include "Clock.h"
 #include "Updatable.h"
+#include "Sequencer.h"
 
 
 Clock* Clock::clocks[16];
@@ -9,6 +10,8 @@ unsigned int Clock::clockCount = 0;
 pthread_t Clock::thread;
 Io Clock::runInput;
 Io Clock::stepInput;
+Io Clock::resetInput;
+Io Clock::haltInput;
 int Clock::clockDelay = 1000000;
 
 static bool started = false;
@@ -22,15 +25,24 @@ Clock::Clock() {
 }
 
 void* Clock::ClockThread(void*) {
+	int localDelay = clockDelay;
 	for (;;) {
-		while (runInput.GetOutput()) {
-			usleep(clockDelay);
+		usleep(localDelay);
+		// check if we're forcing all outputs to 0
+		if (resetInput.GetOutput()) {
+			Io::ForceReset(true);
+			Updatable::DoUpdate();
+			Io::ForceReset(false);
+			Sequencer::Reset();
+		} else if (haltInput.GetOutput()) {
+			continue;
+		} else if (runInput.GetOutput()) {
 			// make sure we have an update across all relays
 			Updatable::DoUpdate();
 			Updatable::DoUpdate();
 			DoTick();
-		}
-		while (!runInput.GetOutput()) {
+			localDelay = clockDelay;
+		} else {
 			// not running, check for Single step
 			static bool lastStepState = false;
 			bool currentState = stepInput.GetOutput();
@@ -40,7 +52,7 @@ void* Clock::ClockThread(void*) {
 				}
 				lastStepState = currentState;
 			}
-			usleep(50000);
+			localDelay = 5000;
 		}
 	}
 }
