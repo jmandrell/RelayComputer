@@ -3,13 +3,12 @@
 
 #include "FullAdder.h"
 #include "Bus8.h"
-#include "Enablable.h"
 
 
 /// an 8-bit wide incrementer.
 /// The results are only output when the enable line is
 /// driven.
-class Increment8 : public Enablable {
+class Increment8 {
 public:
 	Increment8(const std::string& initName);
 	void AttachEnable(Io* io);

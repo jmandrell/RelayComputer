@@ -7,14 +7,13 @@
 #include "Bus8.h"
 #include "Bus16.h"
 #include "Display8Bit.h"
-#include "Enablable.h"
 
 
 /// An 8-bit register. Data on the input
 /// lines is latched when the capture line is driven,
 /// and the outputs are driven when the enable line is
 /// driven.
-class Register8 : public Display8Bit, Enablable {
+class Register8 : public Display8Bit {
 public:
 	Register8(const std::string& initName, bool show = true);
 	void AttachCapture(Io* io);

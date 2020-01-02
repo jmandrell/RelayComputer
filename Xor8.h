@@ -3,12 +3,11 @@
 
 #include "XorGate.h"
 #include "Bus8.h"
-#include "Enablable.h"
 
 
 /// an 8-bit binary XOR gate. The output is
 /// driven when the enable line is active.
-class Xor8 : public Enablable {
+class Xor8 {
 public:
 	Xor8(const std::string& initName);
 	void AttachEnable(Io* io);

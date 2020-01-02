@@ -2,13 +2,12 @@
 #define ANDGATE_H
 
 #include "Relay.h"
-#include "Enablable.h"
 
 
 /// Implement an AND gate using relays.
 /// The output is only enabled if the enable pin is
 /// driven.
-class AndGate : public Enablable {
+class AndGate {
 public:
 	AndGate(const std::string& initName);
 	void AttachEnable(Io* io) {

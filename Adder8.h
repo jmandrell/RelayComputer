@@ -3,13 +3,12 @@
 
 #include "FullAdder.h"
 #include "Bus8.h"
-#include "Enablable.h"
 
 
 /// an 8-bit wide adder, including carry in and out.
 /// The results are only output when the enable line is
 /// driven.
-class Adder8 : public Enablable {
+class Adder8 {
 public:
 	Adder8(const std::string& initName);
 	void AttachEnable(Io* io);

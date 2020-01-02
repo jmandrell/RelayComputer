@@ -13,12 +13,11 @@
 #include "Increment8.h"
 #include "Sub8.h"
 #include "Mux.h"
-#include "Enablable.h"
 #include "Registers.h"
 #include "Shr8.h"
 
 
-class ALU : public Enablable {
+class ALU {
 public:
 	ALU(const std::string& initName);
 	void AttachCaptureA(Io* io) {
