@@ -15,10 +15,10 @@ public:
 		relay1.GetCommon()->AttachInput(io);
 	}
 	void AttachInput1(Io* io) {
-		relay1.AttachActivate(io);
+		relay1.AttachCoil(io);
 	}
 	void AttachInput2(Io* io) {
-		relay2.AttachActivate(io);
+		relay2.AttachCoil(io);
 	}
 	Io* GetOutput() {
 		return relay2.GetNo();

@@ -14,7 +14,7 @@ public:
 		relay.GetCommon()->AttachInput(io);
 	}
 	void AttachInput(Io* io) {
-		relay.AttachActivate(io);
+		relay.AttachCoil(io);
 	}	
 	Io* GetOutput() {
 		return relay.GetNc();

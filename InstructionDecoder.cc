@@ -399,7 +399,7 @@ Decoder10011::Decoder10011(
 	static Bus8 test0("test0");
 
 	// this relay will determine whether we actuate a read or a write cycle
-	readWrite.AttachActivate(&decoderBus.bits[2]);
+	readWrite.AttachCoil(&decoderBus.bits[2]);
 
 	msb.AttachInputBus(&Buses::dataBus);
 	msb.AttachOutputBus(&Buses::addressBus, true);
@@ -501,13 +501,13 @@ Decoder1110::Decoder1110(
 	seqBuffer.AttachOutputBus(&seqOutBus);
 
 	Registers::flags.AttachOutputBus(&flagsBus);
-	flagsGate_1.AttachActivate(&decoderBus.bits[0]);
+	flagsGate_1.AttachCoil(&decoderBus.bits[0]);
 	flagsGate_1.GetNc()->AttachInput(&flagsBus.bits[0]);
 	flagsGate_1.GetNo()->AttachInput(&flagsBus.bits[1]);
-	flagsGate_2.AttachActivate(&decoderBus.bits[0]);
+	flagsGate_2.AttachCoil(&decoderBus.bits[0]);
 	flagsGate_2.GetNc()->AttachInput(&flagsBus.bits[2]);
 	// note that No() is left purposely disconnected for non-conditional branches
-	flagsGate_3.AttachActivate(&decoderBus.bits[1]);
+	flagsGate_3.AttachCoil(&decoderBus.bits[1]);
 	flagsGate_3.GetNc()->AttachInput(flagsGate_1.GetCommon());
 	flagsGate_3.GetNo()->AttachInput(flagsGate_2.GetCommon());
 	xor1.AttachInput1(flagsGate_3.GetCommon());
@@ -631,30 +631,30 @@ InstructionDecoder::InstructionDecoder(const std::string& initName) :
 	// set up the instruction muxers
 	power.Force(true);
 	bit7Relay.GetCommon()->AttachInput(&power);
-	bit7Relay.AttachActivate(&decoderBus.bits[7]);
-	bit6Relay_0.AttachActivate(&decoderBus.bits[6]);
+	bit7Relay.AttachCoil(&decoderBus.bits[7]);
+	bit6Relay_0.AttachCoil(&decoderBus.bits[6]);
 	bit6Relay_0.GetCommon()->AttachInput(bit7Relay.GetNc());
-	bit6Relay_1.AttachActivate(&decoderBus.bits[6]);
+	bit6Relay_1.AttachCoil(&decoderBus.bits[6]);
 	bit6Relay_1.GetCommon()->AttachInput(bit7Relay.GetNo());
-	bit5Relay_10.AttachActivate(&decoderBus.bits[5]);
+	bit5Relay_10.AttachCoil(&decoderBus.bits[5]);
 	bit5Relay_10.GetCommon()->AttachInput(bit6Relay_1.GetNc());
-	bit5Relay_11.AttachActivate(&decoderBus.bits[5]);
+	bit5Relay_11.AttachCoil(&decoderBus.bits[5]);
 	bit5Relay_11.GetCommon()->AttachInput(bit6Relay_1.GetNo());
-	bit4Relay_100.AttachActivate(&decoderBus.bits[4]);
+	bit4Relay_100.AttachCoil(&decoderBus.bits[4]);
 	bit4Relay_100.GetCommon()->AttachInput(bit5Relay_10.GetNc());
-	bit4Relay_111.AttachActivate(&decoderBus.bits[4]);
+	bit4Relay_111.AttachCoil(&decoderBus.bits[4]);
 	bit4Relay_111.GetCommon()->AttachInput(bit5Relay_11.GetNo());
-	bit3Relay_1000.AttachActivate(&decoderBus.bits[3]);
+	bit3Relay_1000.AttachCoil(&decoderBus.bits[3]);
 	bit3Relay_1000.GetCommon()->AttachInput(bit4Relay_100.GetNc());
-	bit3Relay_1001.AttachActivate(&decoderBus.bits[3]);
+	bit3Relay_1001.AttachCoil(&decoderBus.bits[3]);
 	bit3Relay_1001.GetCommon()->AttachInput(bit4Relay_100.GetNo());
-	bit3Relay_1111.AttachActivate(&decoderBus.bits[3]);
+	bit3Relay_1111.AttachCoil(&decoderBus.bits[3]);
 	bit3Relay_1111.GetCommon()->AttachInput(bit4Relay_111.GetNo());
-	bit2Relay_11111.AttachActivate(&decoderBus.bits[2]);
+	bit2Relay_11111.AttachCoil(&decoderBus.bits[2]);
 	bit2Relay_11111.GetCommon()->AttachInput(bit3Relay_1111.GetNo());
-	bit1Relay_111111.AttachActivate(&decoderBus.bits[1]);
+	bit1Relay_111111.AttachCoil(&decoderBus.bits[1]);
 	bit1Relay_111111.GetCommon()->AttachInput(bit2Relay_11111.GetNo());
-	bit0Relay_1111111.AttachActivate(&decoderBus.bits[0]);
+	bit0Relay_1111111.AttachCoil(&decoderBus.bits[0]);
 	bit0Relay_1111111.GetCommon()->AttachInput(bit1Relay_111111.GetNo());
 
 	// process instructions that start with 00 (register moves)

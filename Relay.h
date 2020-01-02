@@ -15,11 +15,11 @@ class Relay : public Updatable {
 public:
 	Relay(const std::string& initName);
 	void Update();
-	void AttachActivate(Io* io) {
-		activate.AttachInput(io);
+	void AttachCoil(Io* io) {
+		coil.AttachInput(io);
 	}
 	Io* GetCommon() {
-		return &armature;
+		return &common;
 	}
 	Io* GetNo() {
 		return &no;
@@ -30,8 +30,8 @@ public:
 	
 private:	
 	const std::string name;
-	Io activate;
-	Io armature;
+	Io coil;
+	Io common;
 	Io nc;
 	Io no;
 };

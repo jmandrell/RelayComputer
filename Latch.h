@@ -13,13 +13,13 @@ class Latch : public Enablable {
 public:
 	Latch(const std::string& initName);
 	void AttachEnable(Io* io) {
-		relay4.AttachActivate(io);
+		relay4.AttachCoil(io);
 	}
 	void AttachCapture(Io* io) {
 		relay1.GetCommon()->AttachInput(io);
 	}
 	void AttachData(Io* io) {
-		relay1.AttachActivate(io);
+		relay1.AttachCoil(io);
 	}
 	Io* GetOutput() {
 		return relay4.GetNo();

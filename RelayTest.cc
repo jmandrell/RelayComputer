@@ -15,12 +15,12 @@ int main() {
 	Io no2;
 	Io nc2;
 	
-	relay1.AttachActivate(&activate1);
+	relay1.AttachCoil(&activate1);
 	harness.AddInput("Relay 1 Activate", &activate1);
 	relay1.GetCommon()->AttachInput(&armature1);
 	harness.AddInput("Relay 1 Armature", &armature1);
 	
-	relay2.AttachActivate(&activate2);
+	relay2.AttachCoil(&activate2);
 	harness.AddInput("Relay 2 Activate", &activate2);
 	relay2.GetNo()->AttachInput(&no2);
 	harness.AddInput("Relay 2 NO", &no2);

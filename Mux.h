@@ -17,17 +17,17 @@ class Mux {
 public:
 	Mux(const std::string& initName);
 	void AttachChannel0(Io* io) {
-		relay1.AttachActivate(io);
+		relay1.AttachCoil(io);
 	}
 	void AttachChannel1(Io* io) {
-		relay2.AttachActivate(io);
-		relay3.AttachActivate(io);
+		relay2.AttachCoil(io);
+		relay3.AttachCoil(io);
 	}
 	void AttachChannel2(Io* io) {
-		relay4.AttachActivate(io);
-		relay5.AttachActivate(io);
-		relay6.AttachActivate(io);
-		relay7.AttachActivate(io);
+		relay4.AttachCoil(io);
+		relay5.AttachCoil(io);
+		relay6.AttachCoil(io);
+		relay7.AttachCoil(io);
 	}
 	Io* GetLeftSignal() {
 		return relay1.GetCommon();

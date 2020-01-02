@@ -6,26 +6,26 @@ Relay::Relay(const std::string& initName) : name(initName) {
 }
 
 void Relay::Update() {
-	if (activate.GetOutput()) {
+	if (coil.GetOutput()) {
 #ifdef DEBUG
 		std::cerr << "NO "
-				  << armature.GetOutput() << " "
+				  << common.GetOutput() << " "
 				  << no.GetOutput() << std::endl;
 #endif
 		// NO is activated
-		bool state = armature.GetOutput(false) || no.GetOutput(false);
-		armature.Force(state);
+		bool state = common.GetOutput(false) || no.GetOutput(false);
+		common.Force(state);
 		no.Force(state);
 		nc.Force(false);
 	} else {
 #ifdef DEBUG
 		std::cerr << "NC "
-				  << armature.GetOutput() << " "
+				  << coil.GetOutput() << " "
 				  << nc.GetOutput() << std::endl;
 #endif
 		// NC is activated
-		bool state = armature.GetOutput(false) || nc.GetOutput(false);
-		armature.Force(state);
+		bool state = common.GetOutput(false) || nc.GetOutput(false);
+		common.Force(state);
 		nc.Force(state);
 		no.Force(false);
 	}

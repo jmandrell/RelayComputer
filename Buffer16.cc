@@ -22,22 +22,22 @@ Buffer16::Buffer16(const std::string& initName) :
 
 
 void Buffer16::AttachInputBus(Bus16* bus) {
-	bit0.AttachActivate(&bus->bits[0]);
-	bit1.AttachActivate(&bus->bits[1]);
-	bit2.AttachActivate(&bus->bits[2]);
-	bit3.AttachActivate(&bus->bits[3]);
-	bit4.AttachActivate(&bus->bits[4]);
-	bit5.AttachActivate(&bus->bits[5]);
-	bit6.AttachActivate(&bus->bits[6]);
-	bit7.AttachActivate(&bus->bits[7]);
-	bit8.AttachActivate(&bus->bits[8]);
-	bit9.AttachActivate(&bus->bits[9]);
-	bit10.AttachActivate(&bus->bits[10]);
-	bit11.AttachActivate(&bus->bits[11]);
-	bit12.AttachActivate(&bus->bits[12]);
-	bit13.AttachActivate(&bus->bits[13]);
-	bit14.AttachActivate(&bus->bits[14]);
-	bit15.AttachActivate(&bus->bits[15]);
+	bit0.AttachCoil(&bus->bits[0]);
+	bit1.AttachCoil(&bus->bits[1]);
+	bit2.AttachCoil(&bus->bits[2]);
+	bit3.AttachCoil(&bus->bits[3]);
+	bit4.AttachCoil(&bus->bits[4]);
+	bit5.AttachCoil(&bus->bits[5]);
+	bit6.AttachCoil(&bus->bits[6]);
+	bit7.AttachCoil(&bus->bits[7]);
+	bit8.AttachCoil(&bus->bits[8]);
+	bit9.AttachCoil(&bus->bits[9]);
+	bit10.AttachCoil(&bus->bits[10]);
+	bit11.AttachCoil(&bus->bits[11]);
+	bit12.AttachCoil(&bus->bits[12]);
+	bit13.AttachCoil(&bus->bits[13]);
+	bit14.AttachCoil(&bus->bits[14]);
+	bit15.AttachCoil(&bus->bits[15]);
 }
 
 

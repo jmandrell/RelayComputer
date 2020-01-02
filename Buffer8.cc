@@ -14,14 +14,14 @@ Buffer8::Buffer8(const std::string& initName) :
 
 
 void Buffer8::AttachInputBus(Bus8* bus) {
-	bit0.AttachActivate(&bus->bits[0]);
-	bit1.AttachActivate(&bus->bits[1]);
-	bit2.AttachActivate(&bus->bits[2]);
-	bit3.AttachActivate(&bus->bits[3]);
-	bit4.AttachActivate(&bus->bits[4]);
-	bit5.AttachActivate(&bus->bits[5]);
-	bit6.AttachActivate(&bus->bits[6]);
-	bit7.AttachActivate(&bus->bits[7]);
+	bit0.AttachCoil(&bus->bits[0]);
+	bit1.AttachCoil(&bus->bits[1]);
+	bit2.AttachCoil(&bus->bits[2]);
+	bit3.AttachCoil(&bus->bits[3]);
+	bit4.AttachCoil(&bus->bits[4]);
+	bit5.AttachCoil(&bus->bits[5]);
+	bit6.AttachCoil(&bus->bits[6]);
+	bit7.AttachCoil(&bus->bits[7]);
 }
 
 
