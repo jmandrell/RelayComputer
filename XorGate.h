@@ -12,7 +12,7 @@ class XorGate : public Enablable {
 public:
 	XorGate(const std::string& initName);
 	void AttachEnable(Io* io) {
-		relay1.GetArmature()->AttachInput(io);
+		relay1.GetCommon()->AttachInput(io);
 	}
 	void AttachInput1(Io* io) {
 		relay1.AttachActivate(io);
@@ -21,7 +21,7 @@ public:
 		relay2.AttachActivate(io);
 	}
 	Io* GetOutput() {
-		return relay2.GetArmature();
+		return relay2.GetCommon();
 	}
 	
 private:

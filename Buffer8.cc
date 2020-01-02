@@ -38,12 +38,12 @@ void Buffer8::AttachOutputBus(Bus8* bus) {
 
 
 void Buffer8::AttachEnable(Io* io) {
-	bit0.GetArmature()->AttachInput(io);
-	bit1.GetArmature()->AttachInput(io);
-	bit2.GetArmature()->AttachInput(io);
-	bit3.GetArmature()->AttachInput(io);
-	bit4.GetArmature()->AttachInput(io);
-	bit5.GetArmature()->AttachInput(io);
-	bit6.GetArmature()->AttachInput(io);
-	bit7.GetArmature()->AttachInput(io);
+	bit0.GetCommon()->AttachInput(io);
+	bit1.GetCommon()->AttachInput(io);
+	bit2.GetCommon()->AttachInput(io);
+	bit3.GetCommon()->AttachInput(io);
+	bit4.GetCommon()->AttachInput(io);
+	bit5.GetCommon()->AttachInput(io);
+	bit6.GetCommon()->AttachInput(io);
+	bit7.GetCommon()->AttachInput(io);
 }

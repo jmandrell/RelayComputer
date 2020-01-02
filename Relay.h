@@ -18,7 +18,7 @@ public:
 	void AttachActivate(Io* io) {
 		activate.AttachInput(io);
 	}
-	Io* GetArmature() {
+	Io* GetCommon() {
 		return &armature;
 	}
 	Io* GetNo() {

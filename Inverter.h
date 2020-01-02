@@ -11,7 +11,7 @@ class Inverter : public Enablable {
 public:
 	Inverter(const std::string& initName);
 	void AttachEnable(Io* io) {
-		relay.GetArmature()->AttachInput(io);
+		relay.GetCommon()->AttachInput(io);
 	}
 	void AttachInput(Io* io) {
 		relay.AttachActivate(io);

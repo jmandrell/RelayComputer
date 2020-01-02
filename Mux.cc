@@ -9,10 +9,10 @@ Mux::Mux(const std::string& initName) :
 	relay5(name + " relay5"),
 	relay6(name + " relay6"),
 	relay7(name + " relay7") {
-	relay2.GetArmature()->AttachInput(relay1.GetNc());
-	relay3.GetArmature()->AttachInput(relay1.GetNo());
-	relay4.GetArmature()->AttachInput(relay2.GetNc());
-	relay5.GetArmature()->AttachInput(relay2.GetNo());
-	relay6.GetArmature()->AttachInput(relay3.GetNc());
-	relay7.GetArmature()->AttachInput(relay3.GetNo());
+	relay2.GetCommon()->AttachInput(relay1.GetNc());
+	relay3.GetCommon()->AttachInput(relay1.GetNo());
+	relay4.GetCommon()->AttachInput(relay2.GetNc());
+	relay5.GetCommon()->AttachInput(relay2.GetNo());
+	relay6.GetCommon()->AttachInput(relay3.GetNc());
+	relay7.GetCommon()->AttachInput(relay3.GetNo());
 }

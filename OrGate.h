@@ -12,8 +12,8 @@ class OrGate : public Enablable {
 public:
 	OrGate(const std::string& initName);
 	void AttachEnable(Io* io) {
-		relay1.GetArmature()->AttachInput(io);
-		relay2.GetArmature()->AttachInput(io);
+		relay1.GetCommon()->AttachInput(io);
+		relay2.GetCommon()->AttachInput(io);
 	}
 	void AttachInput1(Io* io) {
 		relay1.AttachActivate(io);

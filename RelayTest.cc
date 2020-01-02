@@ -17,7 +17,7 @@ int main() {
 	
 	relay1.AttachActivate(&activate1);
 	harness.AddInput("Relay 1 Activate", &activate1);
-	relay1.GetArmature()->AttachInput(&armature1);
+	relay1.GetCommon()->AttachInput(&armature1);
 	harness.AddInput("Relay 1 Armature", &armature1);
 	
 	relay2.AttachActivate(&activate2);
@@ -29,7 +29,7 @@ int main() {
 	
 	harness.AddOutput("Relay 1 NO", relay1.GetNo());
 	harness.AddOutput("Relay 1 NC", relay1.GetNc());
-	harness.AddOutput("Relay 2 Armature", relay2.GetArmature());
+	harness.AddOutput("Relay 2 Armature", relay2.GetCommon());
 	
 	harness.Run();
 	return 0;

@@ -206,7 +206,8 @@ Bus8Test.o: Bus16.h Display16Bit.h
 Clock.o: /usr/include/unistd.h /usr/include/features.h
 Clock.o: /usr/include/stdc-predef.h Clock.h /usr/include/pthread.h
 Clock.o: /usr/include/endian.h /usr/include/sched.h /usr/include/time.h Io.h
-Clock.o: Updatable.h
+Clock.o: Updatable.h Sequencer.h Mux.h Relay.h Bus16.h Display16Bit.h
+Clock.o: Display8Bit.h
 Display16Bit.o: /usr/include/ncurses.h /usr/include/ncurses_dll.h
 Display16Bit.o: /usr/include/stdint.h /usr/include/stdio.h
 Display16Bit.o: /usr/include/unctrl.h /usr/include/curses.h Display16Bit.h

@@ -62,20 +62,20 @@ void Buffer16::AttachOutputBus(Bus16* bus) {
 
 
 void Buffer16::AttachEnable(Io* io) {
-	bit0.GetArmature()->AttachInput(io);
-	bit1.GetArmature()->AttachInput(io);
-	bit2.GetArmature()->AttachInput(io);
-	bit3.GetArmature()->AttachInput(io);
-	bit4.GetArmature()->AttachInput(io);
-	bit5.GetArmature()->AttachInput(io);
-	bit6.GetArmature()->AttachInput(io);
-	bit7.GetArmature()->AttachInput(io);
-	bit8.GetArmature()->AttachInput(io);
-	bit9.GetArmature()->AttachInput(io);
-	bit10.GetArmature()->AttachInput(io);
-	bit11.GetArmature()->AttachInput(io);
-	bit12.GetArmature()->AttachInput(io);
-	bit13.GetArmature()->AttachInput(io);
-	bit14.GetArmature()->AttachInput(io);
-	bit15.GetArmature()->AttachInput(io);
+	bit0.GetCommon()->AttachInput(io);
+	bit1.GetCommon()->AttachInput(io);
+	bit2.GetCommon()->AttachInput(io);
+	bit3.GetCommon()->AttachInput(io);
+	bit4.GetCommon()->AttachInput(io);
+	bit5.GetCommon()->AttachInput(io);
+	bit6.GetCommon()->AttachInput(io);
+	bit7.GetCommon()->AttachInput(io);
+	bit8.GetCommon()->AttachInput(io);
+	bit9.GetCommon()->AttachInput(io);
+	bit10.GetCommon()->AttachInput(io);
+	bit11.GetCommon()->AttachInput(io);
+	bit12.GetCommon()->AttachInput(io);
+	bit13.GetCommon()->AttachInput(io);
+	bit14.GetCommon()->AttachInput(io);
+	bit15.GetCommon()->AttachInput(io);
 }

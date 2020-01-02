@@ -450,7 +450,7 @@ Decoder10011::Decoder10011(
 	// cycle 8: put the address on the address bus
 	msb.AttachEnable(&seqOutBus.bits[8]);
 	lsb.AttachEnable(&seqOutBus.bits[8]);
-	readWrite.GetArmature()->AttachInput(&seqOutBus.bits[8]);
+	readWrite.GetCommon()->AttachInput(&seqOutBus.bits[8]);
 	// for reads, the data comes from memory, and is captured in R0
 	// this is triggered by the normally closed side of the relay
 	Components::memory.AttachEnable(readWrite.GetNc());
@@ -464,7 +464,7 @@ Decoder10011::Decoder10011(
 	// cycle 9: keep the address on the address bus
 	msb.AttachEnable(&seqOutBus.bits[9]);
 	lsb.AttachEnable(&seqOutBus.bits[9]);
-	readWrite.GetArmature()->AttachInput(&seqOutBus.bits[9]);
+	readWrite.GetCommon()->AttachInput(&seqOutBus.bits[9]);
 	// for reads, the data comes from memory, and is captured in R0
 	// this is triggered by the normally closed side of the relay
 	Components::memory.AttachEnable(readWrite.GetNc());
@@ -508,9 +508,9 @@ Decoder1110::Decoder1110(
 	flagsGate_2.GetNc()->AttachInput(&flagsBus.bits[2]);
 	// note that No() is left purposely disconnected for non-conditional branches
 	flagsGate_3.AttachActivate(&decoderBus.bits[1]);
-	flagsGate_3.GetNc()->AttachInput(flagsGate_1.GetArmature());
-	flagsGate_3.GetNo()->AttachInput(flagsGate_2.GetArmature());
-	xor1.AttachInput1(flagsGate_3.GetArmature());
+	flagsGate_3.GetNc()->AttachInput(flagsGate_1.GetCommon());
+	flagsGate_3.GetNo()->AttachInput(flagsGate_2.GetCommon());
+	xor1.AttachInput1(flagsGate_3.GetCommon());
 	xor1.AttachInput2(&decoderBus.bits[2]);
 
 	arg8_1.AttachInputBus(&Buses::dataBus);
@@ -630,32 +630,32 @@ InstructionDecoder::InstructionDecoder(const std::string& initName) :
 
 	// set up the instruction muxers
 	power.Force(true);
-	bit7Relay.GetArmature()->AttachInput(&power);
+	bit7Relay.GetCommon()->AttachInput(&power);
 	bit7Relay.AttachActivate(&decoderBus.bits[7]);
 	bit6Relay_0.AttachActivate(&decoderBus.bits[6]);
-	bit6Relay_0.GetArmature()->AttachInput(bit7Relay.GetNc());
+	bit6Relay_0.GetCommon()->AttachInput(bit7Relay.GetNc());
 	bit6Relay_1.AttachActivate(&decoderBus.bits[6]);
-	bit6Relay_1.GetArmature()->AttachInput(bit7Relay.GetNo());
+	bit6Relay_1.GetCommon()->AttachInput(bit7Relay.GetNo());
 	bit5Relay_10.AttachActivate(&decoderBus.bits[5]);
-	bit5Relay_10.GetArmature()->AttachInput(bit6Relay_1.GetNc());
+	bit5Relay_10.GetCommon()->AttachInput(bit6Relay_1.GetNc());
 	bit5Relay_11.AttachActivate(&decoderBus.bits[5]);
-	bit5Relay_11.GetArmature()->AttachInput(bit6Relay_1.GetNo());
+	bit5Relay_11.GetCommon()->AttachInput(bit6Relay_1.GetNo());
 	bit4Relay_100.AttachActivate(&decoderBus.bits[4]);
-	bit4Relay_100.GetArmature()->AttachInput(bit5Relay_10.GetNc());
+	bit4Relay_100.GetCommon()->AttachInput(bit5Relay_10.GetNc());
 	bit4Relay_111.AttachActivate(&decoderBus.bits[4]);
-	bit4Relay_111.GetArmature()->AttachInput(bit5Relay_11.GetNo());
+	bit4Relay_111.GetCommon()->AttachInput(bit5Relay_11.GetNo());
 	bit3Relay_1000.AttachActivate(&decoderBus.bits[3]);
-	bit3Relay_1000.GetArmature()->AttachInput(bit4Relay_100.GetNc());
+	bit3Relay_1000.GetCommon()->AttachInput(bit4Relay_100.GetNc());
 	bit3Relay_1001.AttachActivate(&decoderBus.bits[3]);
-	bit3Relay_1001.GetArmature()->AttachInput(bit4Relay_100.GetNo());
+	bit3Relay_1001.GetCommon()->AttachInput(bit4Relay_100.GetNo());
 	bit3Relay_1111.AttachActivate(&decoderBus.bits[3]);
-	bit3Relay_1111.GetArmature()->AttachInput(bit4Relay_111.GetNo());
+	bit3Relay_1111.GetCommon()->AttachInput(bit4Relay_111.GetNo());
 	bit2Relay_11111.AttachActivate(&decoderBus.bits[2]);
-	bit2Relay_11111.GetArmature()->AttachInput(bit3Relay_1111.GetNo());
+	bit2Relay_11111.GetCommon()->AttachInput(bit3Relay_1111.GetNo());
 	bit1Relay_111111.AttachActivate(&decoderBus.bits[1]);
-	bit1Relay_111111.GetArmature()->AttachInput(bit2Relay_11111.GetNo());
+	bit1Relay_111111.GetCommon()->AttachInput(bit2Relay_11111.GetNo());
 	bit0Relay_1111111.AttachActivate(&decoderBus.bits[0]);
-	bit0Relay_1111111.GetArmature()->AttachInput(bit1Relay_111111.GetNo());
+	bit0Relay_1111111.GetCommon()->AttachInput(bit1Relay_111111.GetNo());
 
 	// process instructions that start with 00 (register moves)
 	dec00.AttachEnable(bit6Relay_0.GetNc());

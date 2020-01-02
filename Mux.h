@@ -30,7 +30,7 @@ public:
 		relay7.AttachActivate(io);
 	}
 	Io* GetLeftSignal() {
-		return relay1.GetArmature();
+		return relay1.GetCommon();
 	}
 	Io* GetRightSignal0() {
 		return relay4.GetNc();

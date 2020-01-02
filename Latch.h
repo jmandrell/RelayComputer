@@ -16,7 +16,7 @@ public:
 		relay4.AttachActivate(io);
 	}
 	void AttachCapture(Io* io) {
-		relay1.GetArmature()->AttachInput(io);
+		relay1.GetCommon()->AttachInput(io);
 	}
 	void AttachData(Io* io) {
 		relay1.AttachActivate(io);
