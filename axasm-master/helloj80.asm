@@ -45,6 +45,8 @@ start:
 	MVI(r0,0xb7)
 	STO(0xfffb,r0)
 
+	HALT
+	JMP start
 hang:
 	JMP hang
 

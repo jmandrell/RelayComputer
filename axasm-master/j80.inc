@@ -85,6 +85,7 @@
 #define	JNC(l)	DB(0xe5); DW(l)
 #define	JPOS(l)	DB(0xe6); DW(l)
 #define JMP(l)	DB(0xe7); DW(l) 
-
+#define HALT	DB(0xff)
+#define HLT	DB(0xff)
 
 #endif

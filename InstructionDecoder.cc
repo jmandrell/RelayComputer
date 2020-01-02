@@ -596,6 +596,10 @@ InstructionDecoder::InstructionDecoder(const std::string& initName) :
 	bit4Relay_111(name + " bit4Relay_111"),
 	bit3Relay_1000(name + " bit3Relay_1000"),
 	bit3Relay_1001(name + " bit3Relay_1001"),
+	bit3Relay_1111(name + " bit3Relay_1111"),
+	bit2Relay_11111(name + " bit2Relay_11111"),
+	bit1Relay_111111(name + " bit1Relay_111111"),
+	bit0Relay_1111111(name + " bit0Relay_1111111"),
 	dec00(name + " dec00", decoderBus),
 	dec01(name + " dec01", decoderBus),
 	dec10000(name + " dec10000", decoderBus, increment16, arg16),
@@ -644,6 +648,14 @@ InstructionDecoder::InstructionDecoder(const std::string& initName) :
 	bit3Relay_1000.GetArmature()->AttachInput(bit4Relay_100.GetNc());
 	bit3Relay_1001.AttachActivate(&decoderBus.bits[3]);
 	bit3Relay_1001.GetArmature()->AttachInput(bit4Relay_100.GetNo());
+	bit3Relay_1111.AttachActivate(&decoderBus.bits[3]);
+	bit3Relay_1111.GetArmature()->AttachInput(bit4Relay_111.GetNo());
+	bit2Relay_11111.AttachActivate(&decoderBus.bits[2]);
+	bit2Relay_11111.GetArmature()->AttachInput(bit3Relay_1111.GetNo());
+	bit1Relay_111111.AttachActivate(&decoderBus.bits[1]);
+	bit1Relay_111111.GetArmature()->AttachInput(bit2Relay_11111.GetNo());
+	bit0Relay_1111111.AttachActivate(&decoderBus.bits[0]);
+	bit0Relay_1111111.GetArmature()->AttachInput(bit1Relay_111111.GetNo());
 
 	// process instructions that start with 00 (register moves)
 	dec00.AttachEnable(bit6Relay_0.GetNc());
@@ -662,6 +674,8 @@ InstructionDecoder::InstructionDecoder(const std::string& initName) :
 
 	// process instructions that start with 1110 (branches and calls)
 	dec1110.AttachEnable(bit4Relay_111.GetNc());
+	// special case: opcode 0xff is a HALT
+	Clock::haltInput.AttachInput(bit0Relay_1111111.GetNo());
 }
 
 unsigned int InstructionDecoder::PCReadAndIncrement(Register8& data, unsigned int startCycle) {

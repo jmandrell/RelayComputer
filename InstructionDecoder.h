@@ -174,6 +174,10 @@ private:
 	Relay bit4Relay_111;
 	Relay bit3Relay_1000;
 	Relay bit3Relay_1001;
+	Relay bit3Relay_1111;
+	Relay bit2Relay_11111;
+	Relay bit1Relay_111111;
+	Relay bit0Relay_1111111;
 	Decoder00 dec00;
 	Decoder01 dec01;
 	Decoder10000 dec10000;
