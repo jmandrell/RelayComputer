@@ -23,14 +23,18 @@ void Memory::AttachDataBus(Bus8* bus) {
 unsigned char Memory::ReadMem(unsigned int address) {
 	unsigned char c;
 	lseek(memFd, address, SEEK_SET);
-	read(memFd, &c, 1);
+	if (read(memFd, &c, 1) != 1) {
+		c = 0;
+	}
 	return c;
 }
 
 
 void Memory::WriteMem(unsigned int address, unsigned char value) {
 	lseek(memFd, address, SEEK_SET);
-	write(memFd, &value, 1);
+	if (write(memFd, &value, 1) != 1) {
+		std::cerr << "Failed to write memory" << std::endl;
+	}
 }
 
 

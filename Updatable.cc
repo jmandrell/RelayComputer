@@ -39,7 +39,7 @@ void Updatable::DoUpdate(void) {
 
 void* Updatable::UpdateAll(void*) {
 	for (;;) {
-		usleep(500);
+		usleep(1);
 		while (delay) {
 			delay = false;
 			usleep(50000);
@@ -48,5 +48,3 @@ void* Updatable::UpdateAll(void*) {
 	}
 	return 0;
 }
-
-

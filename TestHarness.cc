@@ -168,9 +168,16 @@ void TestHarness::Run() {
 			move(0, 0);
 			clrtoeol();
 			if (ch == KEY_UP) {
-				*intValue = *intValue + *intValue / 4;
+				if (*intValue < 4) {
+					*intValue = 4;
+				} else {
+					*intValue = *intValue + *intValue / 4;
+				}
 			} else if (ch == KEY_DOWN) {
 				*intValue = *intValue * 8 / 10;
+				if (*intValue < 1) {
+					*intValue = 1;
+				}
 			} else if (ch == 27) {
 				return;
 			} else if ((ch >= 'a') && (ch <= 'z')) {

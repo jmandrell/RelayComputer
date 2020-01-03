@@ -68,7 +68,7 @@ GATELIB = gatelib.a
 
 CC=g++
 LDLIBS=-lncurses -lpthread
-CXXFLAGS=-g -Wall -pedantic -ansi -Werror
+CXXFLAGS=-O5 -g -Wall -pedantic -ansi -Werror
 
 GATELIB_OBJS = $(GATELIB_SRCS:.cc=.o)
 TESTS = $(TEST_SRCS:.cc=)
